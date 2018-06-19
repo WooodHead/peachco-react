@@ -1,9 +1,13 @@
 const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 3001;
 const app = express();
+const bodyParser = require("body-parser");
+const path = require("path");
+
 const db = require("./models");
+const routes = require("./routes");
+
+let PORT = process.env.PORT || 3001;
+
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,11 +18,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-
-require("./routes/ebay.js")(app);
-require("./routes/barcode.js")(app);
-require("./routes/db.js")(app);
-
+app.use(routes);
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
@@ -28,6 +28,5 @@ app.get("*", (req, res) => {
 db.sequelize.sync().then(function(){
   app.listen(PORT, function() {
     console.log("Listening to port %s", PORT);
-
   });
 });
