@@ -1,0 +1,51 @@
+change to this maybe... or maybe something more general
+bedding object
+
+
+
+item: {
+    sku: sku,
+    brand: brand,
+    collection: collection,
+    type: type,
+    color: color,
+    images: {
+        [
+            'pic1.jpg',
+            'pic2.jpg,
+            ''....
+            ]
+    },
+    retail: retail,
+    features: {
+        [ 
+            'feat',
+            'feat2',
+            ...
+        ]
+    }
+        sizes: {
+        [ 
+            'feat',
+            'feat2',
+            ...
+        ]
+    }
+        setIncludes: {
+        [ 
+            'feat',
+            'feat2',
+            ...
+        ]
+    }
+        materials: {
+        [ 
+            'feat',
+            'feat2',
+            ...
+        ]
+    }
+}
+
+
+should save category name or id
