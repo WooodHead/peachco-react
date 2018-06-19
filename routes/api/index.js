@@ -1,6 +1,6 @@
 const router = require("express").Router();
 //const ebayRoutes = require("./ebay");
-const db = require("./db");
+const db = require("./db/db");
 //const barcode = require("./barcode");
 
 router.use("/db", db);
