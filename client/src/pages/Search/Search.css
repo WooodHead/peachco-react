@@ -1,0 +1,5 @@
+.search-form-wrapper {
+    display: grid;
+    grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content);
+    grid-gap: .5rem;
+}

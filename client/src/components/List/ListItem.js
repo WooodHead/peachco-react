@@ -2,7 +2,7 @@ import React from "react";
 import "./ListItem.css";
 
 export const ListItem = props => (
-    <div className="list-item">
+    <div className="list-item" item-id={props.id}>
     <ul>
     <li>{props.brand}</li>
     <li>{props.collection}</li>
