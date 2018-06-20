@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const ebay = require('ebay-api');
 require("dotenv").config();
+
+const ebay = require('ebay-api');
 const keys = require("../keys");
 
-const uri = "https://api.sandbox.ebay.com/ws/api.dll";
+//const uri = "https://api.sandbox.ebay.com/ws/api.dll";
 const dev_id = keys.ebay.dev_id;
 const app_id = keys.ebay.app_id;
 const cert_id = keys.ebay.cert_id;
