@@ -10,7 +10,7 @@ module.exports = {
         let fileInput = req.file;
     
         Quagga.decodeSingle({
-            src: path.join(__dirname, "./code128.png"),
+            src: path.join(__dirname, "./IMG_0630.jpg"),
             numOfWorkers: 0,  // Needs to be 0 when used within node
             locate: true,
             inputStream: {
@@ -23,7 +23,7 @@ module.exports = {
             if(result.codeResult) {
                 res.json(result.codeResult.code);
             } else {
-                res.json("error");
+                res.json(result);
             }
         });
 
