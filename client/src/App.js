@@ -7,8 +7,7 @@ const App = () => {
   return (
     <main>
       <Header />
-      <h1>Gotta start somewhere</h1>
-      <Search/>
+      <Search />
     </main>
   )
 }

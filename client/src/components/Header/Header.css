@@ -1,6 +1,8 @@
 .header {
     margin: 0;
-    padding: 0;
+    padding: 1rem;
+    font-family: 'Catamaran', sans-serif;
     background-color: maroon;
     color: white;
+    border-bottom: peachpuff .5rem solid;
 }
