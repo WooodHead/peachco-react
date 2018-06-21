@@ -19,3 +19,7 @@
 .button:hover {
     opacity: .7;
 }
+
+input {
+    background-color: lemonchiffon;
+}

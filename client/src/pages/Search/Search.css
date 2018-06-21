@@ -1,5 +1,15 @@
+.search-form-container {
+    padding: 1rem;
+}
+
 .search-form-wrapper {
     display: grid;
     grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content);
     grid-gap: .5rem;
+}
+
+.info-pane {
+    position: fixed;
+    right: 0;
+
 }

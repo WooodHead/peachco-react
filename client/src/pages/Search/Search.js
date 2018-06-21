@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Item } from "../../components/Item";
+import { Input, FormBtn } from "../../components/Form";
 import { Container } from "../../components/Container";
 import "./Search.css";
 
 class ItemList extends Component {
   state = {
     items: [],
+    item: [],
     query: ""
   };
 
   componentDidMount() {
-    this.loadItems();
   }
 
   loadItems = () => {
     API.getItemsByQuery(this.state.query)
       .then(res => this.setState({ items: res.data }))
+      .catch(err => console.log(err));
+  };
+
+  loadItem = id => {
+    API.getItemById(id)
+      .then(res => this.setState({ item: res.data}))
       .catch(err => console.log(err));
   };
 
@@ -42,7 +49,7 @@ class ItemList extends Component {
   render() {
     return (
       <section>
-        <Container>
+        <div className="search-form-container">
           <form>
             <div className="search-form-wrapper">
               <Input
@@ -59,19 +66,35 @@ class ItemList extends Component {
               </FormBtn>
             </div>
           </form>
+        </div>
+        <Container className="search-body">
+          <div className="search-pane">
+            <List>
+              {this.state.items.map(item => (
+                <ListItem
+                  key={item.id}
+                  id={item.id}
+                  brand={item.brand}
+                  collection={item.collection}
+                  type={item.type}
+                  color={item.color}
+                  onClick={() => this.loadItem(item.id)}
+                />
+              ))}
+            </List>
+          </div>
+          <div className="info-pane">
+              <ul>
+              <li>{this.state.item.brand}</li>
+              <li>{this.state.item.collection}</li>
+              <li>{this.state.item.type}</li>
+              <li>{this.state.item.color}</li>
+              <li>{this.state.item.secPic}</li>
+              <li>{this.state.item.pic}</li>
+              <li>{this.state.item.retail}</li>
+              </ul>
+          </div>
         </Container>
-        <List>
-          {this.state.items.map(item => (
-            <ListItem
-              key={item.id}
-              id={item.id}
-              brand={item.brand}
-              collection={item.collection}
-              type={item.type}
-              color={item.color}
-            />
-          ))}
-        </List>
       </section>
     );
   }
