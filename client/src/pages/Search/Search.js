@@ -90,7 +90,7 @@ class Search extends Component {
                   collection={item.collection}
                   type={item.type}
                   color={item.color}
-                  onClick={this.loadItem(item.id)}
+                  onClick={() => this.loadItem(item.id)}
                 />
               ))}
             </List>

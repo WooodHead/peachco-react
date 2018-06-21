@@ -18,7 +18,7 @@ export const Modal = props => (
                 </ul>
             </div>
             <div className="close-container">
-                <Button onClick={() => props.build()} name="Build"/>
+                <Button onClick={() => props.build(props.id)} name="Build"/>
                 <Button onClick={() => props.closeModal()} name="Close"/>
             </div>
         </div>
