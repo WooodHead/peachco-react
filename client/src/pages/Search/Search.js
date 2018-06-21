@@ -55,6 +55,10 @@ class Search extends Component {
     }
   };
 
+  buildItem = (id) => {
+    window.location = "./build/" + id;
+  }
+
   render() {
     return (
       <section>
@@ -86,7 +90,7 @@ class Search extends Component {
                   collection={item.collection}
                   type={item.type}
                   color={item.color}
-                  onClick={() => this.loadItem(item.id)}
+                  onClick={this.loadItem(item.id)}
                 />
               ))}
             </List>
@@ -95,8 +99,9 @@ class Search extends Component {
           (this.state.showModal) ? 
             (
               <Modal 
-                onClick={this.closeModal}
                 item={this.state.item}
+                build={() => this.buildItem(this.state.item.id)}
+                closeModal={() => this.closeModal()}
               >
               </Modal>
             ) : ("")

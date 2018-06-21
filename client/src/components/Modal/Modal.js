@@ -1,5 +1,7 @@
 import React from "react";
+import { Button } from "../Button";
 import "./Modal.css";
+
 
 export const Modal = props => (
 
@@ -16,9 +18,8 @@ export const Modal = props => (
                 </ul>
             </div>
             <div className="close-container">
-                <button onClick="" className="modal-button accept" type="button">Use Features</button>
-                <button onClick="" className="modal-button accept" type="button">Sell This</button>
-                <button {...props} className="modal-button cancel" type="button">Close</button>
+                <Button onClick={() => props.build()} name="Build"/>
+                <Button onClick={() => props.closeModal()} name="Close"/>
             </div>
         </div>
     </div>
