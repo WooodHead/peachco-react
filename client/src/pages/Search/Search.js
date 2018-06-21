@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
-import { Item } from "../../components/Item";
 import { Input, FormBtn } from "../../components/Form";
-import { Container } from "../../components/Container";
 import { Modal } from "../../components/Modal";
+import API from "../../utils/API";
 import "./Search.css";
 
-class ItemList extends Component {
+class Search extends Component {
   state = {
     items: [],
     item: [],
@@ -108,4 +106,4 @@ class ItemList extends Component {
   }
 }
 
-export default ItemList;
+export default Search;

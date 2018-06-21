@@ -16,7 +16,8 @@ export const Modal = props => (
                 </ul>
             </div>
             <div className="close-container">
-                <button {...props} className="modal-button accept" type="button">Close</button>
+                <button onClick="" className="modal-button accept" type="button">Use Features</button>
+                <button onClick="" className="modal-button accept" type="button">Sell This</button>
                 <button {...props} className="modal-button cancel" type="button">Close</button>
             </div>
         </div>
