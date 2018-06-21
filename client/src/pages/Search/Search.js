@@ -78,8 +78,7 @@ class ItemList extends Component {
             </div>
           </form>
         </div>
-        <Container className="search-body">
-          <div className="search-pane">
+        <div className="search-results-container">
             <List>
               {this.state.items.map(item => (
                 <ListItem
@@ -93,8 +92,7 @@ class ItemList extends Component {
                 />
               ))}
             </List>
-          </div>
-        </Container>
+        </div>
         {
           (this.state.showModal) ? 
             (

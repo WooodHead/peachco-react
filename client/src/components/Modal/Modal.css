@@ -22,19 +22,23 @@
 }
 
 .modal-content {
-    background-color: rgba(255, 177, 32, 0.938);
-    margin: 2% auto 15% auto;
-    border: 1px solid #888;
+    background-color: white;
+    margin: 6rem auto 20% auto;
+    border: 1px solid black;
     width: 80%;
     color: black;
 }
 
 .close-container {
-    background-color: #F0E68C;
+    background-color: #eee;
     text-align: center;
     padding: 16px;
     display: grid;
     grid-template-columns: auto auto;
+}
+
+.item-info-container {
+    padding: 1rem;
 }
 
 .modal-button {
