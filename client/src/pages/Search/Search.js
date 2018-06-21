@@ -4,13 +4,15 @@ import { List, ListItem } from "../../components/List";
 import { Item } from "../../components/Item";
 import { Input, FormBtn } from "../../components/Form";
 import { Container } from "../../components/Container";
+import { Modal } from "../../components/Modal";
 import "./Search.css";
 
 class ItemList extends Component {
   state = {
     items: [],
     item: [],
-    query: ""
+    query: "",
+    showModal: false
   };
 
   componentDidMount() {
@@ -24,8 +26,17 @@ class ItemList extends Component {
 
   loadItem = id => {
     API.getItemById(id)
-      .then(res => this.setState({ item: res.data}))
+      .then(res => this.setState(
+        { 
+          item: res.data, 
+          showModal: true
+        }
+      ))
       .catch(err => console.log(err));
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
   };
 
   handleInputChange = event => {
@@ -83,18 +94,17 @@ class ItemList extends Component {
               ))}
             </List>
           </div>
-          <div className="info-pane">
-              <ul>
-              <li>{this.state.item.brand}</li>
-              <li>{this.state.item.collection}</li>
-              <li>{this.state.item.type}</li>
-              <li>{this.state.item.color}</li>
-              <li>{this.state.item.secPic}</li>
-              <li>{this.state.item.pic}</li>
-              <li>{this.state.item.retail}</li>
-              </ul>
-          </div>
         </Container>
+        {
+          (this.state.showModal) ? 
+            (
+              <Modal 
+                onClick={this.closeModal}
+                item={this.state.item}
+              >
+              </Modal>
+            ) : ("")
+        }
       </section>
     );
   }

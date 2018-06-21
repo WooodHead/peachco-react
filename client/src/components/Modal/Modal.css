@@ -1,0 +1,86 @@
+/** General Modal Stuff **/
+
+.modal {
+    /* display: none; */
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0px;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: rgba(255, 177, 32, 0.938);
+    margin: 2% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+    color: black;
+}
+
+.close-container {
+    background-color: #F0E68C;
+    text-align: center;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.modal-button {
+    background-color: rgb(44, 195, 14);
+    color: white;
+    padding: 14px 40px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.modal-button:hover {
+    opacity: 0.8;
+}
+
+.accept {
+    background-color: rgb(50, 214, 50);
+}
+
+.cancel {
+    background-color: #e25f4e
+}
+
+/* Animation for the modal */
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
