@@ -27,6 +27,7 @@
     border: 1px solid black;
     width: 80%;
     color: black;
+    border-radius: 10px;
 }
 
 .close-container {
@@ -35,6 +36,7 @@
     padding: 16px;
     display: grid;
     grid-template-columns: auto auto;
+    border-radius: 10px;
 }
 
 .item-info-container {

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { List, ListItem } from "../../components/List";
-import { Input, FormBtn } from "../../components/Form";
+import { Input } from "../../components/Input";
 import { Modal } from "../../components/Modal";
+import { Button } from "../../components/Button";
 import API from "../../utils/API";
 import "./Search.css";
 
@@ -69,14 +70,14 @@ class Search extends Component {
               value={this.state.query}
               onChange={this.handleInputChange}
               name="query"
+              labelname="Search"
               placeholder="search (required)"
               />
-              <FormBtn
+              <Button
                 disabled={!(this.state.query)}
                 onClick={this.handleFormSubmit}
-                >
-                Search
-              </FormBtn>
+                name="Search"
+              />
             </div>
           </form>
         </div>
