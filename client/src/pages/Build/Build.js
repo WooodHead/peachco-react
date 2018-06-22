@@ -33,6 +33,24 @@ class Build extends Component {
         });
       };
 
+    labelize = (label) => {
+        let expr = label.substring(0,2);
+        switch(expr) {
+            case "f_":
+                label = "features"
+                break;
+            case "s_":
+                label = "size"
+                break;
+            case "m_":
+                label = "materials"
+                break;
+        }
+        
+        label = label[0].toUpperCase() + label.substring(1);
+        return label;
+    }
+
     render() {
         return (
             <div className="build-container">
@@ -43,7 +61,7 @@ class Build extends Component {
                             key={property[0]}
                             value={(property[1]) ? (property[1]) : ("")}
                             name={property[0]}
-                            labelname={property[0]}
+                            labelname={this.labelize(property[0])}
                             onChange={this.handleInputChange(property[0])}
                         />
                         )
