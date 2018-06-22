@@ -21,10 +21,14 @@ class Build extends Component {
           .catch(err => console.log(err));
     }
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
+    handleInputChange = (propertyName) => event => {
+        const { item } = this.state;
+        const newItem = {
+            ...item,
+            [propertyName]: event.target.value
+        };
         this.setState({
-          [name]: value
+          item: newItem
         });
       };
 
@@ -40,172 +44,172 @@ class Build extends Component {
                 <form>
                     <div className="item-inputs">
                         <Input
-                            defaultValue={this.state.item.sku}
+                            value={(this.state.item.sku) ? (this.state.item.sku) : ("")}
                             name="Sku"
                             labelname="SKU"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('sku')}
                         />
                         <Input
-                            defaultValue={this.state.item.brand}
+                            value={(this.state.item.brand) ? (this.state.item.brand) : ("")}
                             name="brand"
                             labelname="Brand"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('brand')}
                         />
                         <Input
-                            defaultValue={this.state.item.collection}
+                            value={(this.state.item.collection) ? (this.state.item.collection) : ("")}
                             name="collection"
                             labelname="Collection"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('collection')}
                         />
                         <Input
-                            defaultValue={this.state.item.type}
+                            value={(this.state.item.type) ? (this.state.item.type) : ("")}
                             name="type"
                             labelname="Type"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('type')}
                         />
                         <Input
-                            defaultValue={this.state.item.color}
+                            value={(this.state.item.color) ? (this.state.item.color) : ("")}
                             name="color"
                             labelname="Color"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('color')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_1}
+                            value={(this.state.item.f_1) ? (this.state.item.f_1) : ("")}
                             name="f_1"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_1')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_2}
+                            value={(this.state.item.f_2) ? (this.state.item.f_2) : ("")}
                             name="f_2"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_2')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_3}
+                            value={(this.state.item.f_3) ? (this.state.item.f_3) : ("")}
                             name="f_3"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_3')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_4}
+                            value={(this.state.item.f_4) ? (this.state.item.f_4) : ("")}
                             name="f_4"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_4')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_5}
+                            value={(this.state.item.f_5) ? (this.state.item.f_5) : ("")}
                             name="f_5"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_5')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_6}
+                            value={(this.state.item.f_6) ? (this.state.item.f_6) : ("")}
                             name="f_6"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_6')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_7}
+                            value={(this.state.item.f_7) ? (this.state.item.f_7) : ("")}
                             name="f_7"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_7')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_8}
-                            name="f-8"
+                            value={(this.state.item.f_8) ? (this.state.item.f_8) : ("")}
+                            name="f_8"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_8')}
                         />
                         <Input
-                            defaultValue={this.state.item.f_9}
+                            value={(this.state.item.f_9) ? (this.state.item.f_9) : ("")}
                             name="f_9"
                             labelname="Features"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('f_9')}
                         />
                         <Input
-                            defaultValue={this.state.item.pic}
+                            value={(this.state.item.pic) ? (this.state.item.pic) : ("")}
                             name="pic"
                             labelname="Stock Pic"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('pic')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_1}
+                            value={(this.state.item.s_1) ? (this.state.item.s_1) : ("")}
                             name="s_1"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_1')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_2}
+                            value={(this.state.item.s_2) ? (this.state.item.s_2) : ("")}
                             name="s_2"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_2')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_3}
+                            value={(this.state.item.s_3) ? (this.state.item.s_3) : ("")}
                             name="s_3"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_3')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_4}
+                            value={(this.state.item.s_4) ? (this.state.item.s_4) : ("")}
                             name="s_4"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_4')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_5}
+                            value={(this.state.item.s_5) ? (this.state.item.s_5) : ("")}
                             name="s_5"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_5')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_6}
+                            value={(this.state.item.s_6) ? (this.state.item.s_6) : ("")}
                             name="s_6"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_6')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_7}
+                            value={(this.state.item.s_7) ? (this.state.item.s_7) : ("")}
                             name="s_7"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_7')}
                         />
                         <Input
-                            defaultValue={this.state.item.s_8}
+                            value={(this.state.item.s_8) ? (this.state.item.s_8) : ("")}
                             name="s_8"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('s_8')}
                         />
                         <Input
-                            defaultValue={this.state.item.m_1}
+                            value={(this.state.item.m_1) ? (this.state.item.m_1) : ("")}
                             name="m_1"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('m_1')}
                         />
                         <Input
-                            defaultValue={this.state.item.m_2}
+                            value={(this.state.item.m_2) ? (this.state.item.m_2) : ("")}
                             name="m_2"
                             labelname="Sizes"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('m_2')}
                         />
                         <Input
-                            defaultValue={this.state.item.retail}
+                            value={(this.state.item.retail) ? (this.state.item.retail) : ("")}
                             name="retail"
                             labelname="Retail"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('retail')}
                         />
                         <Input
-                            defaultValue={this.state.item.itemTitle}
+                            value={(this.state.item.itemTitle) ? (this.state.item.itemTitle) : ("")}
                             name="itemTitle"
                             labelname="Title"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('itemTitle')}
                         />
                         <Input
-                            defaultValue={this.state.item.secPic}
+                            value={(this.state.item.secPic) ? (this.state.item.secPic) : ("")}
                             name="secPic"
                             labelname="Pic"
-                            onChange={this.handleInputChange}
+                            onChange={this.handleInputChange('secPic')}
                         />
                         
                     </div>
