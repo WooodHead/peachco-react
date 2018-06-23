@@ -49,6 +49,12 @@ class Build extends Component {
         return label;
     };
 
+    cleanLabels = (label) => {
+        if(label[0] !== "id" || label[0] !== "createdAt" || label[0] !== "updatedAt"){
+            return label;
+        }
+    }
+
     updateItem = (id, data) => {
         API.updateItem(id, data)
         .then(res => console.log(res))
@@ -60,7 +66,9 @@ class Build extends Component {
             <div className="build-container">
                 <form>
                     <div className="item-inputs">
-                        {Object.entries(this.state.item).map(property => (
+                        {
+                            ((Object.entries(this.state.item)).filter(n => n[0]!== "id").filter(n => n[0] !== "createdAt").filter(n => n[0] !== "updatedAt"))
+                            .map(property => (
                             <Input
                             key={property[0]}
                             value={(property[1]) ? (property[1]) : ("")}
