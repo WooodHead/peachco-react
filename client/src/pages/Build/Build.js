@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { ListItem } from "../../components/List";
 import API from "../../utils/API";
 import "./Build.css";
 
@@ -48,6 +47,12 @@ class Build extends Component {
         }
         label = label[0].toUpperCase() + label.substring(1);
         return label;
+    };
+
+    updateItem = (id, data) => {
+        API.updateItem(id, data)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
 
     render() {
@@ -67,7 +72,7 @@ class Build extends Component {
                         )}
                     </div>
                     <div className="build-button-section">
-                    <Button name="Next"/>
+                    <Button onClick={() => this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
                     </div>
                 </form>
             
@@ -76,8 +81,6 @@ class Build extends Component {
         )
         
     }
-
-
 
 
 }

@@ -10,5 +10,9 @@ router
   .route("/:searchTerm")
   .get(dbController.findByQuery);
 
+router
+  .route("/item/update/:id")
+  .post(dbController.updateItem)
+
 
 module.exports = router;

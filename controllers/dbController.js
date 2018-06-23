@@ -37,9 +37,6 @@ module.exports = {
           };
         }
         db.bedding.findAll(query).then(function(data) {
-          let hbsObject = {
-            bedding: data
-          };
           res.json(data);
         });
     },
@@ -51,13 +48,21 @@ module.exports = {
           }
         })
         .then(function(data) {
-          console.log(data);
-          let hbsObject = {
-            item: data
-          };
           res.json(data);
         });
 
+    },
+
+    updateItem: function(req, res){
+      db.bedding
+      .update(req.body, {
+        where: {
+          id: req.params.id
+        }
+      }).then(function(data){
+        res.json(data);
+      })
+      
     }
 
 };
