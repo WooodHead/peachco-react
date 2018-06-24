@@ -12,7 +12,7 @@ const user_token = keys.ebay.user_token;
 module.exports = {
 
     getCategories: function(req, res){
-
+        console.log(req.body.query);
         ebay.xmlRequest({
             serviceName: 'Trading',
             opType: 'GetSuggestedCategories',

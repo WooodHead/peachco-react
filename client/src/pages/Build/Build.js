@@ -8,7 +8,8 @@ import "./Build.css";
 class Build extends Component {
 
     state =  {
-        item: {}
+        item: {},
+        listing: {itemInfo: {}}
     }
 
     componentDidMount() {
@@ -44,19 +45,40 @@ class Build extends Component {
             case "m_":
                 label = "materials"
                 break;
+            case "pi":
+                label = "stock"
+                break;
+            case "sk":
+                label = "SKU"
+                break;
+            case "it":
+                label = "Title"
+                break;
+            case "se":
+                label = "Photo"
+                break;
         }
         label = label[0].toUpperCase() + label.substring(1);
         return label;
     };
 
-    cleanLabels = (label) => {
-        if(label[0] !== "id" || label[0] !== "createdAt" || label[0] !== "updatedAt"){
-            return label;
-        }
+    updateItem = (id, data) => event => {
+        event.preventDefault();
+        API.updateItem(id, data)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     }
 
-    updateItem = (id, data) => {
-        API.updateItem(id, data)
+    getCategory = (query) => event => {
+        event.preventDefault();
+        API.getCategories({query: query})
+        .then(res => console.log(res.data.SuggestedCategorys))
+        .catch(err => console.log(err));
+    }
+
+    listItem = (data) => event => {
+        event.preventDefault();
+        API.listItem({data})
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
@@ -65,9 +87,13 @@ class Build extends Component {
         return (
             <div className="build-container">
                 <form>
-                    <div className="item-inputs">
+                    <div className="inputs-wrapper">
+                        <div className="item-inputs db-info">
                         {
-                            ((Object.entries(this.state.item)).filter(n => n[0]!== "id").filter(n => n[0] !== "createdAt").filter(n => n[0] !== "updatedAt"))
+                            Object.entries(this.state.item)
+                            .filter(n => n[0]!== "id")
+                            .filter(n => n[0] !== "createdAt")
+                            .filter(n => n[0] !== "updatedAt")
                             .map(property => (
                             <Input
                             key={property[0]}
@@ -78,10 +104,23 @@ class Build extends Component {
                         />
                         )
                         )}
+                        </div>
+                        <div className="item-inputs specific-info">
+                            <Input labelname="Item #" name="Item #" />
+                            <Input labelname="List Price" name="List Price" />
+                            <Input labelname="Condition" name="Condition" />
+                            <Input labelname="Condition" name="Condition" />
+                            <Input labelname="Template" name="Template" />
+                            <Input labelname="Something" name="Something" />
+                        </div>
+                        <div className="build-button-section">
+                            <Button onClick={this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
+                            <Button onClick={this.getCategory(this.state.item.type)} name="Get Category"/>
+                            <Button onClick={this.listItem(this.state.listing)} name="AddItem"/>
+                        </div>
+                    
                     </div>
-                    <div className="build-button-section">
-                    <Button onClick={() => this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
-                    </div>
+ 
                 </form>
             
             </div>

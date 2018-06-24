@@ -12,3 +12,23 @@
     margin-top: 5px;
     text-align: right;
 }
+
+.inputs-wrapper {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+@media (min-width: 760px) {
+    .inputs-wrapper {
+        grid-template-columns: auto auto;
+    }
+
+    .specific-info {
+        display: inline-block;
+
+    }
+
+    .specific-info div {
+        margin-bottom: 2.5px;
+    }
+}
