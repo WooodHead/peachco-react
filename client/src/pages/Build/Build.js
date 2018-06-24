@@ -3,13 +3,15 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import API from "../../utils/API";
 import "./Build.css";
+import settings from "./settings.json";
 
 
 class Build extends Component {
 
     state =  {
         item: {},
-        listing: {itemInfo: {}}
+        listing: {itemInfo: {}},
+        settings: settings //probably will have to be removed from state
     }
 
     componentDidMount() {

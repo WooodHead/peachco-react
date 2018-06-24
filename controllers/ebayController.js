@@ -12,7 +12,7 @@ const user_token = keys.ebay.user_token;
 module.exports = {
 
     getCategories: function(req, res){
-        console.log(req.body.query);
+
         ebay.xmlRequest({
             serviceName: 'Trading',
             opType: 'GetSuggestedCategories',
@@ -42,46 +42,6 @@ module.exports = {
 
     addItem: function(req, res){
 
-        let categoryId = "20460";
-        let country = "";
-        let currency = "";
-        let duration = "";
-        let type = "";
-        let paymentMethods = "";
-        let quantity = "";
-        let regionId = "";
-        let returnsAcceptedOption = "";
-        let returnsWithinOption = "";
-        let shippingCostPaidByOption = "";
-        let restockingFee = "";
-        let returnDescription = "";
-        let dispatchTime = "";
-        let startPrice = "10.00";
-        let ShippingTermsInDescription = "";
-        let itemTitle = "TEST TEST TEST TEST";
-        let pictureUrl = "";
-        let brand = "";
-        let size = "";
-        let color = "";
-        let material = "";
-        let retail = "";
-        let itemDescription = "";
-        let shipToLocations = "";
-        let originatingPostalCode = "";
-        let shippingIrregular = "";
-        let packageSize = "";
-        let lbs = "5";
-        let oz = "0";
-        let shippingService = "";
-        let shippingServicePriority = "";
-        let shippingCost = "";
-        let internationalShippingService = "";
-        let internationalShippingServicePriority = "";
-        let internationalShipToLocation = "";
-        let internationalShippingType = "";
-        let paypalEmailAddress = "";
-        let customId = "";
-
         ebay.xmlRequest({
             serviceName: 'Trading',
             opType: 'AddItem',
@@ -98,69 +58,69 @@ module.exports = {
             params: {
                 'Item': {
                     PrimaryCategory: {
-                        CategoryID: categoryId
+                        CategoryID: req.body.categoryId
                     },
-                    Country: country,
-                    Currency: currency,
-                    ListingDuration: duration,
-                    ListingType: type,
+                    Country: req.body.country,
+                    Currency: req.body.currency,
+                    ListingDuration: req.body.duration,
+                    ListingType: req.body.type,
                     Location: "<![CDATA[US]]>",
-                    PaymentMethods: paymentMethods,
-                    Quantity: quantity,
-                    RegionID: regionId,
+                    PaymentMethods: req.body.paymentMethods,
+                    Quantity: req.body.quantity,
+                    RegionID: req.body.regionId,
                     ReturnPolicy: {
-                        ReturnsAcceptedOption: returnsAcceptedOption,
-                        ReturnsWithinOption: returnsWithinOption,
-                        ShippingCostPaidByOption: shippingCostPaidByOption,
-                        RestockingFeeValueOption: restockingFee,
-                        Description: returnDescription
+                        ReturnsAcceptedOption: req.body.returnsAcceptedOption,
+                        ReturnsWithinOption: req.body.returnsWithinOption,
+                        ShippingCostPaidByOption: req.body.shippingCostPaidByOption,
+                        RestockingFeeValueOption: req.body.restockingFee,
+                        Description: req.body.returnDescription
                     },
-                    DispatchTimeMax: dispatchTime,
-                    StartPrice: startPrice,
-                    ShippingTermsInDescription: ShippingTermsInDescription,
-                    Title: `<![CDATA[${itemTitle}]`,
+                    DispatchTimeMax: req.body.dispatchTime,
+                    StartPrice: req.body.startPrice,
+                    ShippingTermsInDescription: req.body.ShippingTermsInDescription,
+                    Title: `<![CDATA[${req.body.itemTitle}]`,
                     PictureDetails: {
-                        PictureURL: pictureUrl
+                        PictureURL: req.body.pictureUrl
                     },
                     ItemSpecifics: {
                         NameValueList: {
                             Name: "Brand",
-                            Value: `<![CDATA[${brand}]]`,
+                            Value: `<![CDATA[${req.body.brand}]]`,
                             Name: "Size",
-                            Value: `<![CDATA[${size}]]`,
+                            Value: `<![CDATA[${req.body.size}]]`,
                             Name: "Color",
-                            Value: `<![CDATA[${color}]]`,
+                            Value: `<![CDATA[${req.body.color}]]`,
                             Name: "Material",
-                            Value: `<![CDATA[${material}]]`,
+                            Value: `<![CDATA[${req.body.material}]]`,
                             Name: "Retail",
-                            Value: `<![CDATA[${retail}]]`,
+                            Value: `<![CDATA[${req.body.retail}]]`,
                         }
                     },
-                    Description: itemDescription,
-                    ShipToLocations: shipToLocations,
+                    Description: req.body.itemDescription,
+                    ShipToLocations: req.body.shipToLocations,
                     ShippingDetails: {
                         CalculatedShippingRate: {
-                            OriginatingPostalCode: originatingPostalCode,
-                            ShippingIrregular: shippingIrregular,
-                            ShippingPackage: packageSize,
-                            WeightMajor: lbs,
-                            WeightMinor: oz
+                            OriginatingPostalCode: req.body.originatingPostalCode,
+                            ShippingIrregular: req.body.shippingIrregular,
+                            ShippingPackage: req.body.packageSize,
+                            WeightMajor: req.body.lbs,
+                            WeightMinor: req.body.oz
                         },
                         ShippingServiceOptions: {
-                            ShippingService: shippingService,
-                            ShippingServicePriority: shippingServicePriority,
-                            ShippingServiceCost: shippingCost
+                            ShippingService: req.body.shippingService,
+                            ShippingServicePriority: req.body.shippingServicePriority,
+                            ShippingServiceCost: req.body.shippingCost
                         },
                         InternationalShippingServiceOption: {
-                            ShippingService: internationalShippingService,
-                            ShippingServicePriority: internationalShippingServicePriority,
-                            ShipToLocation: internationalShipToLocation,
+                            ShippingService: req.body.internationalShippingService,
+                            ShippingServicePriority: req.body.internationalShippingServicePriority,
+                            ShipToLocation: req.body.internationalShipToLocation,
                         },
-                        ShippingType: internationalShippingType
+                        ShippingType: req.body.internationalShippingType
                     },
-                    PaymentMethods: paymentMethods,
-                    PayPalEmailAddress: paypalEmailAddress,
-                    SKU: customId
+                    PaymentMethods: req.body.paymentMethods,
+                    PayPalEmailAddress: req.body.paypalEmailAddress,
+                    SKU: req.body.customId
                 }
             }
         }, function (error, results) {
