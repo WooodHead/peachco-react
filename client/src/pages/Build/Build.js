@@ -10,8 +10,18 @@ class Build extends Component {
 
     state =  {
         item: {},
-        listing: {itemInfo: {}},
-        settings: settings //probably will have to be removed from state
+        settings: {
+            customId: "",
+            categoryId: "",
+            duration: "",
+            listingType: "",
+            quantity: 1,
+            itemDescription: "this is the where the template goes",
+            packageSize: "",
+            lbs: "",
+            oz: "",
+            shippingCost: ""
+        }
     }
 
     componentDidMount() {
@@ -80,9 +90,11 @@ class Build extends Component {
 
     listItem = (data) => event => {
         event.preventDefault();
-        API.listItem({data})
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        const combined = Object.assign(settings, this.state.item, this.state.settings);
+        console.log(combined);
+        // API.listItem({data})
+        // .then(res => console.log(res))
+        // .catch(err => console.log(err));
     }
 
     render() {
@@ -109,16 +121,19 @@ class Build extends Component {
                         </div>
                         <div className="item-inputs specific-info">
                             <Input labelname="Item #" name="Item #" />
-                            <Input labelname="List Price" name="List Price" />
+                            <Input labelname="StartPrice" name="StartPrice" />
                             <Input labelname="Condition" name="Condition" />
                             <Input labelname="Condition" name="Condition" />
                             <Input labelname="Template" name="Template" />
-                            <Input labelname="Something" name="Something" />
+                            <Input labelname="Duration" name="Duration" />
+                            <Input labelname="ListType" name="ListType" /> /* make this change the start price */
+                            <Input labelname="Duration" name="Duration" />
+                            <Input labelname="Quantity" name="Quantity" />
                         </div>
                         <div className="build-button-section">
                             <Button onClick={this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
                             <Button onClick={this.getCategory(this.state.item.type)} name="Get Category"/>
-                            <Button onClick={this.listItem(this.state.listing)} name="AddItem"/>
+                            <Button onClick={this.listItem()} name="AddItem"/>
                         </div>
                     
                     </div>

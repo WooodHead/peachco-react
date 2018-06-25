@@ -50,6 +50,23 @@ item: {
 
 should save category name or id
 
+there are the fields that i already have info for but need to be made into an object to be set to the additem request
 
-
- 
+"categoryId": "",
+"duration": "",
+"type": "", 
+"quantity": "",
+"startPrice": "",
+"itemTitle": "",
+"pictureUrl": "",
+"brand": "",
+"size": "",
+"color": "",
+"material": "",
+"retail": "", 
+"itemDescription": "",
+"packageSize": "",
+"lbs": "",
+"oz": "",
+"shippingCost": "",
+"customId": ""
