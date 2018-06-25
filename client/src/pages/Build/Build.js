@@ -20,7 +20,9 @@ class Build extends Component {
             packageSize: "",
             lbs: "",
             oz: "",
-            shippingCost: ""
+            shippingCost: "",
+            condition: "",
+            startPrice: ""
         }
     }
 
@@ -42,6 +44,19 @@ class Build extends Component {
         };
         this.setState({
           item: newItem
+        });
+      };
+
+      handleInputChangeForSettings = (propertyName) => event => {
+        const { settings } = this.state;
+        console.log(propertyName);
+        const newSettings = {
+            ...settings,
+            [propertyName]: event.target.value
+        };
+        // console.log(newSettings);
+        this.setState({
+          settings: newSettings
         });
       };
 
@@ -69,6 +84,7 @@ class Build extends Component {
             case "se":
                 label = "Photo"
                 break;
+            default: break;
         }
         label = label[0].toUpperCase() + label.substring(1);
         return label;
@@ -97,6 +113,11 @@ class Build extends Component {
         // .catch(err => console.log(err));
     }
 
+    getPrice = (retail) => event =>{
+        event.preventDefault();
+        return retail * .25;
+    }
+
     render() {
         return (
             <div className="build-container">
@@ -121,14 +142,13 @@ class Build extends Component {
                         </div>
                         <div className="item-inputs specific-info">
                             <Input labelname="Item #" name="Item #" />
-                            <Input labelname="StartPrice" name="StartPrice" />
-                            <Input labelname="Condition" name="Condition" />
-                            <Input labelname="Condition" name="Condition" />
-                            <Input labelname="Template" name="Template" />
-                            <Input labelname="Duration" name="Duration" />
-                            <Input labelname="ListType" name="ListType" /> /* make this change the start price */
-                            <Input labelname="Duration" name="Duration" />
-                            <Input labelname="Quantity" name="Quantity" />
+                            <Input labelname="StartPrice" name="StartPrice" value={this.state.settings.startPrice} onChange={this.handleInputChangeForSettings("startPrice")}/>
+                            <Input labelname="Condition" name="Condition" value={this.state.settings.condition} onChange={this.handleInputChangeForSettings("condition")}/>
+                            <Input labelname="Condition" name="Condition" value={this.state.settings.condition} onChange={this.handleInputChangeForSettings("condition")}/>
+                            <Input labelname="Template" name="Template"/>
+                            <Input labelname="Duration" name="Duration" value={this.state.settings.duration} onChange={this.handleInputChangeForSettings("duration")}/>
+                            <Input labelname="ListType" name="ListType" value={this.state.settings.listingType} onChange={this.handleInputChangeForSettings("listingType")}/> {/* this should change the start price dynamically*/}
+                            <Input labelname="Quantity" name="Quantity" value={this.state.settings.quantity} onChange={this.handleInputChangeForSettings("quantity")}/>
                         </div>
                         <div className="build-button-section">
                             <Button onClick={this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
