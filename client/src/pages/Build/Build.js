@@ -21,8 +21,7 @@ class Build extends Component {
             lbs: "",
             oz: "",
             shippingCost: "",
-            condition: "",
-            startPrice: ""
+            condition: ""
         }
     }
 
@@ -30,7 +29,10 @@ class Build extends Component {
         API.getItemById(this.props.match.params.id)
         .then(res => this.setState(
             { 
-              item: res.data
+              item: res.data,
+              settings: {
+                  startPrice: this.getPrice(res.data.retail)
+              }
             }
           ))
           .catch(err => console.log(err));
@@ -49,12 +51,10 @@ class Build extends Component {
 
       handleInputChangeForSettings = (propertyName) => event => {
         const { settings } = this.state;
-        console.log(propertyName);
         const newSettings = {
             ...settings,
             [propertyName]: event.target.value
         };
-        // console.log(newSettings);
         this.setState({
           settings: newSettings
         });
@@ -113,8 +113,7 @@ class Build extends Component {
         // .catch(err => console.log(err));
     }
 
-    getPrice = (retail) => event =>{
-        event.preventDefault();
+    getPrice = (retail) => {
         return retail * .25;
     }
 
@@ -142,13 +141,13 @@ class Build extends Component {
                         </div>
                         <div className="item-inputs specific-info">
                             <Input labelname="Item #" name="Item #" />
-                            <Input labelname="StartPrice" name="StartPrice" value={this.state.settings.startPrice} onChange={this.handleInputChangeForSettings("startPrice")}/>
-                            <Input labelname="Condition" name="Condition" value={this.state.settings.condition} onChange={this.handleInputChangeForSettings("condition")}/>
-                            <Input labelname="Condition" name="Condition" value={this.state.settings.condition} onChange={this.handleInputChangeForSettings("condition")}/>
+                            <Input labelname="StartPrice" name="StartPrice" value={(this.state.settings.startPrice) ? (this.state.settings.startPrice) : ("")} onChange={this.handleInputChangeForSettings("startPrice")}/>
+                            <Input labelname="Condition" name="Condition" value={(this.state.settings.condition) ? (this.state.settings.condition) : ("")} onChange={this.handleInputChangeForSettings("condition")}/>
+                            <Input labelname="Condition" name="Condition" value={(this.state.settings.condition) ? (this.state.settings.condition) : ("")} onChange={this.handleInputChangeForSettings("condition")}/>
                             <Input labelname="Template" name="Template"/>
-                            <Input labelname="Duration" name="Duration" value={this.state.settings.duration} onChange={this.handleInputChangeForSettings("duration")}/>
-                            <Input labelname="ListType" name="ListType" value={this.state.settings.listingType} onChange={this.handleInputChangeForSettings("listingType")}/> {/* this should change the start price dynamically*/}
-                            <Input labelname="Quantity" name="Quantity" value={this.state.settings.quantity} onChange={this.handleInputChangeForSettings("quantity")}/>
+                            <Input labelname="Duration" name="Duration" value={(this.state.settings.duration) ? (this.state.settings.duration) : ("")} onChange={this.handleInputChangeForSettings("duration")}/>
+                            <Input labelname="ListType" name="ListType" value={(this.state.settings.listingType) ? (this.state.settings.listingType) : ("")} onChange={this.handleInputChangeForSettings("listingType")}/> {/* this should change the start price dynamically*/}
+                            <Input labelname="Quantity" name="Quantity" value={(this.state.settings.quantity) ? (this.state.settings.quantity) : ("")} onChange={this.handleInputChangeForSettings("quantity")}/>
                         </div>
                         <div className="build-button-section">
                             <Button onClick={this.updateItem(this.state.item.id, this.state.item)} name="Update"/>
