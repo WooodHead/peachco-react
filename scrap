@@ -49,3 +49,21 @@ item: {
 
 
 should save category name or id
+
+
+
+,
+        settings: {
+            customId: "",
+            categoryId: "",
+            duration: "",
+            listingType: "",
+            quantity: 1,
+            itemDescription: "this is the where the template goes",
+            packageSize: "",
+            lbs: "",
+            oz: "",
+            shippingCost: "",
+            condition: "",
+            startPrice: "",
+            categories: ""

@@ -14,7 +14,6 @@ export default {
     return axios.post("/api/ebay/additem/", data);
   },
   getCategories: function(query) {
-    console.log(query);
     return axios.post("/api/ebay/getcategories/", query);
   }
     
