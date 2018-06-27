@@ -139,8 +139,8 @@ class Build extends Component {
   };
 
   render() {
+      console.log(this.state.settings.categories);
     let updateItemParameters = {id: this.state.item.id, data: this.state.item};
-    console.log(updateItemParameters);
     return (
       <div className="build-container">
         <form>
@@ -172,12 +172,28 @@ class Build extends Component {
                 <option>9</option>
               </select>
               <h3>Category</h3>
-              <select size="10" style={{ width: "100%" }}>
-                <option>1</option>
-                <option>4</option>
-                <option>6</option>
-                <option>9</option>
-              </select>
+              
+              {
+                  (this.state.settings.categories) 
+                  ? 
+                    (
+                        <select size="10" style={{ width: "100%" }}>
+                        {
+                            this.state.settings.categories.map(cat => (
+                                <option
+                                key={cat.Category.CategoryID}
+                                id={cat.Category.CategoryID}
+                                >
+                                {cat.Category.CategoryName} - Relevance: {cat.PercentItemFound}%
+                                </option>
+                        ))
+                    }
+                        </select>
+                    ) 
+                : 
+                    ("")
+            }
+              
               {/*<Input labelname="Item #" name="Item #" />
               <Input
                 labelname="StartPrice"
