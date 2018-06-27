@@ -21,7 +21,8 @@ class Build extends Component {
       shippingCost: "",
       condition: "",
       startPrice: "",
-      categories: ""
+      categories: "",
+      category: ""
     }
   };
 
@@ -31,6 +32,7 @@ class Build extends Component {
           this.getCategory(res.data.type).then(categoryData => {
           const settings = { ...this.state.settings };
           settings.categories = categoryData;
+          settings.category = categoryData[0].Category.CategoryID;
           this.setState({
             item: res.data,
             settings: settings
@@ -50,6 +52,17 @@ class Build extends Component {
       item: newItem
     });
   };
+
+    handleInputChangeforOptions = (event) => {
+        const { settings } = this.state;
+        const newSettings = {
+            ...settings,
+            category: event.target.value
+        }
+        this.setState({
+            settings: newSettings
+        });
+    }
 
   handleInputChangeForSettings = propertyName => event => {
     const { settings } = this.state;
@@ -177,12 +190,12 @@ class Build extends Component {
                   (this.state.settings.categories) 
                   ? 
                     (
-                        <select size="10" style={{ width: "100%" }}>
+                        <select value={this.state.settings.category} onChange={this.handleInputChangeforOptions} size="10" style={{ width: "100%" }}>
                         {
                             this.state.settings.categories.map(cat => (
                                 <option
                                 key={cat.Category.CategoryID}
-                                id={cat.Category.CategoryID}
+                                value={cat.Category.CategoryID}
                                 >
                                 {cat.Category.CategoryName} - Relevance: {cat.PercentItemFound}%
                                 </option>
