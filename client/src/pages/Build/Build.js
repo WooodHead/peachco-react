@@ -3,7 +3,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import API from "../../utils/API";
 import "./Build.css";
-import settings from "./settings.json";
+//import userSettings from "./settings.json";
 
 class Build extends Component {
   state = {
@@ -28,12 +28,9 @@ class Build extends Component {
   componentDidMount() {
     API.getItemById(this.props.match.params.id)
       .then(res => {
-          console.log(res)
-          API.getCategories({ query: res.data.type }).then(categoryData => {
+          this.getCategory(res.data.type).then(categoryData => {
           const settings = { ...this.state.settings };
-
-          settings.categories = categoryData.data.SuggestedCategorys;
-          console.log(settings);
+          settings.categories = categoryData;
           this.setState({
             item: res.data,
             settings: settings
@@ -43,11 +40,11 @@ class Build extends Component {
       .catch(err => console.log(err));
   }
 
-  handleInputChange = propertyName => event => {
+  handleInputChange = event => {
     const { item } = this.state;
     const newItem = {
       ...item,
-      [propertyName]: event.target.value
+      [event.target.name]: event.target.value
     };
     this.setState({
       item: newItem
@@ -95,10 +92,10 @@ class Build extends Component {
     label = label[0].toUpperCase() + label.substring(1);
     return label;
   };
-
-  updateItem = (id, data) => event => {
-    event.preventDefault();
-    API.updateItem(id, data)
+  
+  updateItem = obj => {
+      console.log("obj");
+    API.updateItem(obj.id, obj.data)
       .then(function(res) {
         return res;
       })
@@ -106,17 +103,30 @@ class Build extends Component {
   };
 
   getCategory = query => {
-    API.getCategories({ query: query })
-      .then(res => res.data.SuggestedCategorys)
-      .catch(err => console.log(err));
+      let promise = new Promise(function(resolve, reject) {
+        API.getCategories({ query: query })
+        .then(res => {
+            if (res.data.Ack === "Success") {
+                resolve(res.data.SuggestedCategorys);
+            }
+            else if (res.data.severityCode === "Error"){
+                resolve("error");
+            }
+            else {
+                reject("error");
+            }
+        })
+      })
+      return promise;
+    
+
   };
 
   listItem = data => event => {
     event.preventDefault();
     const combined = Object.assign(
-      settings,
-      this.state.item,
-      this.state.settings
+
+      this.state.item
     );
     console.log(combined);
     // API.listItem({data})
@@ -129,8 +139,8 @@ class Build extends Component {
   };
 
   render() {
-    // let test = this.getCategory(this.state.item.type);
-    // console.log(this.state.item.type);
+    let updateItemParameters = {id: this.state.item.id, data: this.state.item};
+    console.log(updateItemParameters);
     return (
       <div className="build-container">
         <form>
@@ -145,9 +155,11 @@ class Build extends Component {
                     key={property[0]}
                     value={property[1] ? property[1] : ""}
                     name={property[0]}
-                    labelname={this.labelize(property[0])}
-                    onChange={this.handleInputChange(property[0])}
-                  />
+                    func={this.handleInputChange}
+                    parameter={property[0]}
+                  >
+                  {this.labelize(property[0])}
+                  </Input>
                 ))}
             </div>
             <div className="item-inputs specific-info">
@@ -166,7 +178,7 @@ class Build extends Component {
                 <option>6</option>
                 <option>9</option>
               </select>
-              <Input labelname="Item #" name="Item #" />
+              {/*<Input labelname="Item #" name="Item #" />
               <Input
                 labelname="StartPrice"
                 name="StartPrice"
@@ -217,7 +229,7 @@ class Build extends Component {
                 }
                 onChange={this.handleInputChangeForSettings("listingType")}
               />{" "}
-              {/* this should change the start price dynamically*/}
+              {/* this should change the start price dynamically
               <Input
                 labelname="Quantity"
                 name="Quantity"
@@ -227,16 +239,13 @@ class Build extends Component {
                     : ""
                 }
                 onChange={this.handleInputChangeForSettings("quantity")}
-              />
+            />*/}
             </div>
             <div className="build-button-section">
               <Button
-                onClick={this.updateItem(this.state.item.id, this.state.item)}
+                func={this.updateItem}
+                parameter={updateItemParameters}
                 name="Update"
-              />
-              <Button
-                onClick={this.getCategory(this.state.item.type)}
-                name="Get Category"
               />
               <Button onClick={this.listItem()} name="AddItem" />
             </div>

@@ -45,8 +45,7 @@ class Search extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
+  handleFormSubmit = () => {
     if (this.state.query) {
       API.getItemsByQuery({
         query: this.state.query
@@ -67,16 +66,16 @@ class Search extends Component {
           <form>
             <div className="search-form-wrapper">
               <Input
+              key="search"
               value={this.state.query}
-              onChange={this.handleInputChange}
               name="query"
-              labelname="Search"
-              placeholder="search (required)"
-              />
+              func={this.handleInputChange}
+              >
+              Search
+              </Input>
               <Button
-                disabled={!(this.state.query)}
-                onClick={this.handleFormSubmit}
                 name="Search"
+                func={this.handleFormSubmit}
               />
             </div>
           </form>
@@ -101,8 +100,9 @@ class Search extends Component {
             (
               <Modal 
                 item={this.state.item}
-                build={() => this.buildItem(this.state.item.id)}
-                closeModal={() => this.closeModal()}
+                buildItem={this.buildItem}
+                buildParameter={this.state.item.id}
+                closeModal={this.closeModal}
               >
               </Modal>
             ) : ("")

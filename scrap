@@ -67,3 +67,35 @@ should save category name or id
             condition: "",
             startPrice: "",
             categories: ""
+
+
+
+componentDidMount() {
+    API.getItemById(this.props.match.params.id)
+      .then(res => {
+          console.log(res)
+          API.getCategories({ query: res.data.type }).then(categoryData => {
+          const settings = { ...this.state.settings };
+
+          settings.categories = categoryData.data.SuggestedCategorys;
+          console.log(settings);
+          this.setState({
+            item: res.data,
+            settings: settings
+          });
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+
+  (
+                    <Input
+                    key={value}
+                    value={label}
+
+                    >
+                    {value}
+                    </Input>
+
+                )

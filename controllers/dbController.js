@@ -54,6 +54,7 @@ module.exports = {
     },
 
     updateItem: function(req, res){
+      console.log(req.params.id);
       db.bedding
       .update(req.body, {
         where: {
