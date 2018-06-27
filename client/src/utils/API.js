@@ -7,6 +7,9 @@ export default {
   getItemById: function(id) {
     return axios.get("/api/db/item/" + id);
   },
+  getShippingTemplates: function() {
+    return axios.get("/api/db/shipping/templates");
+  },
   updateItem: function(id, data){
     return axios.post("/api/db/item/update/" + id, data);
   },
@@ -16,5 +19,7 @@ export default {
   getCategories: function(query) {
     return axios.post("/api/ebay/getcategories/", query);
   }
+
+
     
 };

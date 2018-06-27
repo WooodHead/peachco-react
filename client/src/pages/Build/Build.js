@@ -23,20 +23,24 @@ class Build extends Component {
       startPrice: "",
       categories: "",
       category: ""
-    }
+    },
+    templates: {}
   };
 
   componentDidMount() {
     API.getItemById(this.props.match.params.id)
       .then(res => {
           this.getCategory(res.data.type).then(categoryData => {
-          const settings = { ...this.state.settings };
-          settings.categories = categoryData;
-          settings.category = categoryData[0].Category.CategoryID;
-          this.setState({
-            item: res.data,
-            settings: settings
-          });
+            this.getShippingTemplates().then(templates => {
+              const settings = { ...this.state.settings };
+              settings.categories = categoryData;
+              settings.category = categoryData[0].Category.CategoryID;
+              this.setState({
+                item: res.data,
+                settings: settings,
+                templates: templates
+              });
+            })
         });
       })
       .catch(err => console.log(err));
@@ -131,9 +135,20 @@ class Build extends Component {
         })
       })
       return promise;
-    
-
   };
+
+  getShippingTemplates = () => {
+    let promise = new Promise(function(resolve, reject){
+      API.getShippingTemplates()
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      })
+    })
+    return promise;
+  }
 
   listItem = data => event => {
     event.preventDefault();
@@ -152,7 +167,7 @@ class Build extends Component {
   };
 
   render() {
-      console.log(this.state.settings.categories);
+    console.log(this.state);
     let updateItemParameters = {id: this.state.item.id, data: this.state.item};
     return (
       <div className="build-container">
@@ -178,11 +193,21 @@ class Build extends Component {
             <div className="item-inputs specific-info">
               <h3>Template</h3>
               <select size="10" style={{ width: "100%" }}>
-                <option>2</option>
-                <option>1</option>
-                <option>4</option>
-                <option>6</option>
-                <option>9</option>
+              {
+                (this.state.templates.length) ? 
+                (
+                  this.state.templates.map(template => 
+                    <option
+                    key={template.id}
+                    value={template.id}
+                    >
+                    {template.type}
+                    </option>
+                  )
+                ) : 
+                (console.log("nothing to see here"))
+              }
+
               </select>
               <h3>Category</h3>
               

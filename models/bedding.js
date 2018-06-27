@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var bedding = sequelize.define("bedding", {
+    const bedding = sequelize.define("bedding", {
         sku: {
             type: DataTypes.BIGINT,
             allowNull: true,

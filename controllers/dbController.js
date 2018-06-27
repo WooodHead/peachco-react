@@ -54,7 +54,6 @@ module.exports = {
     },
 
     updateItem: function(req, res){
-      console.log(req.params.id);
       db.bedding
       .update(req.body, {
         where: {
@@ -64,7 +63,15 @@ module.exports = {
         res.json(data);
       })
       
-    }
+    },
+
+    getShippingTemplates: function(req, res){
+      db.packageSizes
+      .findAll()
+      .then(function(data){
+        res.json(data);
+      })
+    } 
 
 };
 

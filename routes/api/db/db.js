@@ -11,8 +11,12 @@ router
   .get(dbController.findByQuery);
 
 router
+  .route("/shipping/templates/")
+  .get(dbController.getShippingTemplates);
+
+router
   .route("/item/update/:id")
-  .post(dbController.updateItem)
+  .post(dbController.updateItem);
 
 
 module.exports = router;

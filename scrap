@@ -70,32 +70,19 @@ should save category name or id
 
 
 
-componentDidMount() {
-    API.getItemById(this.props.match.params.id)
-      .then(res => {
-          console.log(res)
-          API.getCategories({ query: res.data.type }).then(categoryData => {
-          const settings = { ...this.state.settings };
-
-          settings.categories = categoryData.data.SuggestedCategorys;
-          console.log(settings);
-          this.setState({
-            item: res.data,
-            settings: settings
-          });
-        });
-      })
-      .catch(err => console.log(err));
-  }
 
 
-  (
-                    <Input
-                    key={value}
-                    value={label}
-
+                              {
+                (this.state.templates) ? 
+                (
+                  this.state.templates.map(template => {
+                    <option
+                    key={template.id}
+                    value={template.id}
                     >
-                    {value}
-                    </Input>
-
-                )
+                    {template.type}
+                    </option>
+                  })
+                ) : 
+                ("")
+              }
