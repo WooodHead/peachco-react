@@ -10,8 +10,8 @@ class Build extends Component {
     item: {},
     settings: {
       customId: "",
-      duration: "",
-      listingType: "",
+      duration: "Days_7",
+      listingType: "Chinese",
       quantity: 1,
       itemDescription: "this is the where the template goes",
       condition: "",
@@ -142,7 +142,8 @@ class Build extends Component {
   };
 
   listItem = data => {
-    const combined = Object.assign(data.item, data.template, userSettings);
+    const combined = Object.assign(data.item, data.settings, data.template, userSettings);
+    console.log(combined);
     API.listItem(combined)
       .then(res => console.log(res))
       .catch(err => console.log(err));
@@ -153,7 +154,6 @@ class Build extends Component {
   };
 
   render() {
-    console.log(this.state);
     let updateItemParameters = {
       id: this.state.item.id,
       data: this.state.item
@@ -264,7 +264,6 @@ class Build extends Component {
               >
                 CustomID
               </Input>
-              <textarea value="the item description should go here maybe i dunno, maybe this should be a preview box" />
             </div>
             <div className="build-button-section">
               <Button

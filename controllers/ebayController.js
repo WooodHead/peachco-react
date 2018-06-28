@@ -58,53 +58,68 @@ module.exports = {
             params: {
                 'Item': {
                     PrimaryCategory: {
-                        CategoryID: req.body.categoryId
+                        CategoryID: req.body.category
                     },
                     Country: req.body.country,
+                    Condition: "new",
+                    conditionID: 1000,
                     Currency: req.body.currency,
                     ListingDuration: req.body.duration,
-                    ListingType: req.body.type,
+                    ListingType: req.body.listingType,
                     Location: "<![CDATA[US]]>",
                     PaymentMethods: req.body.paymentMethods,
+                    ProductListingDetails: {
+                        UPC: req.body.sku
+                    },
                     Quantity: req.body.quantity,
                     RegionID: req.body.regionId,
                     ReturnPolicy: {
                         ReturnsAcceptedOption: req.body.returnsAcceptedOption,
                         ReturnsWithinOption: req.body.returnsWithinOption,
+                        RefundOption: req.body.refundOption,
                         ShippingCostPaidByOption: req.body.shippingCostPaidByOption,
-                        RestockingFeeValueOption: req.body.restockingFee,
-                        Description: req.body.returnDescription
+                        RestockingFeeValueOption: req.body.restockingFee
+                        
                     },
                     DispatchTimeMax: req.body.dispatchTime,
                     StartPrice: req.body.startPrice,
                     ShippingTermsInDescription: req.body.ShippingTermsInDescription,
-                    Title: `<![CDATA[${req.body.itemTitle}]`,
+                    Title: req.body.itemTitle,
                     PictureDetails: {
-                        PictureURL: req.body.pictureUrl
+                        PictureURL: "http://www.thepeachco.com/ebay/images/" + req.body.pic + ".jpg"
                     },
                     ItemSpecifics: {
-                        NameValueList: {
-                            Name: "Brand",
-                            Value: `<![CDATA[${req.body.brand}]]`,
-                            Name: "Size",
-                            Value: `<![CDATA[${req.body.size}]]`,
-                            Name: "Color",
-                            Value: `<![CDATA[${req.body.color}]]`,
-                            Name: "Material",
-                            Value: `<![CDATA[${req.body.material}]]`,
-                            Name: "Retail",
-                            Value: `<![CDATA[${req.body.retail}]]`,
-                        }
+                        NameValueList: [
+                            {
+                                Name: "Brand",
+                                Value: [req.body.brand]
+                            },
+                            {
+                                Name: "Size",
+                                Value: req.body.s_1
+                            },
+                            {
+                                Name: "Color",
+                                Value: req.body.color
+                            },
+                            {
+                                Name: "Material",
+                                Value: req.body.m_1
+                            },
+                            {
+                                Name: "Retail",
+                                Value: req.body.retail
+                            }
+                        ]
                     },
-                    Description: req.body.itemDescription,
+                    Description: "this is a test",
                     ShipToLocations: req.body.shipToLocations,
                     ShippingDetails: {
                         CalculatedShippingRate: {
                             OriginatingPostalCode: req.body.originatingPostalCode,
                             ShippingIrregular: req.body.shippingIrregular,
-                            ShippingPackage: req.body.packageSize,
-                            WeightMajor: req.body.lbs,
-                            WeightMinor: req.body.oz
+                            WeightMajor: req.body.weight+ ".0",
+                            WeightMinor: 0
                         },
                         ShippingServiceOptions: {
                             ShippingService: req.body.shippingService,
