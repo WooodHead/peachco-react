@@ -226,8 +226,8 @@ class Build extends Component {
                 onChange={this.handleInputChangeforSettings}
                 name="listingType"
               >
-                <option value="Auction">Auction</option>
-                <option value="Fixed">Fixed</option>
+                <option value="Chinese">Auction</option>
+                <option value="FixedPriceItem">Fixed</option>
               </select>
               <h3>Duration</h3>
               <select
@@ -235,28 +235,31 @@ class Build extends Component {
                 onChange={this.handleInputChangeforSettings}
                 name="duration"
               >
-                <option value="5">5</option>
-                <option value="7">7</option>
-                <option value="30">30</option>
+                <option value="Days_5">5</option>
+                <option value="Days_7">7</option>
+                <option value="Days_30">30</option>
                 <option value="GTC">GTC</option>
               </select>
               <Input
                 value={this.state.settings.quantity}
-                func={this.handleInputChangeForSettings}
+                func={this.handleInputChangeforSettings}
+                parameter="quantity"
                 name="quantity"
               >
                 Quantity
               </Input>
               <Input
                 value={this.state.settings.startPrice}
-                func={this.handleInputChangeForSettings}
+                func={this.handleInputChangeforSettings}
+                parameter="startPrice"
                 name="startPrice"
               >
                 StartPrice
               </Input>
               <Input
                 value={this.state.settings.customId}
-                func={this.handleInputChangeForSettings}
+                func={this.handleInputChangeforSettings}
+                parameter="customId"
                 name="customId"
               >
                 CustomID
