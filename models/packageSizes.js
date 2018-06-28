@@ -16,9 +16,11 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: true
         }
-    }, {
-        freezeTableName: true
     });
+
+    packageSizes.associate = models => {
+        packageSizes.hasMany(models.bedding);
+    };
 
     return packageSizes;
 }

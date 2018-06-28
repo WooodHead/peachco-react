@@ -167,7 +167,6 @@ class Build extends Component {
   };
 
   render() {
-    console.log(this.state);
     let updateItemParameters = {id: this.state.item.id, data: this.state.item};
     return (
       <div className="build-container">
@@ -191,7 +190,7 @@ class Build extends Component {
                 ))}
             </div>
             <div className="item-inputs specific-info">
-              <h3>Template</h3>
+              <h3>Shipping Template</h3>
               <select size="10" style={{ width: "100%" }}>
               {
                 (this.state.templates.length) ? 
@@ -205,33 +204,30 @@ class Build extends Component {
                     </option>
                   )
                 ) : 
-                (console.log("nothing to see here"))
+                ("")
               }
 
               </select>
               <h3>Category</h3>
+              <select value={this.state.settings.category} onChange={this.handleInputChangeforOptions} size="10" style={{ width: "100%" }}>
               
               {
-                  (this.state.settings.categories) 
-                  ? 
-                    (
-                        <select value={this.state.settings.category} onChange={this.handleInputChangeforOptions} size="10" style={{ width: "100%" }}>
-                        {
-                            this.state.settings.categories.map(cat => (
-                                <option
-                                key={cat.Category.CategoryID}
-                                value={cat.Category.CategoryID}
-                                >
-                                {cat.Category.CategoryName} - Relevance: {cat.PercentItemFound}%
-                                </option>
-                        ))
-                    }
-                        </select>
-                    ) 
+                (this.state.settings.categories) 
+                ? 
+                (
+                  this.state.settings.categories.map(cat => (
+                    <option
+                    key={cat.Category.CategoryID}
+                    value={cat.Category.CategoryID}
+                    >
+                    {cat.Category.CategoryName} - Relevance: {cat.PercentItemFound}%
+                    </option>
+                  )) 
+                ) 
                 : 
-                    ("")
-            }
-              
+                ("")
+              }
+              </select>
               {/*<Input labelname="Item #" name="Item #" />
               <Input
                 labelname="StartPrice"

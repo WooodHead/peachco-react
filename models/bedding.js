@@ -116,7 +116,7 @@ module.exports = function (sequelize, DataTypes) {
         secPic: {
             type: DataTypes.STRING,
             allowNull: true
-        },
+        }
 
     }, {
         freezeTableName: true
@@ -128,6 +128,16 @@ module.exports = function (sequelize, DataTypes) {
             }
         ]
     });
+
+
+
+    bedding.associate = (models) => {
+        bedding.belongsTo(models.packageSizes,{
+            foreignKey: {
+                allowNull: true
+            }
+        });
+    } 
 
     return bedding;
 }
