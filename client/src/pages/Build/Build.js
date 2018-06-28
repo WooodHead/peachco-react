@@ -3,28 +3,24 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import API from "../../utils/API";
 import "./Build.css";
-//import userSettings from "./settings.json";
+import userSettings from "./settings.json";
 
 class Build extends Component {
   state = {
     item: {},
     settings: {
       customId: "",
-      categoryId: "",
       duration: "",
       listingType: "",
       quantity: 1,
       itemDescription: "this is the where the template goes",
-      packageSize: "",
-      lbs: "",
-      oz: "",
-      shippingCost: "",
       condition: "",
       startPrice: "",
       categories: "",
       category: ""
     },
-    templates: {}
+    templates: {},
+    template: {}
   };
 
   componentDidMount() {
@@ -35,10 +31,15 @@ class Build extends Component {
               const settings = { ...this.state.settings };
               settings.categories = categoryData;
               settings.category = categoryData[0].Category.CategoryID;
+              let template = {};
+              if(res.data.packageSizeId){
+                template =  templates[res.data.packageSizeId]
+              }
               this.setState({
                 item: res.data,
                 settings: settings,
-                templates: templates
+                templates: templates,
+                template: template
               });
             })
         });
@@ -78,6 +79,18 @@ class Build extends Component {
       settings: newSettings
     });
   };
+
+  handleInputChangeforTemplate = (event) => {
+    console.log(event.target.value);
+    const { item } = this.state;
+    const newItem = {
+      ...item,
+      packageSizeId: event.target.value
+    }
+    this.setState({
+      item: newItem
+    })
+  }
 
   labelize = label => {
     let expr = label.substring(0, 2);
@@ -150,11 +163,11 @@ class Build extends Component {
     return promise;
   }
 
-  listItem = data => event => {
-    event.preventDefault();
+  listItem = data => {
     const combined = Object.assign(
-
-      this.state.item
+      data.item,
+      data.template,
+      userSettings
     );
     console.log(combined);
     // API.listItem({data})
@@ -167,6 +180,7 @@ class Build extends Component {
   };
 
   render() {
+    console.log(this.state);
     let updateItemParameters = {id: this.state.item.id, data: this.state.item};
     return (
       <div className="build-container">
@@ -190,8 +204,8 @@ class Build extends Component {
                 ))}
             </div>
             <div className="item-inputs specific-info">
-              <h3>Shipping Template</h3>
-              <select size="10" style={{ width: "100%" }}>
+              <h3>Shipping Templates</h3>
+              <select value={(this.state.item.packageSizeId) ? (this.state.item.packageSizeId) : ("")} onChange={this.handleInputChangeforTemplate} size="15" style={{ width: "100%" }}>
               {
                 (this.state.templates.length) ? 
                 (
@@ -209,7 +223,7 @@ class Build extends Component {
 
               </select>
               <h3>Category</h3>
-              <select value={this.state.settings.category} onChange={this.handleInputChangeforOptions} size="10" style={{ width: "100%" }}>
+              <select value={this.state.settings.category} onChange={this.handleInputChangeforOptions} size="15" style={{ width: "100%" }}>
               
               {
                 (this.state.settings.categories) 
@@ -297,7 +311,11 @@ class Build extends Component {
                 parameter={updateItemParameters}
                 name="Update"
               />
-              <Button onClick={this.listItem()} name="AddItem" />
+              <Button 
+                func={this.listItem} 
+                parameter={this.state}
+                name="AddItem" 
+              />
             </div>
           </div>
         </form>
