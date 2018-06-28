@@ -3,7 +3,6 @@ import "./Button.css";
 
 function handleClick(e, props) {
     e.preventDefault();
-    console.log(props.parameter);
     props.func(props.parameter)
 }
 
