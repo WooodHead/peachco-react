@@ -81,7 +81,6 @@ class Build extends Component {
   };
 
   handleInputChangeforTemplate = (event) => {
-    console.log(event.target.value);
     const { item } = this.state;
     const newItem = {
       ...item,
@@ -169,10 +168,9 @@ class Build extends Component {
       data.template,
       userSettings
     );
-    console.log(combined);
-    // API.listItem({data})
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err));
+    API.listItem(combined)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   };
 
   getPrice = retail => {
@@ -180,7 +178,6 @@ class Build extends Component {
   };
 
   render() {
-    console.log(this.state);
     let updateItemParameters = {id: this.state.item.id, data: this.state.item};
     return (
       <div className="build-container">
@@ -242,68 +239,22 @@ class Build extends Component {
                 ("")
               }
               </select>
-              {/*<Input labelname="Item #" name="Item #" />
-              <Input
-                labelname="StartPrice"
-                name="StartPrice"
-                value={
-                  this.state.settings.startPrice
-                    ? this.state.settings.startPrice
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("startPrice")}
-              />
-              <Input
-                labelname="Condition"
-                name="Condition"
-                value={
-                  this.state.settings.condition
-                    ? this.state.settings.condition
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("condition")}
-              />
-              <Input
-                labelname="Condition"
-                name="Condition"
-                value={
-                  this.state.settings.condition
-                    ? this.state.settings.condition
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("condition")}
-              />
-              <Input
-                labelname="Duration"
-                name="Duration"
-                value={
-                  this.state.settings.duration
-                    ? this.state.settings.duration
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("duration")}
-              />
-              <Input
-                labelname="ListType"
-                name="ListType"
-                value={
-                  this.state.settings.listingType
-                    ? this.state.settings.listingType
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("listingType")}
-              />{" "}
-              {/* this should change the start price dynamically
-              <Input
-                labelname="Quantity"
-                name="Quantity"
-                value={
-                  this.state.settings.quantity
-                    ? this.state.settings.quantity
-                    : ""
-                }
-                onChange={this.handleInputChangeForSettings("quantity")}
-            />*/}
+              <h3>Listing Type</h3>
+              <select>
+                <option value="Auction">Auction</option>
+                <option value="Fixed">Fixed</option>
+              </select>
+              <h3>Duration</h3>
+              <select>
+                <option value="">5</option>
+                <option value="">7</option>
+                <option value="">30</option>
+                <option value="">GTC</option>
+              </select>
+              // <Input value="0" name="quantity">Quantity</Input>
+              // <Input value="" name="duration">CustomId</Input>
+              // <Input value="" name="startPrice">StartPrice</Input>
+              <textarea value="the item description should go here maybe i dunno, maybe this should be a preview box"></textarea>
             </div>
             <div className="build-button-section">
               <Button
