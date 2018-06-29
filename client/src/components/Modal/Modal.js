@@ -18,7 +18,8 @@ export const Modal = props => (
                 </ul>
             </div>
             <div className="close-container">
-                <Button func={props.buildItem} parameter={props.buildParameter} name="Build"/>
+                <Button func={props.buildItem} parameter={props.buildParameter} name="Similar"/>
+                <Button func={props.buildItem} parameter={props.buildParameter} name="Exact"/>
                 <Button func={props.closeModal} name="Close"/>
             </div>
         </div>

@@ -2,46 +2,171 @@ var db = require("../models");
 var Sequelize = require("sequelize");
 
 module.exports = {
-    findByQuery: function(req, res){
-        let query;
-        let searchTerm = req.params.searchTerm;
-        let isnum = /^\d+$/.test(searchTerm);
-        if (isnum || searchTerm.startsWith("CA")) {
-          if (searchTerm.startsWith("CA")) {
-            searchTerm = searchTerm.substr(2);
+  findByQuery: function(req, res) {
+    let query;
+    let searchTerm = req.params.searchTerm;
+    let isnum = /^\d+$/.test(searchTerm);
+    if (isnum || searchTerm.startsWith("CA")) {
+      if (searchTerm.startsWith("CA")) {
+        searchTerm = searchTerm.substr(2);
+      }
+      if (searchTerm.endsWith("N")) {
+        searchTerm = searchTerm.slice(0, -1);
+      }
+      if (searchTerm.length === 8) {
+        query = {
+          where: {
+            secPic: {
+              $like: "%" + searchTerm + "%"
+            }
           }
-          if (searchTerm.endsWith("N")) {
-            searchTerm = searchTerm.slice(0, -1);
+        };
+      } else if (searchTerm.length > 8) {
+        query = {
+          where: {
+            sku: searchTerm
           }
-          if (searchTerm.length === 8) {
-            query = {
-              where: {
-                secPic: {
-                  $like: "%" + searchTerm + "%"
-                }
-              }
-            };
-          } else if (searchTerm.length > 8) {
-            query = {
-              where: {
-                sku: searchTerm
-              }
-            };
+        };
+      }
+    } else {
+      searchTerm = "+" + searchTerm.split(" ").join(" +");
+      query = {
+        where: Sequelize.literal(
+          `MATCH (brand, collection, type, color) AGAINST('${searchTerm}' IN BOOLEAN MODE)`
+        )
+      };
+    }
+    db.bedding.findAll(query).then(function(data) {
+      res.json(data);
+    });
+  },
+
+  // findById: function(id) {
+  //   db.bedding
+  //     .findOne({
+  //       where: {
+  //         id: id
+  //       }
+  //     })
+  //     .then(function(data) {
+  //       res.json(data);
+  //     });
+  // },
+
+  // findByIdPartial: function(id) {
+  //   //takes in req.params.match which should be a boolean
+  //   db.bedding
+  //     .findOne({
+  //       where: {
+  //         id: id
+  //       }
+  //     })
+  //     .then(function(data) {
+  //       let newData = {};
+  //       Object.keys(data.dataValues).forEach(key => {
+  //         let k = key;
+  //         let v = data.dataValues[key];
+  //         console.log(k);
+  //         if (
+  //           [
+  //             "brand",
+  //             "collection",
+  //             "f_1",
+  //             "f_2",
+  //             "f_3",
+  //             "f_4",
+  //             "f_5",
+  //             "f_6",
+  //             "f_7",
+  //             "f_8",
+  //             "f_9",
+  //             "pic"
+  //           ].includes(k)
+  //         ) {
+  //           newData[k] = v;
+  //         } else {
+  //           newData[k] = "";
+  //         }
+  //       });
+  //       res.json(newData);
+  //     });
+  // },
+
+  // newTemplate: function() {
+  //   db.bedding
+  //     .findOne({
+  //       where: {
+  //         id: 60
+  //       }
+  //     })
+  //     .then(data => {
+  //       let newData = {};
+  //       Object.keys(data.dataValues).forEach(key => {
+  //         let k = key;
+  //         console.log(key);
+  //         newData[k] = "";
+  //       });
+  //       console.log(newData);
+  //       // res.json(newData);
+  //       return newData;
+  //     });
+  // },
+
+  getAttributes: function(req, res) {
+    if (req.params.type === "new") {
+      db.bedding
+        .findOne({
+          where: {
+            id: 60
           }
-        } else {
-          searchTerm = "+" + searchTerm.split(" ").join(" +");
-          query = {
-            where: Sequelize.literal(
-              `MATCH (brand, collection, type, color) AGAINST('${searchTerm}' IN BOOLEAN MODE)`
-            )
-          };
-        }
-        db.bedding.findAll(query).then(function(data) {
-          res.json(data);
+        })
+        .then(data => {
+          let newData = {};
+          Object.keys(data.dataValues).forEach(key => {
+            let k = key;
+            console.log(key);
+            newData[k] = "";
+          });
+          res.json(newData);
         });
-    },
-    findById: function(req, res){
-        db.bedding
+    } else if (req.params.type === "similar") {
+      db.bedding
+        .findOne({
+          where: {
+            id: req.params.id
+          }
+        })
+        .then(function(data) {
+          let newData = {};
+          Object.keys(data.dataValues).forEach(key => {
+            let k = key;
+            let v = data.dataValues[key];
+            console.log(k);
+            if (
+              [
+                "brand",
+                "collection",
+                "f_1",
+                "f_2",
+                "f_3",
+                "f_4",
+                "f_5",
+                "f_6",
+                "f_7",
+                "f_8",
+                "f_9",
+                "pic"
+              ].includes(k)
+            ) {
+              newData[k] = v;
+            } else {
+              newData[k] = "";
+            }
+          });
+          res.json(newData);
+        });
+    } else if (req.params.type === "exact") {
+      db.bedding
         .findOne({
           where: {
             id: req.params.id
@@ -50,30 +175,24 @@ module.exports = {
         .then(function(data) {
           res.json(data);
         });
+    }
+  },
 
-    },
-
-    updateItem: function(req, res){
-      db.bedding
+  updateItem: function(req, res) {
+    db.bedding
       .update(req.body, {
         where: {
           id: req.params.id
         }
-      }).then(function(data){
-        res.json(data);
       })
-      
-    },
-
-    getShippingTemplates: function(req, res){
-      db.packageSizes
-      .findAll()
-      .then(function(data){
+      .then(function(data) {
         res.json(data);
-      })
-    } 
+      });
+  },
 
+  getShippingTemplates: function(req, res) {
+    db.packageSizes.findAll().then(function(data) {
+      res.json(data);
+    });
+  }
 };
-
-
-
