@@ -9,6 +9,8 @@ class Build extends Component {
   state = {
     item: {},
     settings: {
+      conditionDescription: "",
+      condition: "",
       customId: "",
       duration: "Days_7",
       listingType: "Chinese",
@@ -240,6 +242,22 @@ class Build extends Component {
                 <option value="Days_30">30</option>
                 <option value="GTC">GTC</option>
               </select>
+              <h3>Condition</h3>
+              <select
+                value={this.state.settings.condition}
+                onChange={this.handleInputChangeforSettings}
+                name="condition"
+              >
+                  <option value="1000">New</option>
+                  <option value="1750">Open, No Packaging, or Display</option>
+                  <option value="3000">Washed or Used</option>
+              </select>
+              <h3>Condition Description</h3>
+              <textarea rows="4" style={{width: "100%"}}
+                  value={this.state.settings.conditionDescription}
+                  onChange={this.handleInputChangeforSettings}
+                  name="conditionDescription"
+              />
               <Input
                 value={this.state.settings.quantity}
                 func={this.handleInputChangeforSettings}
