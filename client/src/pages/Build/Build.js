@@ -16,7 +16,6 @@ class Build extends Component {
       listingType: "Chinese",
       quantity: 1,
       itemDescription: "this is the where the template goes",
-      condition: "",
       startPrice: "",
       categories: "",
       category: ""
@@ -100,6 +99,9 @@ class Build extends Component {
       case "se":
         label = "Photo";
         break;
+      case "si":
+        label = "Includes";
+        break;
       default:
         break;
     }
@@ -152,7 +154,7 @@ class Build extends Component {
   };
 
   getPrice = retail => {
-    this.setState({ settings: { categories: retail * 0.25 } });
+    return retail * .25;
   };
 
   render() {
@@ -167,6 +169,7 @@ class Build extends Component {
             <div className="item-inputs db-info">
               {Object.entries(this.state.item)
                 .filter(n => n[0] !== "id")
+                .filter(n => n[0] !== "packageSizeId")
                 .filter(n => n[0] !== "createdAt")
                 .filter(n => n[0] !== "updatedAt")
                 .map(property => (
@@ -244,6 +247,8 @@ class Build extends Component {
               </select>
               <h3>Condition</h3>
               <select
+                size="8"
+                style={{width: "100%"}}
                 value={this.state.settings.condition}
                 onChange={this.handleInputChangeforSettings}
                 name="condition"
@@ -267,7 +272,7 @@ class Build extends Component {
                 Quantity
               </Input>
               <Input
-                value={this.state.settings.startPrice}
+                value={(this.state.item.retail !== "") ? (this.getPrice(this.state.item.retail)) : ("")}
                 func={this.handleInputChangeforSettings}
                 parameter="startPrice"
                 name="startPrice"

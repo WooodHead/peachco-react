@@ -65,6 +65,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        secPic: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         s_1: {
             type: DataTypes.STRING,
             allowNull: true
@@ -98,6 +102,46 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         m_1: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_01: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_02: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_03: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_04: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_05: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_06: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_07: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_08: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_09: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        si_10: {
             type: DataTypes.STRING,
             allowNull: true
         },
