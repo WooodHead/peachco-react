@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
+import { Redirect } from 'react-router-dom'
 import API from "../../utils/API";
 import "./Build.css";
 import userSettings from "./settings.json";
@@ -22,7 +23,8 @@ class Build extends Component {
     },
     templates: {},
     template: {},
-    isUpdated: false
+    isUpdated: false,
+    redirect: false
   };
 
   componentDidMount() {
@@ -163,8 +165,11 @@ class Build extends Component {
   addToDatabase = (obj) => {
     API.addToDatabase(obj)
     .then(res => {
-      console.log("#########");
-      console.log(res.data.id);
+      this.setState(
+        {
+          redirect: true,
+          newID: res.data.id
+        });
     })
     .catch(err => {
       console.log(err);
@@ -217,6 +222,11 @@ class Build extends Component {
       id: this.state.item.id,
       data: this.state.item
     };
+    const { redirect } = this.state;
+    if(redirect) {
+      this.setState({redirect: false});
+      return <Redirect to={"/build/exact/" + this.state.newID}/>;
+    }
     return (
       <div className="build-container">
         <form>
