@@ -105,6 +105,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        m_2: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         si_01: {
             type: DataTypes.STRING,
             allowNull: true
@@ -145,12 +149,8 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
-        m_2: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         retail: {
-            type: DataTypes.FLOAT(10, 2),
+            type: DataTypes.STRING,
             allowNull: true
         },
         itemTitle: {
@@ -160,8 +160,11 @@ module.exports = function (sequelize, DataTypes) {
         secPic: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        packageSizeId: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
-
     }, {
         freezeTableName: true
     }, {

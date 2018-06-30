@@ -41,6 +41,15 @@ module.exports = {
     });
   },
 
+  addToDatabase: function(req, res) {
+    console.log(req.body);
+    db.bedding.create(req.body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => console.log(err))
+  },
+
   // findById: function(id) {
   //   db.bedding
   //     .findOne({
@@ -124,7 +133,6 @@ module.exports = {
           let newData = {};
           Object.keys(data.dataValues).forEach(key => {
             let k = key;
-            console.log(key);
             newData[k] = "";
           });
           res.json(newData);
@@ -141,7 +149,6 @@ module.exports = {
           Object.keys(data.dataValues).forEach(key => {
             let k = key;
             let v = data.dataValues[key];
-            console.log(k);
             if (
               [
                 "brand",

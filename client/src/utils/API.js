@@ -4,8 +4,17 @@ export default {
   getItemsByQuery: function(query) {
     return axios.get("/api/db/" + query);
   },
-  getItemById: function(id) {
-    return axios.get("/api/db/item/" + id);
+  getItemByIdExact: function(id) {
+    return axios.get("/api/db/item/exact/" + id);
+  },
+  getItemByIdSimilar: function(id){
+    return axios.get("/api/db/item/similar/" + id);
+  },
+  getItemByIdNew: function(id){
+    return axios.get("/api/db/item/new");
+  },
+  addToDatabase: function(obj){
+    return axios.post("/api/db/item", obj);
   },
   getShippingTemplates: function() {
     return axios.get("/api/db/shipping/templates");

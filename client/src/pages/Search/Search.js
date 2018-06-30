@@ -24,7 +24,7 @@ class Search extends Component {
   };
 
   loadItem = id => {
-    API.getItemById(id)
+    API.getItemByIdExact(id)
       .then(res => this.setState(
         { 
           item: res.data, 
@@ -54,10 +54,6 @@ class Search extends Component {
         .catch(err => console.log(err));
     }
   };
-
-  buildItem = (id) => {
-    window.location = "./build/" + id;
-  }
 
   render() {
     return (
@@ -100,8 +96,6 @@ class Search extends Component {
             (
               <Modal 
                 item={this.state.item}
-                buildItem={this.buildItem}
-                buildParameter={this.state.item.id}
                 closeModal={this.closeModal}
               >
               </Modal>

@@ -17,10 +17,13 @@ const dbController = require("../../../controllers/dbController");
 router
   .route("/item/:type")
   .get(dbController.getAttributes);
+router
+  .route("/item/:type/:id")
+  .get(dbController.getAttributes);
 
 router
-.route("/item/:type/:id")
-.get(dbController.getAttributes);
+  .route("/item")
+  .post(dbController.addToDatabase);
 
 router
   .route("/:searchTerm")

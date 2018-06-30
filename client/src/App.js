@@ -13,7 +13,9 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path="/" component={Search}/>
-          <Route exact path="/build/:id" component={Build}/>
+          <Route exact path="/build/:type/:id" component={Build}/>
+          <Route exact path="/build/:type/:id" component={Build}/>
+          <Route exact path="/build/:type/" component={Build}/>
           <Route component={NoMatch}/>
         </Switch>
       </main>

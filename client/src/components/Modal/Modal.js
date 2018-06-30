@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../Button";
+import LinkButton from '../Button/LinkButton';
 import "./Modal.css";
 
 
@@ -18,8 +19,10 @@ export const Modal = props => (
                 </ul>
             </div>
             <div className="close-container">
-                <Button func={props.buildItem} parameter={props.buildParameter} name="Similar"/>
-                <Button func={props.buildItem} parameter={props.buildParameter} name="Exact"/>
+                <LinkButton to={"/build/similar/" + props.item.id}>Similar</LinkButton>
+                <LinkButton to={"/build/exact/" + props.item.id}>Exact</LinkButton>
+            </div>
+            <div>
                 <Button func={props.closeModal} name="Close"/>
             </div>
         </div>

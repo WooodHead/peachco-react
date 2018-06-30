@@ -21,31 +21,74 @@ class Build extends Component {
       category: ""
     },
     templates: {},
-    template: {}
+    template: {},
+    isUpdated: false
   };
 
   componentDidMount() {
-    API.getItemById(this.props.match.params.id)
+    if(this.props.match.params.type === "exact"){
+      API.getItemByIdExact(this.props.match.params.id)
       .then(res => {
-        this.getCategory(res.data.type).then(categoryData => {
-          this.getShippingTemplates().then(templates => {
-            const settings = { ...this.state.settings };
-            settings.categories = categoryData;
-            settings.category = categoryData[0].Category.CategoryID;
-            let template = {};
-            if (res.data.packageSizeId) {
-              template = templates[res.data.packageSizeId - 1];
-            }
-            this.setState({
-              item: res.data,
-              settings: settings,
-              templates: templates,
-              template: template
+        if (res.data.type !== ""){
+          this.getCategory(res.data.type).then(categoryData => {
+            this.getShippingTemplates().then(templates => {
+              const settings = { ...this.state.settings };
+              settings.categories = categoryData;
+              settings.category = categoryData[0].Category.CategoryID;
+              let template = {};
+              if (res.data.packageSizeId) {
+                template = templates[res.data.packageSizeId - 1];
+              }
+              this.setState({
+                item: res.data,
+                settings: settings,
+                templates: templates,
+                template: template
+              });
             });
+          });
+        }
+      })
+      .catch(err => console.log(err));
+
+    } else if (this.props.match.params.type === "similar"){
+      API.getItemByIdSimilar(this.props.match.params.id)
+      .then(res => {
+        this.getShippingTemplates().then(templates => {
+          const settings = { ...this.state.settings };
+          let template = {};
+          if (res.data.packageSizeId) {
+            template = templates[res.data.packageSizeId - 1];
+          }
+          this.setState({
+            item: res.data,
+            settings: settings,
+            templates: templates,
+            template: template
           });
         });
       })
       .catch(err => console.log(err));
+
+    } else if (this.props.match.params.type === "new"){
+      API.getItemByIdNew()
+      .then(res => {
+        this.getShippingTemplates().then(templates => {
+          const settings = { ...this.state.settings };
+          let template = {};
+          if (res.data.packageSizeId) {
+            template = templates[res.data.packageSizeId - 1];
+          }
+          this.setState({
+            item: res.data,
+            settings: settings,
+            templates: templates,
+            template: template
+          });
+        });
+      })
+      .catch(err => console.log(err));
+    }
   }
 
   handleInputChangeforItem = event => {
@@ -117,6 +160,17 @@ class Build extends Component {
       .catch(err => console.log(err));
   };
 
+  addToDatabase = (obj) => {
+    API.addToDatabase(obj)
+    .then(res => {
+      console.log("#########");
+      console.log(res.data.id);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   getCategory = query => {
     let promise = new Promise(function(resolve, reject) {
       API.getCategories({ query: query }).then(res => {
@@ -154,7 +208,8 @@ class Build extends Component {
   };
 
   getPrice = retail => {
-    return retail * .25;
+     let startPrice =  (retail * .25);
+     return parseFloat(startPrice).toFixed(2);
   };
 
   render() {
@@ -272,7 +327,7 @@ class Build extends Component {
                 Quantity
               </Input>
               <Input
-                value={(this.state.item.retail !== "") ? (this.getPrice(this.state.item.retail)) : ("")}
+                value={(this.state.item.retail !== "") ? (this.getPrice(parseFloat(this.state.item.retail))) : ("0")}
                 func={this.handleInputChangeforSettings}
                 parameter="startPrice"
                 name="startPrice"
@@ -297,7 +352,12 @@ class Build extends Component {
               <Button
                 func={this.listItem}
                 parameter={this.state}
-                name="AddItem"
+                name="List Item"
+              />
+              <Button
+              func={this.addToDatabase}
+              parameter={this.state.item}
+              name="Add to Database"
               />
             </div>
           </div>
