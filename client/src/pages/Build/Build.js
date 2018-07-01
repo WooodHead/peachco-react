@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { Redirect } from 'react-router-dom'
 import API from "../../utils/API";
 import "./Build.css";
 import userSettings from "./settings.json";
@@ -24,12 +23,13 @@ class Build extends Component {
     templates: {},
     template: {},
     isUpdated: false,
-    redirect: false
+    listState: this.props.location.state.type,
+    listId: this.props.location.state.id
   };
 
   componentDidMount() {
-    if(this.props.match.params.type === "exact"){
-      API.getItemByIdExact(this.props.match.params.id)
+    if(this.state.listState === "exact"){
+      API.getItemByIdExact(this.state.listId)
       .then(res => {
         if (res.data.type !== ""){
           this.getCategory(res.data.type).then(categoryData => {
@@ -53,8 +53,8 @@ class Build extends Component {
       })
       .catch(err => console.log(err));
 
-    } else if (this.props.match.params.type === "similar"){
-      API.getItemByIdSimilar(this.props.match.params.id)
+    } else if (this.state.listState === "similar"){
+      API.getItemByIdSimilar(this.state.listId)
       .then(res => {
         this.getShippingTemplates().then(templates => {
           const settings = { ...this.state.settings };
@@ -72,7 +72,7 @@ class Build extends Component {
       })
       .catch(err => console.log(err));
 
-    } else if (this.props.match.params.type === "new"){
+    } else if (this.state.listState === "new"){
       API.getItemByIdNew()
       .then(res => {
         this.getShippingTemplates().then(templates => {
@@ -165,11 +165,17 @@ class Build extends Component {
   addToDatabase = (obj) => {
     API.addToDatabase(obj)
     .then(res => {
-      this.setState(
-        {
-          redirect: true,
-          newID: res.data.id
-        });
+      const { item } = this.state;
+      const newItem = {
+        ...item,
+        id: res.data.id
+
+      }
+      this.setState({
+        listState: "exact",
+        listId: res.data.id,
+        item: newItem
+      })
     })
     .catch(err => {
       console.log(err);
@@ -222,11 +228,7 @@ class Build extends Component {
       id: this.state.item.id,
       data: this.state.item
     };
-    const { redirect } = this.state;
-    if(redirect) {
-      this.setState({redirect: false});
-      return <Redirect to={"/build/exact/" + this.state.newID}/>;
-    }
+    console.log(this.state.item);
     return (
       <div className="build-container">
         <form>
