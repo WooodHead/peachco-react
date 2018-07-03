@@ -4,7 +4,7 @@ export const Category = props => {
     return(
 
         <div>
-            <h3>Category</h3>
+            <h3>{props.children}</h3>
             <select
             value={props.category}
             onChange={props.handleInputChangeforSettings}
@@ -12,7 +12,7 @@ export const Category = props => {
             size="15"
             style={{ width: "100%" }}
             >
-            {props.categories
+            {props.categories.length
                 ? props.categories.map(cat => (
                     <option
                     key={cat.Category.CategoryID}

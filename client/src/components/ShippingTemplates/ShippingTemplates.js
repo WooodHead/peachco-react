@@ -4,7 +4,7 @@ export const ShippingTemplates = props => {
     return (
 
         <div>
-            <h3>Shipping Templates</h3>
+            <h3>{props.children}</h3>
             <select
             value={
                 (props.packageSizeId)

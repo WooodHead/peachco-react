@@ -201,7 +201,6 @@ class Build extends Component {
       id: this.state.item.id,
       data: this.state.item
     };
-    console.log(this.state);
     return (
       <div className="build-container">
         <form>
@@ -216,13 +215,16 @@ class Build extends Component {
               packageSizeId={this.state.item.packageSizeId}
               handleInputChangeforItem={this.handleInputChangeforItem}
               templates={this.state.templates}
-            />
+            >
+              Shipping Templates
+            </ShippingTemplates>
             <Category
               category={this.state.settings.category}
               categories={this.state.settings.categories}
               handleInputChangeforSettings={this.handleInputChangeforSettings}
-            />
-
+            >
+              Category
+            </Category>
             <h3>Listing Type</h3>
             <select
               value={this.state.settings.listingType}
