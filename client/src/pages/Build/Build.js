@@ -1,9 +1,10 @@
 //Components
-
 import React, { Component } from "react";
 import { Button } from "../../components/Button";
+import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
 import { Input } from "../../components/Input";
+import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 
 //Functions
 import Template from "../../utils/Template";
@@ -211,46 +212,17 @@ class Build extends Component {
               handleInputChangeforItem={this.handleInputChangeforItem}
             /> 
             <div className="item-inputs specific-info">
-            <h3>Shipping Templates</h3>
-            <select
-              value={
-                (this.state.item.packageSizeId)
-                  ? (this.state.item.packageSizeId)
-                  : ("")
-              }
-              name="packageSizeId"
-              onChange={this.handleInputChangeforItem}
-              size="15"
-              style={{ width: "100%" }}
-            >
-              {this.state.templates.length
-                ? this.state.templates.map(template => (
-                    <option key={template.id} value={template.id}>
-                      {template.shippingType}
-                    </option>
-                  ))
-                : ""}
-            </select>
-            <h3>Category</h3>
-            <select
-              value={this.state.settings.category}
-              onChange={this.handleInputChangeforSettings}
-              name="category"
-              size="15"
-              style={{ width: "100%" }}
-            >
-              {this.state.settings.categories
-                ? this.state.settings.categories.map(cat => (
-                    <option
-                      key={cat.Category.CategoryID}
-                      value={cat.Category.CategoryID}
-                    >
-                      {cat.Category.CategoryName} - Relevance:{" "}
-                      {cat.PercentItemFound}%
-                    </option>
-                  ))
-                : ""}
-            </select>
+            <ShippingTemplates
+              packageSizeId={this.state.item.packageSizeId}
+              handleInputChangeforItem={this.handleInputChangeforItem}
+              templates={this.state.templates}
+            />
+            <Category
+              category={this.state.settings.category}
+              categories={this.state.settings.categories}
+              handleInputChangeforSettings={this.handleInputChangeforSettings}
+            />
+
             <h3>Listing Type</h3>
             <select
               value={this.state.settings.listingType}
