@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import API from "../../utils/API";
+import Template from "../../utils/Template";
 import "./Build.css";
 import userSettings from "./settings.json";
 
@@ -15,7 +16,7 @@ class Build extends Component {
       duration: "Days_7",
       listingType: "Chinese",
       quantity: 1,
-      itemDescription: "this is the where the template goes",
+      itemDescription: "",
       startPrice: "",
       categories: "",
       category: ""
@@ -211,12 +212,24 @@ class Build extends Component {
   };
 
   listItem = data => {
+    data = this.addDescription(data);
     const combined = Object.assign(data.item, data.settings, data.template, userSettings);
     console.log(combined);
-    API.listItem(combined)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    // API.listItem(combined)
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err));
   };
+
+  addDescription = (data) => {
+    let itemDescription = Template.makeTemplate(data);
+    const { settings } = data;
+    let newSettings = {
+      ...settings,
+      itemDescription: itemDescription
+    };
+    data.settings = newSettings;
+    return data;
+  }
 
   getPrice = retail => {
      let startPrice =  (retail * .25);
@@ -228,7 +241,7 @@ class Build extends Component {
       id: this.state.item.id,
       data: this.state.item
     };
-    console.log(this.state.item);
+    console.log(this.state);
     return (
       <div className="build-container">
         <form>
@@ -267,7 +280,7 @@ class Build extends Component {
                 {this.state.templates.length
                   ? this.state.templates.map(template => (
                       <option key={template.id} value={template.id}>
-                        {template.type}
+                        {template.shippingType}
                       </option>
                     ))
                   : ""}
@@ -355,23 +368,28 @@ class Build extends Component {
                 CustomID
               </Input>
             </div>
-            <div className="build-button-section">
+            {(this.state.listState === "exact") ? (
+              <div className="build-button-section">
               <Button
                 func={this.updateItem}
                 parameter={updateItemParameters}
                 name="Update"
               />
               <Button
-                func={this.listItem}
-                parameter={this.state}
-                name="List Item"
+              func={this.listItem}
+              parameter={this.state}
+              name="List Item"
               />
+              </div>
+            ) : (
+              <div className="build-button-section">
               <Button
               func={this.addToDatabase}
               parameter={this.state.item}
               name="Add to Database"
               />
-            </div>
+              </div>
+            )}
           </div>
         </form>
       </div>

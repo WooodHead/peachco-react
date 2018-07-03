@@ -1,10 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
     const packageSizes = sequelize.define("packageSizes", {
-        type: {
+        shippingType: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        weight: {
+        shippingWeight: {
             type: DataTypes.INTEGER,
             allowNull: false
         },

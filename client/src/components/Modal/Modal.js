@@ -30,7 +30,7 @@ export const Modal = props => {
                     </LinkButton>
                     <LinkButton
                         to={"/build/"} 
-                        type={"similar"}
+                        type={"exact"}
                         id={props.item.id}
                     >
                     Exact
