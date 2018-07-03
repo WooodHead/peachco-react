@@ -5,6 +5,7 @@ import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
 import { Input } from "../../components/Input";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
+import { SpecificInfo } from "../../components/SpecificInfo";
 
 //Functions
 import Template from "../../utils/Template";
@@ -225,68 +226,12 @@ class Build extends Component {
             >
               Category
             </Category>
-            <h3>Listing Type</h3>
-            <select
-              value={this.state.settings.listingType}
-              onChange={this.handleInputChangeforSettings}
-              name="listingType"
-            >
-              <option value="Chinese">Auction</option>
-              <option value="FixedPriceItem">Fixed</option>
-            </select>
-            <h3>Duration</h3>
-            <select
-              value={this.state.settings.duration}
-              onChange={this.handleInputChangeforSettings}
-              name="duration"
-            >
-              <option value="Days_5">5</option>
-              <option value="Days_7">7</option>
-              <option value="Days_30">30</option>
-              <option value="GTC">GTC</option>
-            </select>
-            <h3>Condition</h3>
-            <select
-              size="8"
-              style={{width: "100%"}}
-              value={this.state.settings.condition}
-              onChange={this.handleInputChangeforSettings}
-              name="condition"
-            >
-                <option value="1000">New</option>
-                <option value="1750">Open, No Packaging, or Display</option>
-                <option value="3000">Washed or Used</option>
-            </select>
-            <h3>Condition Description</h3>
-            <textarea rows="4" style={{width: "100%"}}
-                value={this.state.settings.conditionDescription}
-                onChange={this.handleInputChangeforSettings}
-                name="conditionDescription"
+            <SpecificInfo 
+              settings={this.state.settings}
+              handleInputChangeforSettings={this.handleInputChangeforSettings}
+              retail={this.state.item.retail}
+              getPrice={Template.getPrice}
             />
-            <Input
-              value={this.state.settings.quantity}
-              func={this.handleInputChangeforSettings}
-              parameter="quantity"
-              name="quantity"
-            >
-              Quantity
-            </Input>
-            <Input
-              value={(this.state.item.retail !== "") ? (Template.getPrice(parseFloat(this.state.item.retail))) : ("0")}
-              func={this.handleInputChangeforSettings}
-              parameter="startPrice"
-              name="startPrice"
-            >
-              StartPrice
-            </Input>
-            <Input
-              value={this.state.settings.customId}
-              func={this.handleInputChangeforSettings}
-              parameter="customId"
-              name="customId"
-            >
-              CustomID
-            </Input>
           </div>
           </div>
           <div>
