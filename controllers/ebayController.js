@@ -150,6 +150,55 @@ module.exports = {
 
 
 
+    },
+
+    addImage: function(req, res) {
+
+        ebay.xmlRequest({
+            serviceName: 'Trading',
+            opType: 'UploadSiteHostedPictures',
+
+            // app/environment
+            devId: dev_id,
+            certId: cert_id,
+            appId: app_id,
+            sandbox: false,
+
+            // per user
+            authToken: user_token,
+
+            params: {
+                'PictureName': req.body.query,
+                'PictureSet': sdfsdf,
+                // 'ExtensionInDays' 30
+                // 'ExternalPictureURL': "",
+                'PictureName': req.body.secPic
+            },
+
+            reqOptions: {
+                url: 'http://example.com',
+                method: 'POST',
+                formData: {
+                  'regularField': 'someValue',
+                  'regularFile': someFileStream,
+                  'customBufferFile': {
+                    value: fileBufferData,
+                    options: {
+                      filename: 'myfile.bin'
+                    }
+                  }
+                }
+
+            }
+        }, function(err, results){
+            if(err){
+                res.json(err);
+            } else {
+                res.json(results);
+            }
+        }
+        )
+
     }
 
 

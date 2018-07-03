@@ -7,6 +7,7 @@ import API from "../../utils/API";
 import "./Search.css";
 
 class Search extends Component {
+
   state = {
     items: [],
     item: [],

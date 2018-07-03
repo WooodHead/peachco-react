@@ -1,9 +1,18 @@
+//Components
+
 import React, { Component } from "react";
-import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import API from "../../utils/API";
+import { ItemInfo } from "../../components/ItemInfo";
+import { Input } from "../../components/Input";
+
+//Functions
 import Template from "../../utils/Template";
+import API from "../../utils/API";
+
+//CSS
 import "./Build.css";
+
+//Other
 import userSettings from "./settings.json";
 
 class Build extends Component {
@@ -121,40 +130,6 @@ class Build extends Component {
     });
   };
 
-  labelize = label => {
-    let expr = label.substring(0, 2);
-    switch (expr) {
-      case "f_":
-        label = "features";
-        break;
-      case "s_":
-        label = "size";
-        break;
-      case "m_":
-        label = "materials";
-        break;
-      case "pi":
-        label = "stock";
-        break;
-      case "sk":
-        label = "SKU";
-        break;
-      case "it":
-        label = "Title";
-        break;
-      case "se":
-        label = "Photo";
-        break;
-      case "si":
-        label = "Includes";
-        break;
-      default:
-        break;
-    }
-    label = label[0].toUpperCase() + label.substring(1);
-    return label;
-  };
-
   updateItem = obj => {
     API.updateItem(obj.id, obj.data)
       .then(function(res) {
@@ -212,28 +187,12 @@ class Build extends Component {
   };
 
   listItem = data => {
-    data = this.addDescription(data);
+    data = Template.addDescription(data);
     const combined = Object.assign(data.item, data.settings, data.template, userSettings);
     console.log(combined);
     // API.listItem(combined)
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
-  };
-
-  addDescription = (data) => {
-    let itemDescription = Template.makeTemplate(data);
-    const { settings } = data;
-    let newSettings = {
-      ...settings,
-      itemDescription: itemDescription
-    };
-    data.settings = newSettings;
-    return data;
-  }
-
-  getPrice = retail => {
-     let startPrice =  (retail * .25);
-     return parseFloat(startPrice).toFixed(2);
   };
 
   render() {
@@ -246,128 +205,117 @@ class Build extends Component {
       <div className="build-container">
         <form>
           <div className="inputs-wrapper">
-            <div className="item-inputs db-info">
-              {Object.entries(this.state.item)
-                .filter(n => n[0] !== "id")
-                .filter(n => n[0] !== "packageSizeId")
-                .filter(n => n[0] !== "createdAt")
-                .filter(n => n[0] !== "updatedAt")
-                .map(property => (
-                  <Input
-                    key={property[0]}
-                    value={property[1] ? property[1] : ""}
-                    name={property[0]}
-                    func={this.handleInputChangeforItem}
-                    parameter={property[0]}
-                  >
-                    {this.labelize(property[0])}
-                  </Input>
-                ))}
-            </div>
+            <ItemInfo
+              data={this.state}
+              labelize={Template.labelize}
+              handleInputChangeforItem={this.handleInputChangeforItem}
+            /> 
             <div className="item-inputs specific-info">
-              <h3>Shipping Templates</h3>
-              <select
-                value={
-                  (this.state.item.packageSizeId)
-                    ? (this.state.item.packageSizeId)
-                    : ("")
-                }
-                name="packageSizeId"
-                onChange={this.handleInputChangeforItem}
-                size="15"
-                style={{ width: "100%" }}
-              >
-                {this.state.templates.length
-                  ? this.state.templates.map(template => (
-                      <option key={template.id} value={template.id}>
-                        {template.shippingType}
-                      </option>
-                    ))
-                  : ""}
-              </select>
-              <h3>Category</h3>
-              <select
-                value={this.state.settings.category}
+            <h3>Shipping Templates</h3>
+            <select
+              value={
+                (this.state.item.packageSizeId)
+                  ? (this.state.item.packageSizeId)
+                  : ("")
+              }
+              name="packageSizeId"
+              onChange={this.handleInputChangeforItem}
+              size="15"
+              style={{ width: "100%" }}
+            >
+              {this.state.templates.length
+                ? this.state.templates.map(template => (
+                    <option key={template.id} value={template.id}>
+                      {template.shippingType}
+                    </option>
+                  ))
+                : ""}
+            </select>
+            <h3>Category</h3>
+            <select
+              value={this.state.settings.category}
+              onChange={this.handleInputChangeforSettings}
+              name="category"
+              size="15"
+              style={{ width: "100%" }}
+            >
+              {this.state.settings.categories
+                ? this.state.settings.categories.map(cat => (
+                    <option
+                      key={cat.Category.CategoryID}
+                      value={cat.Category.CategoryID}
+                    >
+                      {cat.Category.CategoryName} - Relevance:{" "}
+                      {cat.PercentItemFound}%
+                    </option>
+                  ))
+                : ""}
+            </select>
+            <h3>Listing Type</h3>
+            <select
+              value={this.state.settings.listingType}
+              onChange={this.handleInputChangeforSettings}
+              name="listingType"
+            >
+              <option value="Chinese">Auction</option>
+              <option value="FixedPriceItem">Fixed</option>
+            </select>
+            <h3>Duration</h3>
+            <select
+              value={this.state.settings.duration}
+              onChange={this.handleInputChangeforSettings}
+              name="duration"
+            >
+              <option value="Days_5">5</option>
+              <option value="Days_7">7</option>
+              <option value="Days_30">30</option>
+              <option value="GTC">GTC</option>
+            </select>
+            <h3>Condition</h3>
+            <select
+              size="8"
+              style={{width: "100%"}}
+              value={this.state.settings.condition}
+              onChange={this.handleInputChangeforSettings}
+              name="condition"
+            >
+                <option value="1000">New</option>
+                <option value="1750">Open, No Packaging, or Display</option>
+                <option value="3000">Washed or Used</option>
+            </select>
+            <h3>Condition Description</h3>
+            <textarea rows="4" style={{width: "100%"}}
+                value={this.state.settings.conditionDescription}
                 onChange={this.handleInputChangeforSettings}
-                name="category"
-                size="15"
-                style={{ width: "100%" }}
-              >
-                {this.state.settings.categories
-                  ? this.state.settings.categories.map(cat => (
-                      <option
-                        key={cat.Category.CategoryID}
-                        value={cat.Category.CategoryID}
-                      >
-                        {cat.Category.CategoryName} - Relevance:{" "}
-                        {cat.PercentItemFound}%
-                      </option>
-                    ))
-                  : ""}
-              </select>
-              <h3>Listing Type</h3>
-              <select
-                value={this.state.settings.listingType}
-                onChange={this.handleInputChangeforSettings}
-                name="listingType"
-              >
-                <option value="Chinese">Auction</option>
-                <option value="FixedPriceItem">Fixed</option>
-              </select>
-              <h3>Duration</h3>
-              <select
-                value={this.state.settings.duration}
-                onChange={this.handleInputChangeforSettings}
-                name="duration"
-              >
-                <option value="Days_5">5</option>
-                <option value="Days_7">7</option>
-                <option value="Days_30">30</option>
-                <option value="GTC">GTC</option>
-              </select>
-              <h3>Condition</h3>
-              <select
-                size="8"
-                style={{width: "100%"}}
-                value={this.state.settings.condition}
-                onChange={this.handleInputChangeforSettings}
-                name="condition"
-              >
-                  <option value="1000">New</option>
-                  <option value="1750">Open, No Packaging, or Display</option>
-                  <option value="3000">Washed or Used</option>
-              </select>
-              <h3>Condition Description</h3>
-              <textarea rows="4" style={{width: "100%"}}
-                  value={this.state.settings.conditionDescription}
-                  onChange={this.handleInputChangeforSettings}
-                  name="conditionDescription"
-              />
-              <Input
-                value={this.state.settings.quantity}
-                func={this.handleInputChangeforSettings}
-                parameter="quantity"
-                name="quantity"
-              >
-                Quantity
-              </Input>
-              <Input
-                value={(this.state.item.retail !== "") ? (this.getPrice(parseFloat(this.state.item.retail))) : ("0")}
-                func={this.handleInputChangeforSettings}
-                parameter="startPrice"
-                name="startPrice"
-              >
-                StartPrice
-              </Input>
-              <Input
-                value={this.state.settings.customId}
-                func={this.handleInputChangeforSettings}
-                parameter="customId"
-                name="customId"
-              >
-                CustomID
-              </Input>
-            </div>
+                name="conditionDescription"
+            />
+            <Input
+              value={this.state.settings.quantity}
+              func={this.handleInputChangeforSettings}
+              parameter="quantity"
+              name="quantity"
+            >
+              Quantity
+            </Input>
+            <Input
+              value={(this.state.item.retail !== "") ? (Template.getPrice(parseFloat(this.state.item.retail))) : ("0")}
+              func={this.handleInputChangeforSettings}
+              parameter="startPrice"
+              name="startPrice"
+            >
+              StartPrice
+            </Input>
+            <Input
+              value={this.state.settings.customId}
+              func={this.handleInputChangeforSettings}
+              parameter="customId"
+              name="customId"
+            >
+              CustomID
+            </Input>
+          </div>
+          </div>
+          <div>
             {(this.state.listState === "exact") ? (
               <div className="build-button-section">
               <Button
