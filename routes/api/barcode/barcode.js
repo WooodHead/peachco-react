@@ -5,6 +5,9 @@ let storage = multer.memoryStorage();
 let upload = multer({ storage: storage })
 // Matches with "/api/database/:id"
 
-router.route("/scan").post(upload.single("test")).post(barcodeController.decode);
+router.post("/scan", upload.single("barcode"), function(req, res){
+    console.log(req.file.buffer);
+    barcodeController.decode(req.file.buffer);
+});
 
 module.exports = router;

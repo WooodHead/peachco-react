@@ -48,16 +48,28 @@ class Build extends Component {
         if (res.data.type !== ""){
           this.getCategory(res.data.type).then(categoryData => {
             this.getShippingTemplates().then(templates => {
-              const settings = { ...this.state.settings };
-              settings.categories = categoryData;
-              settings.category = categoryData[0].Category.CategoryID;
+              const { settings } =  this.state;
+              let newCategories = [];
+              let newCategory;
+              if (categoryData.length > 1) {
+                newCategories = categoryData;
+                newCategory = categoryData[0].Category.CategoryID;
+              } else {
+                newCategories.push(categoryData);
+                newCategory = categoryData.Category.CategoryID;
+              }
               let template = {};
               if (res.data.packageSizeId) {
                 template = templates[res.data.packageSizeId - 1];
               }
+              const newSettings = {
+                ...settings,
+                categories: newCategories,
+                category: newCategory
+              }
               this.setState({
                 item: res.data,
-                settings: settings,
+                settings: newSettings,
                 templates: templates,
                 template: template
               });
@@ -147,10 +159,16 @@ class Build extends Component {
     .then(res => {
       if(res.data.type !== ""){
         this.getCategory(res.data.type).then(categoryData => {
-          console.log(categoryData);
           const { settings } =  this.state;
-          const newCategories = categoryData;
-          const newCategory = categoryData[0].Category.CategoryID;
+          let newCategories = [];
+          let newCategory;
+          if (categoryData.length > 1) {
+            newCategories = categoryData;
+            newCategory = categoryData[0].Category.CategoryID;
+          } else {
+            newCategories.push(categoryData);
+            newCategory = categoryData.Category.CategoryID;
+          }
           const newSettings = {
             ...settings,
             categories: newCategories,

@@ -7,40 +7,40 @@ export const Photos = props => {
         <h3>Photos</h3>
         <div className="photos-wrapper">
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
             <div className="photo-wrapper">
-                <i class="fas fa-plus" />
+                <i className="fas fa-plus" />
             </div>
         </div>
       </div>

@@ -1,9 +1,13 @@
+//Components
 import React, { Component } from "react";
-import { List, ListItem } from "../../components/List";
-import { Input } from "../../components/Input";
-import { Modal } from "../../components/Modal";
 import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+import { List, ListItem } from "../../components/List";
+import { Modal } from "../../components/Modal";
+
+//Functions
 import API from "../../utils/API";
+//CSS
 import "./Search.css";
 
 class Search extends Component {
@@ -67,6 +71,7 @@ class Search extends Component {
               value={this.state.query}
               name="query"
               func={this.handleInputChange}
+              stylingClass="search-input"
               >
               Search
               </Input>

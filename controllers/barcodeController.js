@@ -1,16 +1,14 @@
 var Quagga = require('quagga').default;
-const path = require("path");
 
 module.exports = {
 
     decode: function(req, res){
-
-        console.log("barcode route hit");
+        console.log(req);
 
         let fileInput = req.file;
     
         Quagga.decodeSingle({
-            src: path.join(__dirname, "./IMG_0630.jpg"),
+            src: fileInput,
             numOfWorkers: 0,  // Needs to be 0 when used within node
             locate: true,
             inputStream: {
