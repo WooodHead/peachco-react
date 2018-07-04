@@ -30,41 +30,58 @@
     border-radius: 10px;
 }
 
-.close-container {
+.modal-close-container {
+    background-color: maroon;
+    border-bottom: solid black 1px;
+    color: white;
+    text-align: right;
+    padding: 1rem;
+}
+
+.modal-button-container {
     background-color: #eee;
-    text-align: center;
+    text-align: left;
     padding: 16px;
     display: grid;
     grid-template-columns: auto auto;
     border-radius: 10px;
 }
 
+.modal-button-container div:nth-child(2){
+    text-align: right;
+
+}
+
 .item-info-container {
     padding: 1rem;
+    display: grid;
+    grid-template-areas: 
+    "heading heading"
+    "info images";
+
 }
 
-.modal-button {
-    background-color: rgb(44, 195, 14);
-    color: white;
-    padding: 14px 40px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid black;
+.modal-heading {
+    grid-area: heading;
+    border-bottom: solid black 1px;
 }
 
-.modal-button:hover {
-    opacity: 0.8;
+.modal-info {
+    grid-area: info;
+    padding-top: 4rem;
 }
 
-.accept {
-    background-color: rgb(50, 214, 50);
+.modal-images {
+    text-align: right;
+    grid-area: images;
+    display: grid;
+    grid-template-columns: 1fr;
+
 }
 
-.cancel {
-    background-color: #e25f4e
-}
+
+
+
 
 /* Animation for the modal */
 
