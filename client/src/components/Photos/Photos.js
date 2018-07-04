@@ -7,8 +7,11 @@ export const Photos = props => {
       <div className="photos-container">
         <h3>Photos</h3>
         <div className="photos-wrapper">
-            {images.map(image => (
-                <div className="photo-wrapper">
+            {images.map((image, i) => (
+                <div 
+                    className="photo-wrapper"
+                    key={i}
+                >
                     {(image !== "") ? 
                      (`<img src=${image} alt="something"/>`) : 
                      (<i className="fas fa-plus" />)}
