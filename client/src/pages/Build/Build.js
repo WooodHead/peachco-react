@@ -3,13 +3,14 @@ import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
-import { Input } from "../../components/Input";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
 
 //Functions
-import Template from "../../utils/Template";
 import API from "../../utils/API";
+import Helpers from "../../utils/Helpers";
+import Template from "../../utils/Template";
+
 
 //CSS
 import "./Build.css";
@@ -143,17 +144,30 @@ class Build extends Component {
   addToDatabase = (obj) => {
     API.addToDatabase(obj)
     .then(res => {
-      const { item } = this.state;
-      const newItem = {
-        ...item,
-        id: res.data.id
-
+      if(res.data.type !== ""){
+        this.getCategory(res.data.type).then(categoryData => {
+          console.log(categoryData);
+          const { settings } =  this.state;
+          const newCategories = categoryData;
+          const newCategory = categoryData[0].Category.CategoryID;
+          const newSettings = {
+            ...settings,
+            categories: newCategories,
+            category: newCategory
+          }
+          const { item } = this.state;
+          const newItem = {
+            ...item,
+            id: res.data.id
+          }
+          this.setState({
+            listState: "exact",
+            listId: res.data.id,
+            item: newItem,
+            settings: newSettings
+          })
+        })
       }
-      this.setState({
-        listState: "exact",
-        listId: res.data.id,
-        item: newItem
-      })
     })
     .catch(err => {
       console.log(err);
@@ -208,7 +222,7 @@ class Build extends Component {
           <div className="inputs-wrapper">
             <ItemInfo
               data={this.state}
-              labelize={Template.labelize}
+              labelize={Helpers.labelize}
               handleInputChangeforItem={this.handleInputChangeforItem}
             /> 
             <div className="item-inputs specific-info">
@@ -230,31 +244,31 @@ class Build extends Component {
               settings={this.state.settings}
               handleInputChangeforSettings={this.handleInputChangeforSettings}
               retail={this.state.item.retail}
-              getPrice={Template.getPrice}
+              getPrice={Helpers.getPrice}
             />
           </div>
           </div>
           <div>
             {(this.state.listState === "exact") ? (
               <div className="build-button-section">
-              <Button
-                func={this.updateItem}
-                parameter={updateItemParameters}
-                name="Update"
-              />
-              <Button
-              func={this.listItem}
-              parameter={this.state}
-              name="List Item"
-              />
+                <Button
+                  func={this.updateItem}
+                  parameter={updateItemParameters}
+                  name="Update"
+                />
+                <Button
+                func={this.listItem}
+                parameter={this.state}
+                name="List Item"
+                />
               </div>
             ) : (
               <div className="build-button-section">
-              <Button
-              func={this.addToDatabase}
-              parameter={this.state.item}
-              name="Add to Database"
-              />
+                <Button
+                func={this.addToDatabase}
+                parameter={this.state.item}
+                name="Add to Database"
+                />
               </div>
             )}
           </div>
