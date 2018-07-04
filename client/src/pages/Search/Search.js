@@ -71,7 +71,8 @@ class Search extends Component {
               value={this.state.query}
               name="query"
               func={this.handleInputChange}
-              stylingClass="search-input"
+              stylingClassLabel="search-label"
+              stylingClassInput="search-input"
               >
               Search
               </Input>

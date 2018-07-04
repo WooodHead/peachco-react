@@ -6,7 +6,7 @@ export const SpecificInfo = props => {
 
     return (
 
-        <div>
+        <div className="section-wrapper">
 
           <h3>Listing Type</h3>
           <select

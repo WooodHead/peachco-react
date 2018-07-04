@@ -3,7 +3,7 @@ import React from "react";
 export const ShippingTemplates = props => {
     return (
 
-        <div>
+        <div className="section-wrapper">
             <h3>{props.children}</h3>
             <select
             value={

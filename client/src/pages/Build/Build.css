@@ -13,6 +13,11 @@
     text-align: right;
 }
 
+.section-wrapper {
+    border: solid black 1px;
+    padding: 1rem;
+}
+
 .inputs-wrapper {
     display: grid;
     grid-gap: 1rem;

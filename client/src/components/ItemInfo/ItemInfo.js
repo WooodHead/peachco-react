@@ -8,7 +8,7 @@ export const ItemInfo = props => {
 
     return (
 
-        <div>
+        <div className="section-wrapper">
             <h3>Item Information</h3>
             <div className="item-inputs db-info">
             {Object.entries(props.data.item)
