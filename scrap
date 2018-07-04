@@ -67,7 +67,3 @@ should save category name or id
             condition: "",
             startPrice: "",
             categories: ""
-
-
-
-

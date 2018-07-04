@@ -4,16 +4,15 @@ import { Input } from "../Input";
 
 export const ItemInfo = props => {
 
+    const filterArr = ["id", "packageSizeId", "createdAt", "updatedAt", "pic", "secPic"];
+
     return (
 
         <div>
             <h3>Item Information</h3>
             <div className="item-inputs db-info">
             {Object.entries(props.data.item)
-            .filter(n => n[0] !== "id")
-            .filter(n => n[0] !== "packageSizeId")
-            .filter(n => n[0] !== "createdAt")
-            .filter(n => n[0] !== "updatedAt")
+            .filter(n => !(filterArr.includes(n[0])))
             .map(property => (
                 <Input
                 key={property[0]}
