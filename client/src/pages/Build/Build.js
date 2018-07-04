@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
+import { Photos } from "../../components/Photos";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
 
@@ -226,27 +227,28 @@ class Build extends Component {
               handleInputChangeforItem={this.handleInputChangeforItem}
             /> 
             <div className="item-inputs specific-info">
-            <ShippingTemplates
-              packageSizeId={this.state.item.packageSizeId}
-              handleInputChangeforItem={this.handleInputChangeforItem}
-              templates={this.state.templates}
-            >
-              Shipping Templates
-            </ShippingTemplates>
-            <Category
-              category={this.state.settings.category}
-              categories={this.state.settings.categories}
-              handleInputChangeforSettings={this.handleInputChangeforSettings}
-            >
-              Category
-            </Category>
-            <SpecificInfo 
-              settings={this.state.settings}
-              handleInputChangeforSettings={this.handleInputChangeforSettings}
-              retail={this.state.item.retail}
-              getPrice={Helpers.getPrice}
-            />
-          </div>
+              <Photos/>
+              <ShippingTemplates
+                packageSizeId={this.state.item.packageSizeId}
+                handleInputChangeforItem={this.handleInputChangeforItem}
+                templates={this.state.templates}
+              >
+                Shipping Templates
+              </ShippingTemplates>
+              <Category
+                category={this.state.settings.category}
+                categories={this.state.settings.categories}
+                handleInputChangeforSettings={this.handleInputChangeforSettings}
+              >
+                Category
+              </Category>
+              <SpecificInfo 
+                settings={this.state.settings}
+                handleInputChangeforSettings={this.handleInputChangeforSettings}
+                retail={this.state.item.retail}
+                getPrice={Helpers.getPrice}
+              />
+            </div>
           </div>
           <div>
             {(this.state.listState === "exact") ? (
