@@ -13,7 +13,7 @@ export const ShippingTemplates = props => {
             }
             name="packageSizeId"
             onChange={props.handleInputChangeforItem}
-            size="15"
+            size="11"
             style={{ width: "100%" }}
             >
             {props.templates.length

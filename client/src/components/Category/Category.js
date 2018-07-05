@@ -9,7 +9,7 @@ export const Category = props => {
             value={props.category}
             onChange={props.handleInputChangeforSettings}
             name="category"
-            size="15"
+            size="5"
             style={{ width: "100%" }}
             >
             {props.categories.length

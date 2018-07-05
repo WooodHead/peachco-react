@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "../Input";
+import "./SpecificInfo.css";
 
 
 export const SpecificInfo = props => {
@@ -30,7 +31,7 @@ export const SpecificInfo = props => {
           </select>
           <h3>Condition</h3>
           <select
-            size="8"
+            size="4"
             style={{width: "100%"}}
             value={props.settings.condition}
             onChange={props.handleInputChangeforSettings}
