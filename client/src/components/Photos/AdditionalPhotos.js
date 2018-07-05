@@ -1,14 +1,14 @@
 import React from "react";
-import urlExists from "url-exists";
+//import urlExists from "url-exists";
 import "./AdditionalPhotos.css";
 
 export const AdditionalPhotos = props => {
 
-    const images = [props.secPic,'','','','','','','','',''];
+const images = [props.secPic,'','','','','','','','',''];
 
-    const addImage = () => {
-        console.log("blah")
-    }
+const addImage = () => {
+    console.log("blah")
+}
 
   return (
       <div className="section-wrapper">

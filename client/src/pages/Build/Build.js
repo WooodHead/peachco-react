@@ -231,10 +231,12 @@ class Build extends Component {
   };
 
   render() {
+
     let updateItemParameters = {
       id: this.state.item.id,
       data: this.state.item
     };
+
     return (
       <div className="build-container">
         <form>

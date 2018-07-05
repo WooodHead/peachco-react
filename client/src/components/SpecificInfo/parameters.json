@@ -1,0 +1,48 @@
+{
+    "specificsParameters": {
+
+        "listingTypes": [
+            {
+                "label": "Auction",
+                "type": "Chinese"
+            }, 
+            {
+                "label": "Fixed Price Item",
+                "type": "FixedPriceItem"
+            }
+        ],
+        "durations": [
+            {
+                "label": "5 Days",
+                "type": "Days_5"
+            },
+            {
+                "label": "7 Days",
+                "type": "Days_7"
+            },
+            {
+                "label": "30 Days",
+                "type": "Days_30"
+            },
+            {
+                "label": "Good Till Cancelled",
+                "type": "GTC"
+            }
+        ],
+        "conditionTypes": [
+            {
+                "label": "New",
+                "type": "1000"
+            },
+            {
+                "label": "Open, No Packaging, or Display",
+                "type": "1750"
+            },
+            {
+                "label": "Washed or Used",
+                "type": "3000"
+            }
+        ]
+
+    }
+}
