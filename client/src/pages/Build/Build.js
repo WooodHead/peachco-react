@@ -245,10 +245,12 @@ class Build extends Component {
               handleInputChangeforItem={this.handleInputChangeforItem}
             /> 
             <div className="item-inputs specific-info">
-              <StockPhoto/>
+              <StockPhoto
+                stockPic={this.state.item.pic}
+                handleInputChangeforItem={this.handleInputChangeforItem}
+              />
               <AdditionalPhotos
-                stockpic={this.state.item.pic}
-                secpic={this.state.item.secPic}
+                secPic={this.state.item.secPic}
               />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}

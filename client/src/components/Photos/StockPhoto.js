@@ -7,10 +7,25 @@ export const StockPhoto = props => {
         <div className="section-wrapper">
             <h3>Stock Photo</h3>
             <div>
-                <img src="https://www.fillmurray.com/200/300" height="100" alt=""/>
+                <img 
+                    src={
+                        (props.stockPic) ? 
+                        `http://www.thepeachco.com/ebay/images/sticky/${props.stockPic}/1.jpg` :
+                        "./No_image_available.svg"
+                    }
+                    height="100" 
+                    alt="stock"
+                />
             </div>
             <div>
-                <Input/>
+                <Input
+                    value={props.stockPic}
+                    func={props.handleInputChangeforItem}
+                    parameter="pic"
+                    name="pic"
+                >
+                Stock Pic
+                </Input>
             </div>
         </div>
     )

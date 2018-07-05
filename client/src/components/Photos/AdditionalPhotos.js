@@ -2,7 +2,7 @@ import React from "react";
 import "./AdditionalPhotos.css";
 
 export const AdditionalPhotos = props => {
-  const images = ["", "", "", "", "", "", "", "", "", "", ""];
+  const images = ["", "", "", "", "", "", "", "", "", "", "", ""];
 
   return (
       <div className="section-wrapper">
@@ -14,8 +14,8 @@ export const AdditionalPhotos = props => {
                     key={i}
                     onClick={() => console.log(i)}
                 >
-                    {(image !== "") ? 
-                     (`<img src="http://www.thepeachco.com/ebay/images/${image}" alt="something"/>`) : 
+                    {(image !== "" && image !== undefined) ? 
+                     (`<img src="http://www.thepeachco.com/ebay/images/${image}/${i+1}.jpg" alt="something"/>`) : 
                      (<i className="fas fa-plus" />)}
                 </div>
             ))}
