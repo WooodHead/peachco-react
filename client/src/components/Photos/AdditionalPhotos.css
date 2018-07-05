@@ -1,16 +1,20 @@
 
 .photos-wrapper {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); 
-    grid-gap: 1rem;
-    width: 100%;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fill, 75px);
+    grid-gap: 30px;
 }
 
 .photo-wrapper {
     background-color: lightgrey;
+    height: 100px;
+    width: 100px;
     text-align: center;
     color: black;
-    padding: 1rem;
-    height: 100%;
-    width: 100%;
+}
+
+.additional-image {
+    max-width:100%;
+    max-height:100%;
 }
