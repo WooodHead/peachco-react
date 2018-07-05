@@ -3,14 +3,16 @@ import { Input } from "../Input";
 
 export const StockPhoto = props => {
 
+    let pic = props.stockPic;
+
     return (
         <div className="section-wrapper">
             <h3>Stock Photo</h3>
             <div>
                 <img 
                     src={
-                        (props.stockPic) ? 
-                        `http://www.thepeachco.com/ebay/images/sticky/${props.stockPic}/1.jpg` :
+                        (pic) ? 
+                        `http://www.thepeachco.com/ebay/images/sticky/${pic}/1.jpg` :
                         "./No_image_available.svg"
                     }
                     height="100" 
@@ -19,9 +21,9 @@ export const StockPhoto = props => {
             </div>
             <div>
                 <Input
-                    value={props.stockPic}
+                    value={props.stockPic ? props.stockPic : ""}
                     func={props.handleInputChangeforItem}
-                    parameter="pic"
+                    parameter={props.stockPic}
                     name="pic"
                 >
                 Stock Pic

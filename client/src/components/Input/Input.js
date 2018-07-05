@@ -30,7 +30,7 @@ export const Input = props => (
         name={props.name}
         label={props.children}
         onChange={props.func}
-        parameter={props.parameter}
+       /* parameter={props.parameter}*/
       />
     </div>
   </div>
