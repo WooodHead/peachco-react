@@ -277,24 +277,30 @@ class Build extends Component {
           <div>
             {(this.state.listState === "exact") ? (
               <div className="build-button-section">
-                <Button
-                  func={this.updateItem}
-                  parameter={updateItemParameters}
-                  name="Update"
-                />
-                <Button
-                func={this.listItem}
-                parameter={this.state}
-                name="List Item"
-                />
+                <div>
+                  <Button
+                    func={this.updateItem}
+                    parameter={updateItemParameters}
+                    name="Update"
+                  />
+                </div>
+                <div>
+                  <Button
+                    func={this.listItem}
+                    parameter={this.state}
+                    name="List Item"
+                  />
+                </div>
               </div>
             ) : (
               <div className="build-button-section">
-                <Button
-                func={this.addToDatabase}
-                parameter={this.state.item}
-                name="Add to Database"
-                />
+                <div>
+                  <Button
+                    func={this.addToDatabase}
+                    parameter={this.state.item}
+                    name="Add to Database"
+                  />
+                </div>
               </div>
             )}
           </div>
