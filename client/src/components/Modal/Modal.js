@@ -1,7 +1,7 @@
 import React from "react";
 import LinkButton from '../Button/LinkButton';
 import "./Modal.css";
-
+import noImage from "./No_image_available.svg";
 
 export const Modal = props => {
 
@@ -32,12 +32,12 @@ export const Modal = props => {
                         <div>
                             <img src={(props.item.pic !== null && props.item.pic !== "") ? 
                                 (`http://www.thepeachco.com/ebay/images/sticky/${props.item.pic}/1.jpg`) : 
-                                ("./No_image_available.svg")} width="300" alt="Stock"/>
+                                (noImage)} width="300" alt="Stock"/>
                         </div>
                         <div>
                             <img src={(props.item.secPic !== null && props.item.secPic !== "") ? 
                                 (`http://www.thepeachco.com/ebay/images/${props.item.secPic}/1.jpg`) : 
-                                ("./No_image_available.svg")} width="300" alt="Actual"/>
+                                (noImage)} width="300" alt="Actual"/>
                         </div>
                     </div>
 

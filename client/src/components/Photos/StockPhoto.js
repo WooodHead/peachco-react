@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "../Input";
-
+import noImage from "./No_image_available.svg";
 export const StockPhoto = props => {
 
     let pic = props.stockPic;
@@ -13,7 +13,7 @@ export const StockPhoto = props => {
                     src={
                         (pic) ? 
                         `http://www.thepeachco.com/ebay/images/sticky/${pic}/1.jpg` :
-                        "./No_image_available.svg"
+                        noImage
                     }
                     height="100" 
                     alt="stock"
