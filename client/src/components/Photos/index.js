@@ -1,1 +1,2 @@
-export * from "./Photos";
+export * from "./AdditionalPhotos";
+export * from "./StockPhoto";

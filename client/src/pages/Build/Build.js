@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
-import { Photos } from "../../components/Photos";
+import { AdditionalPhotos, StockPhoto } from "../../components/Photos";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
 
@@ -38,7 +38,7 @@ class Build extends Component {
     template: {},
     isUpdated: false,
     listState: this.props.location.state.type,
-    listId: this.props.location.state.id
+    listId: this.props.location.state.id,
   };
 
   componentDidMount() {
@@ -245,7 +245,11 @@ class Build extends Component {
               handleInputChangeforItem={this.handleInputChangeforItem}
             /> 
             <div className="item-inputs specific-info">
-              <Photos/>
+              <StockPhoto/>
+              <AdditionalPhotos
+                stockpic={this.state.item.pic}
+                secpic={this.state.item.secPic}
+              />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}
                 handleInputChangeforItem={this.handleInputChangeforItem}
