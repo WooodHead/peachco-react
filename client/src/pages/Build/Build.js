@@ -146,6 +146,17 @@ class Build extends Component {
     });
   };
 
+  changeNumPics = num => {
+    const { item } = this.state;
+    const newItem = {
+      ...item,
+      numPics: num
+    };
+    this.setState({
+      item: newItem
+    })
+  }
+
   updateItem = obj => {
     API.updateItem(obj.id, obj.data)
       .then(function(res) {
@@ -237,6 +248,8 @@ class Build extends Component {
       data: this.state.item
     };
 
+    console.log(this.state);
+
     return (
       <div className="build-container">
         <form>
@@ -252,7 +265,10 @@ class Build extends Component {
                 handleInputChangeforItem={this.handleInputChangeforItem}
               />
               <AdditionalPhotos
+                pic={this.state.item.pic}
                 secPic={this.state.item.secPic}
+                numPics={this.state.item.numPics}
+                func={this.changeNumPics}
               />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}

@@ -69,6 +69,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        numPics: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         s_1: {
             type: DataTypes.STRING,
             allowNull: true
