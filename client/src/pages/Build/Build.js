@@ -157,6 +157,16 @@ class Build extends Component {
     })
   }
 
+  addPic = () => {
+    console.log("add");
+    //this should change the number of pics and update state or something
+  }
+
+  updatePic = () => {
+    console.log("update pic");
+    // this should update the state or something to re render
+  }
+
   updateItem = obj => {
     API.updateItem(obj.id, obj.data)
       .then(function(res) {
@@ -268,7 +278,9 @@ class Build extends Component {
                 pic={this.state.item.pic}
                 secPic={this.state.item.secPic}
                 numPics={this.state.item.numPics}
-                func={this.changeNumPics}
+                changeNum={this.changeNumPics}
+                add={this.addPic}
+                update={this.updatePic}
               />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}
