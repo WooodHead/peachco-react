@@ -8,8 +8,10 @@ export const AdditionalPhotos = props => {
   if (props.numPics === 0 || props.numPics === null) {
     if (props.secPic && props.secPic !== "") {
       picnum = 1;
+      props.changeNum(picnum);
     } else if (props.secPic && props.secPic === "") {
       picnum = 0;
+      props.changeNum(picnum);
     }
   } else {
     picnum = props.numPics;

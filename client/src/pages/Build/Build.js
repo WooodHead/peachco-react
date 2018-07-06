@@ -160,11 +160,19 @@ class Build extends Component {
   addPic = () => {
     console.log("add");
     //this should change the number of pics and update state or something
+    let numPics = parseInt(this.state.item.numPics);
+    numPics++;
+    console.log(numPics);
+    this.changeNumPics(numPics);
   }
 
   updatePic = () => {
     console.log("update pic");
     // this should update the state or something to re render
+    let numPics = parseInt(this.state.item.numPics);
+    numPics--;
+    console.log(numPics);
+    this.changeNumPics(numPics);
   }
 
   updateItem = obj => {
