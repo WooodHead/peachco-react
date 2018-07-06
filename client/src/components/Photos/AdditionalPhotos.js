@@ -19,20 +19,28 @@ export const AdditionalPhotos = props => {
         }
     //else if numPics is not equal to 0 and not null pretty much then set the numPics to the value in props
     } else {
-        picnum = props.numPics;
+       // picnum = props.numPics;
+       picnum = props.numPics;
     }
-
+    
     let imageArr = [];
     for (let i = 0; i < picnum; i++){
-        imageArr.push(`<div className="photo-wrapper"><img src="http://www.thepeachco.com/ebay/images/${props.secPic}/${i+1}.jpg" key=${i+1} alt="additional"/></div>`);
+        imageArr.push(`http://www.thepeachco.com/ebay/images/${props.secPic}/${i+1}.jpg`);
     }
-    console.log(imageArr);
+
 
   return (
       <div className="section-wrapper">
         <h3>Additional Photos</h3>
         <div className="photos-wrapper">
-            {imageArr}
+            {imageArr.map((image, i) => (
+                <div className="photo-wrapper"
+                    key={i}
+                >
+                <img src={image} alt="additional" width="100"/>
+                </div>
+            ))}
+            {(picnum < 10) ? (<div className="photo-wrapper"><i className="fas fa-plus"/></div>) : ("")}
         </div>
       </div>
 
