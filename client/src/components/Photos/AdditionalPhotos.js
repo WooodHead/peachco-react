@@ -20,7 +20,7 @@ const addImage = () => {
                     key={i}
                     onClick={() => addImage()}
                 >
-                    {image !== "" ?
+                    {image !== "" && props.secPic ?
                      <img className="additional-image" src={`http://www.thepeachco.com/ebay/images/${image}/${i+1}.jpg`} alt="extra"/> : 
                      <i className="fas fa-plus"/>
                     }
