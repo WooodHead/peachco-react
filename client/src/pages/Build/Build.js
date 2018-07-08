@@ -67,6 +67,14 @@ class Build extends Component {
                 categories: newCategories,
                 category: newCategory
               }
+              if (res.data.numPics === 0 || res.data.numpics === null){
+                if (res.data.secPic && res.data.secPic !== ""){
+                  res.data.numPics = 1
+                } else if (res.data.secPic && res.data.secPic === ""){
+                  res.data.numPics = 0;
+                }
+              }
+              res.data.numPics = 1;
               this.setState({
                 item: res.data,
                 settings: newSettings,
@@ -160,7 +168,7 @@ class Build extends Component {
   addPic = () => {
     console.log("add");
     //this should change the number of pics and update state or something
-    let numPics = parseInt(this.state.item.numPics);
+    let numPics = parseInt(this.state.item.numPics, 10);
     numPics++;
     console.log(numPics);
     this.changeNumPics(numPics);
@@ -169,7 +177,7 @@ class Build extends Component {
   updatePic = () => {
     console.log("update pic");
     // this should update the state or something to re render
-    let numPics = parseInt(this.state.item.numPics);
+    let numPics = parseInt(this.state.item.numPics, 10);
     numPics--;
     console.log(numPics);
     this.changeNumPics(numPics);
@@ -266,7 +274,6 @@ class Build extends Component {
       data: this.state.item
     };
 
-    console.log(this.state);
 
     return (
       <div className="build-container">
