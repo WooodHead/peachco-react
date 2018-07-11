@@ -1,24 +1,25 @@
-const Client = require("ftp");
-const c = new Client();
+require("dotenv").config();
 
+const keys = require("../keys");
+const username = keys.ftp.username;
+const password = keys.ftp.password;
+
+// const ftpClient = require("ftp-client");
+
+// const config = {
+//     host: "http://www.thepeachco.com",
+//     port: 21,
+//     user: username,
+//     password: password
+// }
+// const client = new ftpClient(config, options);
 
 module.exports = {
 
     listDir: function(req, res) {
-        console.log(c);
-        c.on("ready", function() {
-            console.log("i am ready");
-        })
-        // c.on('ready', function() {
-        //     console.log("ready");
-        //     c.list(function(err, list) {
-        //       if (err) throw err;
-        //       console.dir(list);
-        //       c.end();
-        //     })
-        //   })
-        //   c.connect();
-        //   res.send("something");
+        console.dir(req.file);
+        
+
     }
     
 

@@ -4,3 +4,8 @@ exports.ebay = {
     cert_id: process.env.EBAY_CERT_ID,
     user_token: process.env.EBAY_USER_TOKEN
 };
+
+exports.ftp = {
+    username: process.env.FTP_USERNAME,
+    password: process.env.FTP_PASSWORD
+};
