@@ -4,23 +4,26 @@ const keys = require("../keys");
 const username = keys.ftp.username;
 const password = keys.ftp.password;
 
-// const ftpClient = require("ftp-client");
+const jsftp = require("jsftp");
 
-// const config = {
-//     host: "http://www.thepeachco.com",
-//     port: 21,
-//     user: username,
-//     password: password
-// }
-// const client = new ftpClient(config, options);
+const Ftp = new jsftp({
+  host: "www.thepeachco.com",
+  port: 21, // defaults to 21
+  user: username,
+  pass: password
+});
 
 module.exports = {
 
     listDir: function(req, res) {
-        console.log("hit this route");
-        console.log(req.originalname);
-        
 
+        Ftp.put(req.buffer, "/new_dir/1.jpg", err => {
+            if (err) console.log(err);
+            if (!err) {
+              console.log("File transferred successfully!");
+            }
+          });
+    
     }
     
 
