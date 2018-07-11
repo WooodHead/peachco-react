@@ -17,7 +17,8 @@ const password = keys.ftp.password;
 module.exports = {
 
     listDir: function(req, res) {
-        console.dir(req.file);
+        console.log("hit this route");
+        console.log(req.originalname);
         
 
     }

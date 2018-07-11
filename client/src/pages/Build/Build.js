@@ -1,4 +1,5 @@
 //Components
+import axios from "axios";
 import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
@@ -33,11 +34,12 @@ class Build extends Component {
       categories: "",
       category: ""
     },
+    isUpdated: false,
+    listId: this.props.location.state.id,
+    listState: this.props.location.state.type,
+    selectedFile: null,
     templates: {},
     template: {},
-    isUpdated: false,
-    listState: this.props.location.state.type,
-    listId: this.props.location.state.id,
   };
 
   componentDidMount() {
@@ -167,9 +169,16 @@ class Build extends Component {
     });
   };
 
-  fileSelected = e => {
-    console.log(e.target.files[0]);
-
+  fileSelectedHandler = e => {
+    // console.log(e.target.files[0]);
+    // this.setState({
+    //   selectedFile: e.target.files[0]
+    // })
+    const fd = new FormData();
+    fd.append("image", e.target.files[0], e.target.files[0].name);
+    axios.post("/api/ftp/listdir/", fd).then(res => {
+      console.log(res);
+    })
   }
 
   changeNumPics = num => {
@@ -291,6 +300,8 @@ class Build extends Component {
       data: this.state.item
     };
 
+    // console.log(this.state);
+
 
     return (
       <div className="build-container">
@@ -313,7 +324,7 @@ class Build extends Component {
                 changeNum={this.changeNumPics}
                 add={this.addPic}
                 update={this.updatePic}
-                fileSelected={this.fileSelected}
+                fileSelectedHandler={this.fileSelectedHandler}
               />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}

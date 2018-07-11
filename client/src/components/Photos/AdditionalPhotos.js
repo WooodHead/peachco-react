@@ -30,7 +30,7 @@ export const AdditionalPhotos = props => {
             className="photo-wrapper"
             // onClick={props.add}
           >
-                <input type="file" onChange={props.fileSelected} id="file"/>
+                <input type="file" onChange={props.fileSelectedHandler} id="file"/>
           </div>
         ) : (
           ""
