@@ -6,7 +6,8 @@ let upload = multer({ storage: storage })
 // Matches with "/api/database/:id"
 
 router.post("/listdir", upload.any(), function(req, res){
-    ftpController.listDir(req.files[0]);
+    console.log(req.body);
+    ftpController.listDir(req, res);
 });
 
 module.exports = router;

@@ -17,10 +17,11 @@ module.exports = {
 
     listDir: function(req, res) {
 
-        Ftp.put(req.buffer, "/new_dir/1.jpg", err => {
+        Ftp.put(req.files[0].buffer, "/new_dir/1.jpg", err => {
             if (err) console.log(err);
             if (!err) {
               console.log("File transferred successfully!");
+              res.send("success");
             }
           });
     
