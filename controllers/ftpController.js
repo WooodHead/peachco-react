@@ -18,17 +18,31 @@ module.exports = {
     listDir: function(req, res) {
         console.log(req.body);
 
-        Ftp.raw("mkd", "/" + req.body.directory, (err, data) => {
-            if (err) {
-              return console.error(err);
+        Ftp.ls(`/public_html/ebay/images/${req.body.directory}`, (err, contents) => {
+            console.log(contents);
+            if (contents.length === 0){
+                Ftp.raw("mkd", `/public_html/ebay/images/${req.body.directory}` ,(err, data) => {
+                    if (err) {
+                      return console.error(err);
+                    }
+                    Ftp.put(req.files[0].buffer, `/public_html/ebay/images/${req.body.directory}/${req.body.number}.jpg`, err => {
+                        if (err) console.log(err);
+                        if (!err) {
+                          console.log("File transferred successfully!");
+                          res.send("success");
+                        }
+                      });
+                  });
+            } else {
+                Ftp.put(req.files[0].buffer, `/public_html/ebay/images/${req.body.directory}/${req.body.number}.jpg`, err => {
+                    if (err) console.log(err);
+                    if (!err) {
+                      console.log("File transferred successfully!");
+                      res.send("success");
+                    }
+                  });
+
             }
-            Ftp.put(req.files[0].buffer, "/" + req.body.directory + "/" + req.body.number + ".jpg", err => {
-                if (err) console.log(err);
-                if (!err) {
-                  console.log("File transferred successfully!");
-                  res.send("success");
-                }
-              });
           });
     
     }
