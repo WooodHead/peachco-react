@@ -12,7 +12,6 @@ import API from "../../utils/API";
 import Helpers from "../../utils/Helpers";
 import Template from "../../utils/Template";
 
-
 //CSS
 import "./Build.css";
 
@@ -67,10 +66,10 @@ class Build extends Component {
                 categories: newCategories,
                 category: newCategory
               }
-              if (res.data.numPics === 0 || res.data.numpics === null){
-                if (res.data.secPic && res.data.secPic !== ""){
+              if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
+                if (res.data.secPic !== ""){
                   res.data.numPics = 1
-                } else if (res.data.secPic && res.data.secPic === ""){
+                } else if (res.data.secPic === ""){
                   res.data.numPics = 0;
                 }
               }
@@ -96,6 +95,13 @@ class Build extends Component {
           if (res.data.packageSizeId) {
             template = templates[res.data.packageSizeId - 1];
           }
+          if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
+            if (res.data.secPic !== ""){
+              res.data.numPics = 1
+            } else if (res.data.secPic === ""){
+              res.data.numPics = 0;
+            }
+          }
           this.setState({
             item: res.data,
             settings: settings,
@@ -114,6 +120,13 @@ class Build extends Component {
           let template = {};
           if (res.data.packageSizeId) {
             template = templates[res.data.packageSizeId - 1];
+          }
+          if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
+            if (res.data.secPic !== ""){
+              res.data.numPics = 1
+            } else if (res.data.secPic === ""){
+              res.data.numPics = 0;
+            }
           }
           this.setState({
             item: res.data,
@@ -154,6 +167,11 @@ class Build extends Component {
     });
   };
 
+  fileSelected = e => {
+    console.log(e.target.files[0]);
+
+  }
+
   changeNumPics = num => {
     const { item } = this.state;
     const newItem = {
@@ -169,16 +187,15 @@ class Build extends Component {
     console.log("add");
     //this should change the number of pics and update state or something
     let numPics = parseInt(this.state.item.numPics, 10);
-    numPics++;
+    // numPics++;
     console.log(numPics);
-    this.changeNumPics(numPics);
+    // this.changeNumPics(numPics);
   }
 
   updatePic = () => {
     console.log("update pic");
     // this should update the state or something to re render
     let numPics = parseInt(this.state.item.numPics, 10);
-    numPics--;
     console.log(numPics);
     this.changeNumPics(numPics);
   }
@@ -296,6 +313,7 @@ class Build extends Component {
                 changeNum={this.changeNumPics}
                 add={this.addPic}
                 update={this.updatePic}
+                fileSelected={this.fileSelected}
               />
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}

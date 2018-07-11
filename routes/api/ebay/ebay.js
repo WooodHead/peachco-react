@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const ebayController = require("../../../controllers/ebayController");
-// Matches with "/api/database/:id"
 
 router.route("/getcategories").post(ebayController.getCategories);
 

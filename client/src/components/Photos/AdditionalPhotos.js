@@ -28,9 +28,9 @@ export const AdditionalPhotos = props => {
         {props.numPics < 10 ? (
           <div 
             className="photo-wrapper"
-            onClick={props.add}
+            // onClick={props.add}
           >
-                <i className="fas fa-plus" />
+                <input type="file" onChange={props.fileSelected} id="file"/>
           </div>
         ) : (
           ""
