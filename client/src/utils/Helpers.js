@@ -27,7 +27,7 @@ export default {
             label = "Title";
             break;
           case "se":
-            label = "Photo";
+            label = "Item#";
             break;
           case "si":
             label = "Includes";

@@ -8,9 +8,17 @@
 }
 
 .photo-wrapper {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    color: black;
+}
+
+.add-wrapper {
     background-color: lightgrey;
     height: 100px;
     width: 100px;
+    padding-top: 2.4rem;
     text-align: center;
     color: black;
 }

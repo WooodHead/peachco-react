@@ -320,15 +320,21 @@ class Build extends Component {
                 stockPic={this.state.item.pic}
                 handleInputChangeforItem={this.handleInputChangeforItem}
               />
-              <AdditionalPhotos
-                pic={this.state.item.pic}
-                secPic={this.state.item.secPic}
-                numPics={this.state.item.numPics}
-                changeNum={this.changeNumPics}
-                add={this.addPic}
-                update={this.updatePic}
-                fileSelectedHandler={this.fileSelectedHandler}
-              />
+              {(this.state.item.secPic !== "") ? 
+                (
+                  <AdditionalPhotos
+                  pic={this.state.item.pic}
+                  secPic={this.state.item.secPic}
+                  numPics={this.state.item.numPics}
+                  changeNum={this.changeNumPics}
+                  add={this.addPic}
+                  update={this.updatePic}
+                  fileSelectedHandler={this.fileSelectedHandler}
+                />
+                ) 
+                : 
+                ("")
+              }
               <ShippingTemplates
                 packageSizeId={this.state.item.packageSizeId}
                 handleInputChangeforItem={this.handleInputChangeforItem}

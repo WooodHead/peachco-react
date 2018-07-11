@@ -27,10 +27,17 @@ export const AdditionalPhotos = props => {
         ))}
         {props.numPics < 10 ? (
           <div 
-            className="photo-wrapper"
-            // onClick={props.add}
+            className="add-wrapper"
+            onClick={() => this.fileInput.click()}
           >
-                <input type="file" onChange={props.fileSelectedHandler} id="file"/>
+            <i className="fas fa-plus" />
+                <input 
+                  style={{display: "none"}} 
+                  type="file" 
+                  onChange={props.fileSelectedHandler} 
+                  id="file"
+                  ref={fileInput => this.fileInput = fileInput}
+                />
           </div>
         ) : (
           ""
