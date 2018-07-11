@@ -16,13 +16,19 @@ const Ftp = new jsftp({
 module.exports = {
 
     listDir: function(req, res) {
+        console.log(req.body);
 
-        Ftp.put(req.files[0].buffer, "/new_dir/1.jpg", err => {
-            if (err) console.log(err);
-            if (!err) {
-              console.log("File transferred successfully!");
-              res.send("success");
+        Ftp.raw("mkd", "/" + req.body.directory, (err, data) => {
+            if (err) {
+              return console.error(err);
             }
+            Ftp.put(req.files[0].buffer, "/" + req.body.directory + "/" + req.body.number + ".jpg", err => {
+                if (err) console.log(err);
+                if (!err) {
+                  console.log("File transferred successfully!");
+                  res.send("success");
+                }
+              });
           });
     
     }
