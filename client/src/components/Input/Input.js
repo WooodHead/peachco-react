@@ -1,4 +1,4 @@
-import React from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
+import React from "react";
 import "./Input.css";
 
 export const Input = props => (

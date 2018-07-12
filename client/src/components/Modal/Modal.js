@@ -4,7 +4,7 @@ import "./Modal.css";
 
 import { Button } from "../Button";
 
-export const Modal = props => ({children})=> {
+export const Modal = props => {
 
     return (
 
@@ -12,7 +12,6 @@ export const Modal = props => ({children})=> {
             <div className="modal-content animate">
                 <div className="modal-close-container"><i className="fas fa-times fa-3x" onClick={props.closeModal}></i></div>
                 <div className="item-info-container">
-                    {children}
                 </div>
                 <div className="modal-button-container">
                     {props.buttons.map(button => {

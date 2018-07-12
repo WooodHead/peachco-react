@@ -1,4 +1,4 @@
-import React, { Component } from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
+import React, { Component } from "react";
 import { Button } from "../../components/Button/Button";
 import background from "./login-background.jpeg";
 

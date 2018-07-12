@@ -1,4 +1,4 @@
-import React from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
+import React from "react";
 import { Input } from "../Input";
 import noImage from "./No_image_available.svg";
 export const StockPhoto = props => {

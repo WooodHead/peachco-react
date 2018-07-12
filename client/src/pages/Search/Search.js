@@ -1,10 +1,10 @@
 //Components
-import React, { Component } from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
+import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { List, ListItem } from "../../components/List";
 import { Modal } from "../../components/Modal";
-import ModalItemInfo from "../../components/ModalBodies/ModalItemInfo";
+import { ModalItemInfo }  from "../../components/ModalBodies/ModalItemInfo";
 
 //Functions
 import API from "../../utils/API";

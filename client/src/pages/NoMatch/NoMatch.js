@@ -1,4 +1,4 @@
-import React from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
+import React from "react";
 
 const NoMatch = () => (
   <h1>404 Page Not Found</h1>
