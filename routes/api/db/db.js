@@ -34,8 +34,10 @@ router
   .get(dbController.getShippingTemplates);
 
 router
-  .route("/item/update/:id")
-  .post(dbController.updateItem);
+  // .route("/item/update/:id")
+  .post("/item/update/:id", function(req, res){
+      dbController.updateItem(req, res);
+  });
 
 
 

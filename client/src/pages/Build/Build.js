@@ -69,13 +69,12 @@ class Build extends Component {
                 category: newCategory
               }
               if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
-                if (res.data.secPic !== ""){
+                if (res.data.secPic !== "" && res.data.secPic !== null){
                   res.data.numPics = 1
-                } else if (res.data.secPic === ""){
+                } else if (res.data.secPic === "" || res.data.secPic === null){
                   res.data.numPics = 0;
                 }
               }
-              res.data.numPics = 1;
               this.setState({
                 item: res.data,
                 settings: newSettings,
@@ -208,14 +207,15 @@ class Build extends Component {
     console.log("update pic");
     // this should update the state or something to re render
     let numPics = parseInt(this.state.item.numPics, 10);
-    console.log(numPics);
     this.changeNumPics(numPics);
   }
 
   updateItem = obj => {
     API.updateItem(obj.id, obj.data)
-      .then(function(res) {
-        return res;
+      .then(res => {
+        this.setState({
+          item: res.data
+        })
       })
       .catch(err => console.log(err));
   };
@@ -303,9 +303,6 @@ class Build extends Component {
       data: this.state.item
     };
 
-    console.log(this.state);
-
-
     return (
       <div className="build-container">
         <form>
@@ -320,7 +317,7 @@ class Build extends Component {
                 stockPic={this.state.item.pic}
                 handleInputChangeforItem={this.handleInputChangeforItem}
               />
-              {(this.state.item.secPic !== "") ? 
+              {(this.state.item.secPic !== "" && this.state.item.secPic !== null) ? 
                 (
                   <AdditionalPhotos
                   pic={this.state.item.pic}

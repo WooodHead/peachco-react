@@ -41,15 +41,6 @@ module.exports = {
     });
   },
 
-  addToDatabase: function(req, res) {
-    console.log(req.body);
-    db.bedding.create(req.body)
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => console.log(err))
-  },
-
   getAttributes: function(req, res) {
     if (req.params.type === "new") {
       db.bedding
@@ -114,15 +105,29 @@ module.exports = {
     }
   },
 
+  addToDatabase: function(req, res) {
+    console.log(req.body);
+    db.bedding.create(req.body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => console.log(err))
+  },
+
   updateItem: function(req, res) {
-    db.bedding
-      .update(req.body, {
+    db.bedding.update(req.body, {
         where: {
           id: req.params.id
         }
       })
-      .then(function(data) {
-        res.json(data);
+      .then(() => {
+        db.bedding.findOne({
+          where: {
+            id: req.params.id
+          }
+        }).then(data => {
+          res.json(data);
+        })
       });
   },
 

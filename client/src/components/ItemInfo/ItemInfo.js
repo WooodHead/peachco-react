@@ -4,7 +4,7 @@ import { Input } from "../Input";
 
 export const ItemInfo = props => {
 
-    const filterArr = ["id", "packageSizeId", "createdAt", "updatedAt", "pic"];
+    const filterArr = ["id", "packageSizeId", "createdAt", "updatedAt", "pic", "numPics"];
 
     return (
 
