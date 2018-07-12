@@ -12,15 +12,32 @@ export const Modal = props => {
             <div className="modal-content animate">
                 <div className="modal-close-container"><i className="fas fa-times fa-3x" onClick={props.closeModal}></i></div>
                 <div className="item-info-container">
+                    {props.children}
                 </div>
                 <div className="modal-button-container">
-                    {props.buttons.map(button => {
-                        <Button
+                    { props.redirect 
+                      ? 
+                      props.buttons.map(button => (
+                          <LinkButton
+                            key={button.type}
+                            to={button.to}
+                            type={button.type}
+                            id={props.item.id}
+                          >
+                          {button.type}
+                          </LinkButton>
+                      ))
+                      
+                      :
+
+                      props.buttons.map(button => (
+                          <Button
                             func={button.func}
                             parameter={button.parameter}
                             name={button.name}
-                        />
-                    })}
+                          />
+                      ))
+                    }
                 </div>
             </div>
         </div>

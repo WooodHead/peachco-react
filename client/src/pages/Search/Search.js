@@ -20,6 +20,20 @@ class Search extends Component {
     showModal: false
   };
 
+  itemInfoButtons =[
+    {
+      to: "/build/",
+      type: "similar",
+      name: "Similar",
+    },
+    {
+      to: "/build/",
+      type: "exact",
+      name: "Exact",
+    }
+  
+  ];
+
   componentDidMount() {
   }
 
@@ -105,6 +119,10 @@ class Search extends Component {
             (
               <Modal 
                 closeModal={this.closeModal}
+                redirect={true}
+                buttons={this.itemInfoButtons}
+                item={this.state.item}
+
               >
                 <ModalItemInfo
                   item={this.state.item}
