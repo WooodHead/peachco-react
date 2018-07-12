@@ -1,6 +1,6 @@
 //Components
 import axios from "axios";
-import React, { Component } from "react";
+import React, { Component } from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";

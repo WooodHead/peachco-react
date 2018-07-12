@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
+import React from '../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react'
+import PropTypes from '../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/prop-types'
+import { withRouter } from '../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react-router'
 import "./LinkButton.css";
 
 const LinkButton = (props) => {

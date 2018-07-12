@@ -1,5 +1,4 @@
-import React from "react";
-//import urlExists from "url-exists";
+import React from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
 import "./AdditionalPhotos.css";
 
 

@@ -1,9 +1,10 @@
 //Components
-import React, { Component } from "react";
+import React, { Component } from "../../../../../../../../Users/bagglerock/Library/Caches/typescript/2.9/node_modules/@types/react";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { List, ListItem } from "../../components/List";
 import { Modal } from "../../components/Modal";
+import ModalItemInfo from "../../components/ModalBodies/ModalItemInfo";
 
 //Functions
 import API from "../../utils/API";
@@ -103,9 +104,11 @@ class Search extends Component {
           (this.state.showModal) ? 
             (
               <Modal 
-                item={this.state.item}
                 closeModal={this.closeModal}
               >
+                <ModalItemInfo
+                  item={this.state.item}
+                />
               </Modal>
             ) : ("")
         }
