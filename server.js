@@ -1,6 +1,9 @@
 const express = require("express");
+const session = require('express-session');
 const app = express();
 const bodyParser = require("body-parser");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const path = require("path");
 
 const db = require("./models");
@@ -12,6 +15,11 @@ let PORT = process.env.PORT || 3001;
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// We need to use sessions to keep track of our user's login status
+app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -25,6 +33,12 @@ app.use(routes);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+// Set up passport to authenticate
+const User = require('./models/users');
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 db.sequelize.sync().then(function(){
   app.listen(PORT, function() {
