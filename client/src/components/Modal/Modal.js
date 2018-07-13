@@ -32,6 +32,7 @@ export const Modal = props => {
 
                       props.buttons.map(button => (
                           <Button
+                            key={button.name}
                             func={button.func}
                             parameter={button.parameter}
                             name={button.name}

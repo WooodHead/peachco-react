@@ -30,6 +30,13 @@ export const Input = props => (
         name={props.name}
         label={props.children}
         onChange={props.func}
+        type={
+          props.password
+          ?
+          "password"
+          :
+          "text"
+        }
        /* parameter={props.parameter}*/
       />
     </div>

@@ -3,21 +3,33 @@ import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLogin } from "../../components/ModalBodies/ModalLogin";
 
+import loginUtils from "../../utils/Login";
+
 import "./Login.css";
 
 class Login extends Component {
 
     state= {
-        showModal: false
+        showModal: false,
+        username: "",
+        password: "",
+        isLoggedIn: false
     }
 
-    LoginButtons =[
+    LoginButtons = [
         {
           func: this.doSomething,
           parameter: "hello",
           name: "Login"
         }
     ];
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
 
     showModal = () => {
         this.setState({
@@ -31,6 +43,19 @@ class Login extends Component {
         })
     }
 
+    login = (e) => {
+        e.preventDefault();
+        console.log("peace");
+        // loginUtils
+        //   .login({username: this.state.username, password: this.state.password})
+        //   .then(res => {
+        //     console.log(res.data);
+        //     this.setState({isLoggedIn: res.data})
+    
+        //   })
+        //   .catch(err => console.log(err.response));
+      }
+
     render() {
 
         return(
@@ -38,7 +63,6 @@ class Login extends Component {
                 <div className="button-div">
                     <Button
                         func={this.showModal}
-
                         name="Log In"
                     >
                     </Button>
@@ -53,8 +77,13 @@ class Login extends Component {
                           redirect={false}
                           buttons={this.LoginButtons}
                           item={this.state.item}
+                          func={this.login}
                         >
-                          <ModalLogin/>
+                          <ModalLogin
+                            username={this.state.username}
+                            password={this.state.password}
+                            func={this.handleInputChange}
+                          />
                         </Modal>
                       ) : ("")
                   }
