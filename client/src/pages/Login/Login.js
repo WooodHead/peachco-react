@@ -3,7 +3,7 @@ import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLogin } from "../../components/ModalBodies/ModalLogin";
 
-import loginUtils from "../../utils/Login";
+import loginUtils from "../../utils/loginUtils";
 
 import "./Login.css";
 
@@ -15,14 +15,6 @@ class Login extends Component {
         password: "",
         isLoggedIn: false
     }
-
-    LoginButtons = [
-        {
-          func: this.doSomething,
-          parameter: "hello",
-          name: "Login"
-        }
-    ];
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -43,20 +35,26 @@ class Login extends Component {
         })
     }
 
-    login = (e) => {
-        e.preventDefault();
-        console.log("peace");
-        // loginUtils
-        //   .login({username: this.state.username, password: this.state.password})
-        //   .then(res => {
-        //     console.log(res.data);
-        //     this.setState({isLoggedIn: res.data})
+    login = () => {
+        loginUtils
+          .login({username: this.state.username, password: this.state.password})
+          .then(res => {
+            console.log(res.data);
+            this.setState({isLoggedIn: res.data})
     
-        //   })
-        //   .catch(err => console.log(err.response));
+          })
+          .catch(err => console.log(err.response));
       }
 
     render() {
+
+        const LoginButtons = [
+            {
+              func: this.login,
+              parameter: "hello",
+              name: "Login"
+            }
+        ];
 
         return(
             <div className="login-wrapper">
@@ -75,9 +73,8 @@ class Login extends Component {
                         <Modal 
                           closeModal={this.closeModal}
                           redirect={false}
-                          buttons={this.LoginButtons}
+                          buttons={LoginButtons}
                           item={this.state.item}
-                          func={this.login}
                         >
                           <ModalLogin
                             username={this.state.username}
