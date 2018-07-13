@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { List, ListItem } from "../../components/List";
+import LinkButton from "../../components/Button/LinkButton";
 import { Modal } from "../../components/Modal";
 import { ModalItemInfo }  from "../../components/ModalBodies/ModalItemInfo";
 
@@ -10,6 +11,7 @@ import { ModalItemInfo }  from "../../components/ModalBodies/ModalItemInfo";
 import API from "../../utils/API";
 //CSS
 import "./Search.css";
+
 
 class Search extends Component {
 
@@ -19,20 +21,6 @@ class Search extends Component {
     query: "",
     showModal: false
   };
-
-  itemInfoButtons =[
-    {
-      to: "/build/",
-      type: "similar",
-      name: "Similar",
-    },
-    {
-      to: "/build/",
-      type: "exact",
-      name: "Exact",
-    }
-  
-  ];
 
   componentDidMount() {
   }
@@ -76,8 +64,32 @@ class Search extends Component {
   };
 
   render() {
+
+    const itemInfoButtons =[
+      {
+        to: "/build/",
+        type: "similar",
+        name: "Similar",
+      },
+      {
+        to: "/build/",
+        type: "exact",
+        name: "Exact",
+      }
+    
+    ];
+
     return (
       <section>
+        <div>
+          <LinkButton
+            to="/build/"
+            type="new"
+            name="New"
+          >
+          Make a new listing
+          </LinkButton>
+        </div>
         <div className="search-form-container">
           <form>
             <div className="search-form-wrapper">
@@ -120,7 +132,7 @@ class Search extends Component {
               <Modal 
                 closeModal={this.closeModal}
                 redirect={true}
-                buttons={this.itemInfoButtons}
+                buttons={itemInfoButtons}
                 item={this.state.item}
 
               >

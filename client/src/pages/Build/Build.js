@@ -213,9 +213,29 @@ class Build extends Component {
   updateItem = obj => {
     API.updateItem(obj.id, obj.data)
       .then(res => {
-        this.setState({
-          item: res.data
-        })
+        if(res.data.type){
+          this.getCategory(res.data.type).then(categoryData => {
+            const { settings } = this.state;
+            let newCategories = [];
+            let newCategory;
+            if (categoryData.length > 1) {
+              newCategories = categoryData;
+              newCategory = categoryData[0].Category.CategoryID;
+            } else {
+              newCategories.push(categoryData);
+              newCategory = categoryData.Category.CategoryID;
+            }
+            const newSettings = {
+              ...settings,
+              categories: newCategories,
+              category: newCategory
+            }
+            this.setState({
+              item: res.data,
+              settings: newSettings
+            });
+          })
+        }
       })
       .catch(err => console.log(err));
   };
