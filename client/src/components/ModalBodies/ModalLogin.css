@@ -1,0 +1,27 @@
+.modal-login-wrapper {
+    display: grid;
+    grid-template-areas: 
+        "title title"
+        "user aside"
+        "pass aside"
+    ;
+    grid-gap: 5px; 
+
+}
+
+.modal-login-title {
+    grid-area: title;
+}
+
+.modal-login-user {
+    grid-area: user;
+}
+
+.modal-login-pass {
+    grid-area: pass;
+}
+
+.modal-login-aside {
+    grid-area: aside;
+    text-align: right;
+}

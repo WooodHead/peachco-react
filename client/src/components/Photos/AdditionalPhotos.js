@@ -21,7 +21,7 @@ export const AdditionalPhotos = props => {
             key={i}
             onClick={props.update}
           >
-            <img src={image} alt="additional" width="100" />
+            <img src={image} alt="additional" height="100" />
           </div>
         ))}
         {props.numPics < 10 ? (

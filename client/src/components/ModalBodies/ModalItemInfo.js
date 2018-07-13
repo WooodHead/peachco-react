@@ -1,10 +1,11 @@
 import React from "react";
 import noImage from "./No_image_available.svg";
+import "./ModalItemInfo.css";
 
 export const ModalItemInfo = props => {
 
     return(
-        <div>
+        <div className="item-info-wrapper">
             <div className="modal-heading">
                 <h4>{props.item.brand} - {props.item.collection} {props.item.color} {props.item.type}</h4>
             </div>
