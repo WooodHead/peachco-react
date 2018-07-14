@@ -3,9 +3,12 @@ import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLogin } from "../../components/ModalBodies/ModalLogin";
 
+
 import loginUtils from "../../utils/loginUtils";
 
 import "./Login.css";
+
+import backgroundImage from "../../images/login-background.jpeg";
 
 class Login extends Component {
 
@@ -65,7 +68,7 @@ class Login extends Component {
                     >
                     </Button>
                 </div>
-                <div className="background-div">
+                <div className="background-div" style={{background: `url(${backgroundImage})`}}>
                 </div>
                 {
                     (this.state.showModal) ? 
