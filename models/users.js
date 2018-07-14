@@ -10,11 +10,21 @@ module.exports = function (sequelize, DataTypes) {
             unique: true
         },
         // The password cannot be null
-        password: {
+        hash: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        salt: {
             type: DataTypes.STRING,
             allowNull: false
         }
 
+    });
+
+    passportLocalSequelize.attachToUser(users, {
+        usernameField: 'userName',
+        hashField: 'hash',
+        saltField: 'salt'
     });
 
     return users;
