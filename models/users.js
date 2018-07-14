@@ -1,4 +1,5 @@
 const passportLocalSequelize = require("passport-local-sequelize");
+const bcrypt = require("bcrypt-nodejs");
 
 
 module.exports = function (sequelize, DataTypes) {
@@ -16,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         salt: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
 
     });
@@ -25,6 +26,14 @@ module.exports = function (sequelize, DataTypes) {
         usernameField: 'userName',
         hashField: 'hash',
         saltField: 'salt'
+    });
+
+    users.prototype.validPassword = function (password) {
+        return bcrypt.compareSync(password, this.password);
+    };
+
+    users.hook("beforeCreate", function (user) {
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
 
     return users;

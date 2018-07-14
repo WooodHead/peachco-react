@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "../Input";
-import noImage from "./No_image_available.svg";
+import noImage from "../../images/No_image_available.svg";
 export const StockPhoto = props => {
 
     let pic = props.stockPic;

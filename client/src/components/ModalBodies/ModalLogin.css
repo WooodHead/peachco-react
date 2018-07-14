@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: 
         "title title"
-        "pass aside"
+        "inputs aside"
     ;
     grid-gap: 5px; 
     padding: 1.5rem;
@@ -18,8 +18,8 @@
 }
 
 .modal-login-inputs {
-    grid-area: pass;
-    padding-top: 25px;
+    grid-area: inputs;
+    padding-top: 30px;
 
 }
 

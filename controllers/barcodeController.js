@@ -1,4 +1,4 @@
-var Quagga = require('quagga').default;
+const Quagga = require('quagga').default;
 
 module.exports = {
 
