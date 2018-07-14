@@ -7,17 +7,17 @@
 
 }
 
-.modal-heading {
+.modal-ii-heading {
     grid-area: heading;
     border-bottom: solid black 1px;
 }
 
-.modal-info {
+.modal-ii-info {
     grid-area: info;
     padding-top: 4rem;
 }
 
-.modal-images {
+.modal-ii-images {
     text-align: right;
     grid-area: images;
     display: grid;

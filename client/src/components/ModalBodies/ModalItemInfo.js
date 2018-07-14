@@ -6,10 +6,10 @@ export const ModalItemInfo = props => {
 
     return(
         <div className="item-info-wrapper">
-            <div className="modal-heading">
+            <div className="modal-ii-heading">
                 <h4>{props.item.brand} - {props.item.collection} {props.item.color} {props.item.type}</h4>
             </div>
-            <div className="modal-info">
+            <div className="modal-ii-info">
             
                 <p>SKU: {props.item.sku}</p>
                 <p>CustomID: {props.item.secPic}</p>
@@ -22,7 +22,7 @@ export const ModalItemInfo = props => {
                 <p><br/></p>
                 <p>Retail: {props.item.retail}</p>
             </div>
-            <div className="modal-images">
+            <div className="modal-ii-images">
                 <div>
                     <img src={(props.item.pic !== null && props.item.pic !== "") ? 
                         (`http://www.thepeachco.com/ebay/images/sticky/${props.item.pic}/1.jpg`) : 

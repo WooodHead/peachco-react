@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "../Input/Input";
 import "./ModalLogin.css";
+import logo from "../../images/logo.jpg";
 
 export const ModalLogin = props => {
     return(
@@ -8,15 +9,13 @@ export const ModalLogin = props => {
             <form>
                 <div className="modal-login-wrapper">
                     <div className="modal-login-title"><p>Please log in.</p></div>
-                    <div className="modal-login-user">
+                    <div className="modal-login-inputs">
                         <Input
                             value={props.username}
                             func={props.func}
                             name="username"
                         >Username
                         </Input>
-                    </div>
-                    <div className="modal-login-pass">
                         <Input
                             value={props.password}
                             func={props.func}
@@ -26,7 +25,9 @@ export const ModalLogin = props => {
                         Password
                         </Input>
                     </div>
-                    <div className="modal-login-aside">graphic</div>
+                    <div className="modal-login-aside">
+                        <img src={logo} height="150"/>
+                    </div>
                 </div>
             </form>
 

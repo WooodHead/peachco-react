@@ -121,6 +121,8 @@ class Search extends Component {
                   collection={item.collection}
                   type={item.type}
                   color={item.color}
+                  pic={item.pic}
+                  secPic={item.secPic}
                   onClick={() => this.loadItem(item.id)}
                 />
               ))}

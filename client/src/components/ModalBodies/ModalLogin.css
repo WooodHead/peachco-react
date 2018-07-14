@@ -2,10 +2,10 @@
     display: grid;
     grid-template-areas: 
         "title title"
-        "user aside"
         "pass aside"
     ;
     grid-gap: 5px; 
+    padding: 1.5rem;
 
 }
 
@@ -17,8 +17,14 @@
     grid-area: user;
 }
 
-.modal-login-pass {
+.modal-login-inputs {
     grid-area: pass;
+    padding-top: 25px;
+
+}
+
+.modal-login-inputs div {
+    padding-bottom: 5px;
 }
 
 .modal-login-aside {

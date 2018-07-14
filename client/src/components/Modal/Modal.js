@@ -18,25 +18,31 @@ export const Modal = props => {
                     { props.redirect 
                       ? 
                       props.buttons.map(button => (
-                          <LinkButton
-                            key={button.type}
-                            to={button.to}
-                            type={button.type}
-                            id={props.item.id}
-                          >
-                          {button.type}
-                          </LinkButton>
+                          <div>
+                            <LinkButton
+                                key={button.type}
+                                to={button.to}
+                                type={button.type}
+                                id={props.item.id}
+                            >
+                            {button.type}
+                            </LinkButton>
+                          </div>
+
                       ))
                       
                       :
 
                       props.buttons.map(button => (
-                          <Button
-                            key={button.name}
-                            func={button.func}
-                            parameter={button.parameter}
-                            name={button.name}
-                          />
+                          <div>
+                            <Button
+                                key={button.name}
+                                func={button.func}
+                                parameter={button.parameter}
+                                name={button.name}
+                            />
+                          </div>
+
                       ))
                     }
                 </div>
