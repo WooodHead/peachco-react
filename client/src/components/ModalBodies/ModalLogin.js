@@ -26,7 +26,7 @@ export const ModalLogin = props => {
                         </Input>
                     </div>
                     <div className="modal-login-aside">
-                        <img src={logo} height="150"/>
+                        <img src={logo} height="150" alt="logo"/>
                     </div>
                 </div>
             </form>

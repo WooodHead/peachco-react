@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalLogin } from "../../components/ModalBodies/ModalLogin";
+import {Redirect} from "react-router-dom";
 
 
 import loginUtils from "../../utils/loginUtils";
@@ -51,10 +52,13 @@ class Login extends Component {
 
     render() {
 
+        if (this.state.isLoggedIn) {
+            return <Redirect to="/Search"/>
+          }
+
         const LoginButtons = [
             {
               func: this.login,
-              parameter: "hello",
               name: "Login"
             }
         ];

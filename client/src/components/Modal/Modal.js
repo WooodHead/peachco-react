@@ -17,10 +17,10 @@ export const Modal = props => {
                 <div className="modal-button-container">
                     { props.redirect 
                       ? 
-                      props.buttons.map(button => (
-                          <div>
+                      props.buttons.map((button, i) => (
+                          <div key={i}>
                             <LinkButton
-                                key={button.type}
+                                key={i}
                                 to={button.to}
                                 type={button.type}
                                 id={props.item.id}
@@ -33,10 +33,9 @@ export const Modal = props => {
                       
                       :
 
-                      props.buttons.map(button => (
-                          <div>
+                      props.buttons.map((button, i) => (
+                          <div key={i}>
                             <Button
-                                key={button.name}
                                 func={button.func}
                                 parameter={button.parameter}
                                 name={button.name}

@@ -6,9 +6,11 @@ import { List, ListItem } from "../../components/List";
 import LinkButton from "../../components/Button/LinkButton";
 import { Modal } from "../../components/Modal";
 import { ModalItemInfo }  from "../../components/ModalBodies/ModalItemInfo";
+import {Redirect} from "react-router-dom";
 
 //Functions
 import API from "../../utils/API";
+import LoginAPI from "../../utils/loginUtils";
 //CSS
 import "./Search.css";
 
@@ -19,10 +21,13 @@ class Search extends Component {
     items: [],
     item: [],
     query: "",
-    showModal: false
+    showModal: false,
+    username: "",
+    isLoggedIn: true,
   };
 
   componentDidMount() {
+    this.loginCheck();
   }
 
   loadItems = () => {
@@ -63,7 +68,25 @@ class Search extends Component {
     }
   };
 
+  loginCheck = () => {
+    LoginAPI
+      .loginCheck()
+      .then(res => this.setState({
+        isLoggedIn: res.data.isLoggedIn, username: res.data.username
+      }))
+      .catch(err => {
+        console.log(err);
+        this.setState({isLoggedIn: false})
+      })
+  };
+
   render() {
+
+    console.log(this.state.isLoggedIn);
+
+    if (!this.state.isLoggedIn) {
+      return <Redirect to="/"/>
+    }
 
     const itemInfoButtons =[
       {
@@ -84,6 +107,7 @@ class Search extends Component {
         <div>
           <LinkButton
             to="/build/"
+            id="60"
             type="new"
             name="New"
           >

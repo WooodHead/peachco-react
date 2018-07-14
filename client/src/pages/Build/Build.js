@@ -5,11 +5,13 @@ import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
 import { AdditionalPhotos, StockPhoto } from "../../components/Photos";
+import {Redirect} from "react-router-dom";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
 
 //Functions
 import API from "../../utils/API";
+import LoginAPI from "../../utils/loginUtils";
 import Helpers from "../../utils/Helpers";
 import Template from "../../utils/Template";
 
@@ -40,9 +42,12 @@ class Build extends Component {
     selectedFile: null,
     templates: {},
     template: {},
+    isLoggedIn: true,
+    username: ""
   };
 
   componentDidMount() {
+    this.loginCheck();
     if(this.state.listState === "exact"){
       API.getItemByIdExact(this.state.listId)
       .then(res => {
@@ -183,6 +188,18 @@ class Build extends Component {
     })
   }
 
+  loginCheck = () => {
+    LoginAPI
+      .loginCheck()
+      .then(res => this.setState({
+        isLoggedIn: res.data.isLoggedIn, username: res.data.username
+      }))
+      .catch(err => {
+        console.log(err);
+        this.setState({isLoggedIn: false})
+      })
+  };
+
   changeNumPics = num => {
     const { item } = this.state;
     const newItem = {
@@ -317,6 +334,10 @@ class Build extends Component {
   };
 
   render() {
+
+    if (!this.state.isLoggedIn) {
+      return <Redirect to="/"/>
+    }
 
     let updateItemParameters = {
       id: this.state.item.id,

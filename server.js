@@ -2,7 +2,7 @@ const express = require("express");
 const session = require('express-session');
 const app = express();
 const bodyParser = require("body-parser");
-const passport = require('passport');
+const passport = require('./config/passport');
 const path = require("path");
 
 const db = require("./models");
