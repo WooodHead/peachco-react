@@ -43,9 +43,7 @@ class Login extends Component {
         loginUtils
           .login({username: this.state.username, password: this.state.password})
           .then(res => {
-            console.log(res.data);
             this.setState({isLoggedIn: res.data})
-    
           })
           .catch(err => console.log(err.response));
       }

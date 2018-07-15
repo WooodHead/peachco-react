@@ -17,7 +17,7 @@ export const ListItem = props => (
                     <img src={`http://www.thepeachco.com/ebay/images/sticky/${props.pic}/1.jpg`} alt={props.pic} height="120"/>
                 </div>
                 <div>
-                    <img src={`http://www.thepeachco.com/ebay/images/${props.secPic}/1.jpg`} alt={props.secPic} height="120"/>
+                    <img src={`http://www.thepeachco.com/ebay/images/${props.secpic}/1.jpg`} alt={props.secpic} height="120"/>
                 </div>
             </div>
         </div>

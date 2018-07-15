@@ -82,8 +82,6 @@ class Search extends Component {
 
   render() {
 
-    console.log(this.state.isLoggedIn);
-
     if (!this.state.isLoggedIn) {
       return <Redirect to="/"/>
     }
@@ -150,7 +148,7 @@ class Search extends Component {
                   type={item.type}
                   color={item.color}
                   pic={item.pic}
-                  secPic={item.secPic}
+                  secpic={item.secPic}
                   onClick={() => this.loadItem(item.id)}
                 />
               ))}

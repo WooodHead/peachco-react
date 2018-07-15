@@ -5,7 +5,7 @@ import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
 import { AdditionalPhotos, StockPhoto } from "../../components/Photos";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
 
