@@ -5,5 +5,24 @@
 }
 
 .list-item:hover {
+    background-color: lightcoral;
+}
+
+.item-result-info-wrapper {
     background-color: peachpuff;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.item-result-img-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+
+.item-result-img-wrapper div:nth-child(2){
+    text-align: right;
+
 }

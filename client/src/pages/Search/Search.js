@@ -104,34 +104,38 @@ class Search extends Component {
 
     return (
       <section>
-        <div>
-          <LinkButton
-            to="/build/"
-            id="60"
-            type="new"
-            name="New"
-          >
-          Make a new listing
-          </LinkButton>
-        </div>
         <div className="search-form-container">
           <form>
             <div className="search-form-wrapper">
-              <Input
-              key="search"
-              value={this.state.query}
-              name="query"
-              func={this.handleInputChange}
-              label="search-label"
-              input="search-input"
-              labelWrapper="search-label-wrapper"
-              >
-              Search
-              </Input>
-              <Button
-                name="Search"
-                func={this.handleFormSubmit}
+              <div className="search-input-wrapper">
+                <Input
+                  key="search"
+                  value={this.state.query}
+                  name="query"
+                  func={this.handleInputChange}
+                  label="search-label"
+                  input="search-input"
+                  labelWrapper="search-label-wrapper"
+                >
+                Search
+                </Input>
+              </div>
+              <div className="search-button-wrapper">
+                <Button
+                  name="Search"
+                  func={this.handleFormSubmit}
               />
+              </div>
+              <div className="new-button-wrapper">
+                <LinkButton
+                  to="/build/"
+                  id="60"
+                  type="new"
+                  name="New"
+                >
+                New Listing
+                </LinkButton>
+              </div>
             </div>
           </form>
         </div>

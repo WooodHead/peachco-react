@@ -4,12 +4,23 @@
 
 .search-form-wrapper {
     display: grid;
-    grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content);
+    /* grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content); */
+    grid-template-columns: auto;
     grid-gap: .5rem;
+}
+
+.search-form-wrapper {
+    text-align: center;
 }
 
 .info-pane {
     position: fixed;
     right: 0;
 
+}
+
+@media (min-width: 600px){
+    .search-form-wrapper {
+        grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content) minmax(max-content, max-content);
+    }
 }
