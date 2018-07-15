@@ -344,6 +344,8 @@ class Build extends Component {
       data: this.state.item
     };
 
+    console.log(this.state);
+
     return (
       <div className="build-container">
         <form>
