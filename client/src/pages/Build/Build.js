@@ -1,5 +1,4 @@
 //Components
-import axios from "axios";
 import React, { Component } from "react";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
@@ -44,6 +43,7 @@ class Build extends Component {
     template: {},
     isLoggedIn: true,
     username: ""
+    
   };
 
   componentDidMount() {
@@ -178,27 +178,27 @@ class Build extends Component {
     fd.append("image", e.target.files[0], e.target.files[0].name);
     fd.append("directory", this.state.item.secPic);
     fd.append("number", (parseInt(this.state.item.numPics, 10) + 1));
-    axios.post("/api/ftp/listdir/", fd).then(res => {
-    this.addPic();
+    API.uploadPic(fd).then(res => {
+      console.log(res);
+      if(res.data === "success"){
+        this.addPic();
+      }
     })
+
   }
 
   fileSelectedHandlerUpdate = (i) => (e) => {
-    console.log(i);
-    console.dir(e.target);
-    // const fd = new FormData();
-    // fd.append("image", e.target.files[0], e.target.files[0].name);
-    // fd.append("directory", this.state.item.secPic);
-    // fd.append("number", parseInt(number, 10));
-    // axios.post("/api/ftp/listdir/", fd).then(res => {
-    // console.log(number);
-    // this.updatePic();
-    // })
+    const fd = new FormData();
+    fd.append("image", e.target.files[0], e.target.files[0].name);
+    fd.append("directory", this.state.item.secPic);
+    fd.append("number", (parseInt(i, 10)+1));
+    API.uploadPic(fd).then(res => {
+      console.log(res);
+      if(res.data === "success"){
+        console.log("yay");
+      }
+    })
 
-  }
-
-  test = i => {
-    console.log(i);
   }
 
   loginCheck = () => {
@@ -229,13 +229,6 @@ class Build extends Component {
     //this should change the number of pics and update state or something
     let numPics = parseInt(this.state.item.numPics, 10);
     numPics++;
-    this.changeNumPics(numPics);
-  }
-
-  updatePic = () => {
-    console.log("update pic");
-    // this should update the state or something to re render
-    let numPics = parseInt(this.state.item.numPics, 10);
     this.changeNumPics(numPics);
   }
 
@@ -380,7 +373,7 @@ class Build extends Component {
                   numPics={this.state.item.numPics}
                   fileSelectedHandler={this.fileSelectedHandler}
                   fileSelectedHandlerUpdate={this.fileSelectedHandlerUpdate}
-                  test={this.test}
+                  nonsense={this.state.nonsense}
                   />
                 ) 
                 : 

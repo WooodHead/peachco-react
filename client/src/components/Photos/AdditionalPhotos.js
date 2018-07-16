@@ -16,22 +16,19 @@ export const AdditionalPhotos = props => {
       <h3>Additional Photos</h3>
       <div className="photos-wrapper">
         {imageArr.map((image, i) => {
-          const index = i;
           return (
             <div 
               className="photo-wrapper" 
               key={i}
               onClick={() => this[`fileInput${i}`].click()}
-              //onClick={() => props.test(i)}
             >
               <img src={image} alt="additional" height="100" />
               <input 
                 style={{display: "none"}}
                 type="file"
-                data={i}
                 onChange={props.fileSelectedHandlerUpdate(i)}
-                // onChange={props.test(index)}
                 id="update"
+                nonsense={props.nonsense}
                 ref={fileInputUpdate => this[`fileInput${i}`] = fileInputUpdate}
               />
             </div>

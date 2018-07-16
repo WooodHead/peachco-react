@@ -27,6 +27,9 @@ export default {
   },
   getCategories: function(query) {
     return axios.post("/api/ebay/getcategories/", query);
+  },
+  uploadPic: function(data) {
+    return axios.post("/api/ftp/listdir/", data);
   }
 
 
