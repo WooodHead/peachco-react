@@ -182,13 +182,13 @@ module.exports = function (sequelize, DataTypes) {
 
 
 
-    bedding.associate = (models) => {
-        bedding.belongsTo(models.packageSizes,{
-            foreignKey: {
-                allowNull: true
-            }
-        });
-    } 
+    // bedding.associate = (models) => {
+    //     bedding.belongsTo(models.packageSizes,{
+    //         foreignKey: {
+    //             allowNull: true
+    //         }
+    //     });
+    // } 
 
     return bedding;
 }
