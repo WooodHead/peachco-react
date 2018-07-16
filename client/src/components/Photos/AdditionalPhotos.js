@@ -19,25 +19,31 @@ export const AdditionalPhotos = props => {
           <div 
             className="photo-wrapper" 
             key={i}
-            onClick={() => this.fileInput.click()}
-            onChange={(e) => props.fileSelectedHandler(e, "update", (i+1))}
+            onClick={() => this.fileInputUpdate.click()}
           >
             <img src={image} alt="additional" height="100" />
+            <input 
+              style={{display: "none"}}
+              type="file"
+              onChange={(e) => props.fileSelectedHandlerUpdate(e, i)}
+              id="update"
+              ref={fileInputUpdate => this.fileInputUpdate = fileInputUpdate}
+            />
           </div>
         ))}
         {props.numPics < 10 ? (
           <div 
             className="add-wrapper"
-            onClick={() => this.fileInput.click()}
+            onClick={() => this.fileInputAdd.click()}
           >
             <i className="fas fa-plus" />
-                <input 
-                  style={{display: "none"}} 
-                  type="file" 
-                  onChange={(e) => props.fileSelectedHandler(e, "add")} 
-                  id="file"
-                  ref={fileInput => this.fileInput = fileInput}
-                />
+            <input 
+              style={{display: "none"}} 
+              type="file" 
+              onChange={(e) => props.fileSelectedHandler(e)} 
+              id="add"
+              ref={fileInputAdd => this.fileInputAdd = fileInputAdd}
+            />
           </div>
         ) : (
           ""

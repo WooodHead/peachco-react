@@ -173,31 +173,27 @@ class Build extends Component {
     });
   };
 
-  fileSelectedHandler = (e, directive, number) =>{
-    // console.log(e.target.files[0]);
-    // this.setState({
-    //   selectedFile: e.target.files[0]
-    // })
-    console.log(directive + number);
+  fileSelectedHandler = (e) =>{
     const fd = new FormData();
     fd.append("image", e.target.files[0], e.target.files[0].name);
     fd.append("directory", this.state.item.secPic);
-    if (directive === "add"){
-      fd.append("number", (parseInt(this.state.item.numPics, 10) + 1));
-      axios.post("/api/ftp/listdir/", fd).then(res => {
-        console.log(res);
-        this.addPic();
-      })
-    } else if (directive === "update"){
-      console.log(number);
-      fd.append("number", number);
-      axios.post("api/ftp/listdir", fd).then(res => {
-        console.log(res);
-        this.updatePic();
-      })
+    fd.append("number", (parseInt(this.state.item.numPics, 10) + 1));
+    axios.post("/api/ftp/listdir/", fd).then(res => {
+    this.addPic();
+    })
+  }
 
+  fileSelectedHandlerUpdate = (e, number) => {
+    console.log(number);
+    // const fd = new FormData();
+    // fd.append("image", e.target.files[0], e.target.files[0].name);
+    // fd.append("directory", this.state.item.secPic);
+    // fd.append("number", parseInt(number, 10));
+    // axios.post("/api/ftp/listdir/", fd).then(res => {
+    // console.log(number);
+    // this.updatePic();
+    // })
 
-    }
   }
 
   loginCheck = () => {
@@ -381,7 +377,8 @@ class Build extends Component {
                   add={this.addPic}
                   update={this.updatePic}
                   fileSelectedHandler={this.fileSelectedHandler}
-                />
+                  fileSelectedHandlerUpdate={this.fileSelectedHandlerUpdate}
+                  />
                 ) 
                 : 
                 ("")
