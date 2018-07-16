@@ -14,8 +14,8 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": "yhdkjzftd6foihiq",
+    "password": "pnmsd36ki9twvnpp",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
