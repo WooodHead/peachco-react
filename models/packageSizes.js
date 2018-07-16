@@ -18,9 +18,9 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    packageSizes.associate = models => {
-        packageSizes.hasMany(models.bedding);
-    };
+    // packageSizes.associate = models => {
+    //     packageSizes.hasMany(models.bedding);
+    // };
 
     return packageSizes;
 }
