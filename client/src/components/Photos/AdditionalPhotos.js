@@ -15,22 +15,28 @@ export const AdditionalPhotos = props => {
     <div className="section-wrapper">
       <h3>Additional Photos</h3>
       <div className="photos-wrapper">
-        {imageArr.map((image, i) => (
-          <div 
-            className="photo-wrapper" 
-            key={i}
-            onClick={() => this.fileInputUpdate.click()}
-          >
-            <img src={image} alt="additional" height="100" />
-            <input 
-              style={{display: "none"}}
-              type="file"
-              onChange={(e) => props.fileSelectedHandlerUpdate(e, i)}
-              id="update"
-              ref={fileInputUpdate => this.fileInputUpdate = fileInputUpdate}
-            />
-          </div>
-        ))}
+        {imageArr.map((image, i) => {
+          const index = i;
+          return (
+            <div 
+              className="photo-wrapper" 
+              key={i}
+              onClick={() => this[`fileInput${i}`].click()}
+              //onClick={() => props.test(i)}
+            >
+              <img src={image} alt="additional" height="100" />
+              <input 
+                style={{display: "none"}}
+                type="file"
+                data={i}
+                onChange={props.fileSelectedHandlerUpdate(i)}
+                // onChange={props.test(index)}
+                id="update"
+                ref={fileInputUpdate => this[`fileInput${i}`] = fileInputUpdate}
+              />
+            </div>
+          )
+        })}
         {props.numPics < 10 ? (
           <div 
             className="add-wrapper"

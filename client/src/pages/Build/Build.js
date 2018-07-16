@@ -183,8 +183,9 @@ class Build extends Component {
     })
   }
 
-  fileSelectedHandlerUpdate = (e, number) => {
-    console.log(number);
+  fileSelectedHandlerUpdate = (i) => (e) => {
+    console.log(i);
+    console.dir(e.target);
     // const fd = new FormData();
     // fd.append("image", e.target.files[0], e.target.files[0].name);
     // fd.append("directory", this.state.item.secPic);
@@ -194,6 +195,10 @@ class Build extends Component {
     // this.updatePic();
     // })
 
+  }
+
+  test = i => {
+    console.log(i);
   }
 
   loginCheck = () => {
@@ -373,11 +378,9 @@ class Build extends Component {
                   pic={this.state.item.pic}
                   secPic={this.state.item.secPic}
                   numPics={this.state.item.numPics}
-                  changeNum={this.changeNumPics}
-                  add={this.addPic}
-                  update={this.updatePic}
                   fileSelectedHandler={this.fileSelectedHandler}
                   fileSelectedHandlerUpdate={this.fileSelectedHandlerUpdate}
+                  test={this.test}
                   />
                 ) 
                 : 
