@@ -19,7 +19,8 @@ export const AdditionalPhotos = props => {
           <div 
             className="photo-wrapper" 
             key={i}
-            onClick={props.update}
+            onClick={() => this.fileInput.click()}
+            onChange={(e) => props.fileSelectedHandler(e, "update", (i+1))}
           >
             <img src={image} alt="additional" height="100" />
           </div>
@@ -33,7 +34,7 @@ export const AdditionalPhotos = props => {
                 <input 
                   style={{display: "none"}} 
                   type="file" 
-                  onChange={props.fileSelectedHandler} 
+                  onChange={(e) => props.fileSelectedHandler(e, "add")} 
                   id="file"
                   ref={fileInput => this.fileInput = fileInput}
                 />

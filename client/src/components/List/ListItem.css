@@ -1,15 +1,15 @@
 .list-item {
-    padding: 1rem;
+    padding: 1rem 1rem .5rem 1rem;
     border: 1px solid black;
     border-radius: 10px;
 }
 
 .list-item:hover {
-    background-color: lightcoral;
+    background-color: rgb(129, 32, 32);
 }
 
 .item-result-info-wrapper {
-    background-color: peachpuff;
+    background-color: rgb(255, 245, 233);
     color: black;
     border-radius: 10px;
     padding: 10px;
@@ -31,7 +31,7 @@
 @media (min-width: 600px){
     .item-result-wrapper {
         display: grid;
-        grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content); 
+        grid-template-columns: minmax(auto, 70vw) minmax(max-content, max-content); 
         grid-gap: 1rem;
     }
     .item-result-img-wrapper {

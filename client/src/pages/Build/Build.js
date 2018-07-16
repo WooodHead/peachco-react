@@ -173,19 +173,31 @@ class Build extends Component {
     });
   };
 
-  fileSelectedHandler = e => {
+  fileSelectedHandler = (e, directive, number) =>{
     // console.log(e.target.files[0]);
     // this.setState({
     //   selectedFile: e.target.files[0]
     // })
+    console.log(directive + number);
     const fd = new FormData();
     fd.append("image", e.target.files[0], e.target.files[0].name);
     fd.append("directory", this.state.item.secPic);
-    fd.append("number", ((this.state.item.numPics) + 1));
-    axios.post("/api/ftp/listdir/", fd).then(res => {
-      console.log(res);
-      this.addPic();
-    })
+    if (directive === "add"){
+      fd.append("number", (parseInt(this.state.item.numPics, 10) + 1));
+      axios.post("/api/ftp/listdir/", fd).then(res => {
+        console.log(res);
+        this.addPic();
+      })
+    } else if (directive === "update"){
+      console.log(number);
+      fd.append("number", number);
+      axios.post("api/ftp/listdir", fd).then(res => {
+        console.log(res);
+        this.updatePic();
+      })
+
+
+    }
   }
 
   loginCheck = () => {
@@ -216,7 +228,6 @@ class Build extends Component {
     //this should change the number of pics and update state or something
     let numPics = parseInt(this.state.item.numPics, 10);
     numPics++;
-    console.log(numPics);
     this.changeNumPics(numPics);
   }
 
