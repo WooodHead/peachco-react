@@ -25,7 +25,7 @@ class Build extends Component {
     item: {},
     settings: {
       conditionDescription: "",
-      condition: "",
+      condition: "1000",
       customId: "",
       duration: "Days_7",
       listingType: "Chinese",
@@ -335,9 +335,10 @@ class Build extends Component {
   };
 
   listItem = data => {
-    data = Template.addDescription(data);
-    const combined = Object.assign(data.item, data.settings, data.template, userSettings);
-    // console.log(combined);
+    let listingData = JSON.parse(JSON.stringify(data));
+    listingData = Template.addDescription(listingData);
+    const combined = Object.assign(listingData.item, listingData.settings, listingData.template, userSettings);
+    console.log(combined);
     let ebayObject = Template.makeObject(combined);
     console.log(ebayObject);
     // API.listItem(ebayObject)
