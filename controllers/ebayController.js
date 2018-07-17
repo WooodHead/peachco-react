@@ -41,6 +41,7 @@ module.exports = {
     },
 
     addItem: function(req, res){
+        // console.log(req.body);
 
         ebay.xmlRequest({
             serviceName: 'Trading',
@@ -55,100 +56,23 @@ module.exports = {
             // per user
             authToken: user_token,
 
-            params: {
-                'Item': {
-                    PrimaryCategory: {
-                        CategoryID: req.body.category
-                    },
-                    Country: req.body.country,
-                    Condition: "new",
-                    conditionID: 1000,
-                    Currency: req.body.currency,
-                    ListingDuration: req.body.duration,
-                    ListingType: req.body.listingType,
-                    Location: "<![CDATA[US]]>",
-                    PaymentMethods: req.body.paymentMethods,
-                    ProductListingDetails: {
-                        UPC: req.body.sku
-                    },
-                    Quantity: req.body.quantity,
-                    RegionID: req.body.regionId,
-                    ReturnPolicy: {
-                        ReturnsAcceptedOption: req.body.returnsAcceptedOption,
-                        ReturnsWithinOption: req.body.returnsWithinOption,
-                        RefundOption: req.body.refundOption,
-                        ShippingCostPaidByOption: req.body.shippingCostPaidByOption,
-                        RestockingFeeValueOption: req.body.restockingFee
-                        
-                    },
-                    DispatchTimeMax: req.body.dispatchTime,
-                    StartPrice: req.body.startPrice,
-                    ShippingTermsInDescription: req.body.ShippingTermsInDescription,
-                    Title: req.body.itemTitle,
-                    PictureDetails: {
-                        PictureURL: "http://www.thepeachco.com/ebay/images/" + req.body.pic + ".jpg"
-                    },
-                    ItemSpecifics: {
-                        NameValueList: [
-                            {
-                                Name: "Brand",
-                                Value: [req.body.brand]
-                            },
-                            {
-                                Name: "Size",
-                                Value: req.body.s_1
-                            },
-                            {
-                                Name: "Color",
-                                Value: req.body.color
-                            },
-                            {
-                                Name: "Material",
-                                Value: req.body.m_1
-                            },
-                            {
-                                Name: "Retail",
-                                Value: req.body.retail
-                            }
-                        ]
-                    },
-                    Description: "this is a test",
-                    ShipToLocations: req.body.shipToLocations,
-                    ShippingDetails: {
-                        CalculatedShippingRate: {
-                            OriginatingPostalCode: req.body.originatingPostalCode,
-                            ShippingIrregular: req.body.shippingIrregular,
-                            WeightMajor: req.body.weight+ ".0",
-                            WeightMinor: 0
-                        },
-                        ShippingServiceOptions: {
-                            ShippingService: req.body.shippingService,
-                            ShippingServicePriority: req.body.shippingServicePriority,
-                            ShippingServiceCost: req.body.shippingCost
-                        },
-                        InternationalShippingServiceOption: {
-                            ShippingService: req.body.internationalShippingService,
-                            ShippingServicePriority: req.body.internationalShippingServicePriority,
-                            ShipToLocation: req.body.internationalShipToLocation,
-                        },
-                        ShippingType: req.body.internationalShippingType
-                    },
-                    PaymentMethods: req.body.paymentMethods,
-                    PayPalEmailAddress: req.body.paypalEmailAddress,
-                    SKU: req.body.customId
+            params: req.body,
+
+            reqOptions: {
+                headers: {
+                  'X-Extra': 'um'
                 }
             }
+            
         }, function (error, results) {
             if (error) {
-                console.log(error);
-                res.json(error);
-            } else {
-                console.log(results.SuggestedCategorys);
+                console.log("error sent");
                 res.json(results);
+            } else {
+                console.log("result sent");
+                res.send(results);
             }
         });
-
-
 
     },
 

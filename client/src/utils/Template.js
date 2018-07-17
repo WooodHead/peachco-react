@@ -96,7 +96,7 @@ export default {
                     CalculatedShippingRate: {
                         OriginatingPostalCode: data.originatingPostalCode,
                         ShippingIrregular: data.shippingIrregular,
-                        WeightMajor: data.weight+ ".0",
+                        WeightMajor: data.shippingWeight + ".0",
                         WeightMinor: 0
                     },
                     ShippingServiceOptions: {

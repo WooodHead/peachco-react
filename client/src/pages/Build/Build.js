@@ -1,9 +1,11 @@
 //Components
 import React, { Component } from "react";
+import { AdditionalPhotos, StockPhoto } from "../../components/Photos";
 import { Button } from "../../components/Button";
 import { Category } from "../../components/Category";
 import { ItemInfo } from "../../components/ItemInfo";
-import { AdditionalPhotos, StockPhoto } from "../../components/Photos";
+import { Modal } from "../../components/Modal/Modal";
+import { ModalListingConfirmed } from "../../components/ModalBodies/ModalListingConfirmed";
 import { Redirect } from "react-router-dom";
 import { ShippingTemplates } from "../../components/ShippingTemplates"; 
 import { SpecificInfo } from "../../components/SpecificInfo";
@@ -42,7 +44,8 @@ class Build extends Component {
     templates: {},
     template: {},
     isLoggedIn: true,
-    username: ""
+    username: "",
+    showModal: false
     
   };
 
@@ -341,9 +344,13 @@ class Build extends Component {
     console.log(combined);
     let ebayObject = Template.makeObject(combined);
     console.log(ebayObject);
-    // API.listItem(ebayObject)
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
+    API.listItem(ebayObject)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
   };
 
   render() {
@@ -356,6 +363,14 @@ class Build extends Component {
       id: this.state.item.id,
       data: this.state.item
     };
+
+    const itemInfoButtons =[
+      {
+        to: "/search/",
+        name: "Start Over",
+      }
+    
+    ];
 
     console.log(this.state);
 
@@ -440,6 +455,22 @@ class Build extends Component {
             )}
           </div>
         </form>
+        {
+          (this.state.showModal) ? 
+            (
+              <Modal 
+                closeModal={this.closeModal}
+                redirect={true}
+                buttons={itemInfoButtons}
+                item={this.state.item}
+
+              >
+                <ModalListingConfirmed
+                  response={this.state.item}
+                />
+              </Modal>
+            ) : ("")
+        }
       </div>
     );
   }
