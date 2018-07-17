@@ -1,3 +1,5 @@
+import Template from "./Template";
+
 export default {
     makeTemplate : (data) =>  {
         let features = "";
@@ -23,7 +25,7 @@ export default {
     },
 
     addDescription : (data) => {
-        let itemDescription = this.makeTemplate(data);
+        let itemDescription = Template.makeTemplate(data);
         const { settings } = data;
         let newSettings = {
           ...settings,
@@ -31,7 +33,95 @@ export default {
         };
         data.settings = newSettings;
         return data;
-      }
+    },
+
+    makeObject : (data) => {
+        let EbayObject = {
+            'Item': {
+                ConditionDescription: data.conditionDescription,
+                ConditionID: data.condition,
+                Country: data.country,
+                Currency: data.currency,
+                Description: data.itemDescription,
+                DispatchTimeMax: data.dispatchTime,
+                ItemSpecifics: {
+                    NameValueList: [
+                        {
+                            Name: "Brand",
+                            Value: [data.brand]
+                        },
+                        {
+                            Name: "Size",
+                            Value: data.s_1
+                        },
+                        {
+                            Name: "Color",
+                            Value: data.color
+                        },
+                        {
+                            Name: "Material",
+                            Value: data.m_1
+                        },
+                        {
+                            Name: "Retail",
+                            Value: data.retail
+                        }
+                    ]
+                },
+                ListingDuration: data.duration,
+                ListingType: data.listingType,
+                Location: "<![CDATA[US]]>",
+                PaymentMethods: data.paymentMethods,
+                PayPalEmailAddress: data.paypalEmailAddress,
+                PictureDetails: {
+                    PictureURL: "http://www.thepeachco.com/ebay/images/" + data.pic + ".jpg"
+                },
+                PrimaryCategory: {
+                    CategoryID: data.category
+                },
+                ProductListingDetails: {
+                    UPC: data.sku
+                },
+                Quantity: data.quantity,
+                RegionID: data.regionId,
+                ReturnPolicy: {
+                    ReturnsAcceptedOption: data.returnsAcceptedOption,
+                    ReturnsWithinOption: data.returnsWithinOption,
+                    RefundOption: data.refundOption,
+                    ShippingCostPaidByOption: data.shippingCostPaidByOption,
+                    RestockingFeeValueOption: data.restockingFee
+                    
+                },
+                ShippingDetails: {
+                    CalculatedShippingRate: {
+                        OriginatingPostalCode: data.originatingPostalCode,
+                        ShippingIrregular: data.shippingIrregular,
+                        WeightMajor: data.weight+ ".0",
+                        WeightMinor: 0
+                    },
+                    ShippingServiceOptions: {
+                        ShippingService: data.shippingService,
+                        ShippingServicePriority: data.shippingServicePriority,
+                        ShippingServiceCost: data.shippingCost
+                    },
+                    InternationalShippingServiceOption: {
+                        ShippingService: data.internationalShippingService,
+                        ShippingServicePriority: data.internationalShippingServicePriority,
+                        ShipToLocation: data.internationalShipToLocation,
+                    },
+                    ShippingType: data.internationalShippingType
+                },
+                ShipToLocations: data.shipToLocations,
+                SKU: data.customId,
+                StartPrice: data.startPrice,
+                ShippingTermsInDescription: data.ShippingTermsInDescription,
+                Title: data.itemTitle
+            }
+
+        }
+        return EbayObject;
+
+    }
 
 
 }

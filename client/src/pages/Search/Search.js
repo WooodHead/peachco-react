@@ -6,14 +6,13 @@ import { List, ListItem } from "../../components/List";
 import LinkButton from "../../components/Button/LinkButton";
 import { Modal } from "../../components/Modal";
 import { ModalItemInfo }  from "../../components/ModalBodies/ModalItemInfo";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 //Functions
 import API from "../../utils/API";
 import LoginAPI from "../../utils/loginUtils";
 //CSS
 import "./Search.css";
-
 
 class Search extends Component {
 

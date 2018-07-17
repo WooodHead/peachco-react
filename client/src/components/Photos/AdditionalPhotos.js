@@ -28,7 +28,6 @@ export const AdditionalPhotos = props => {
                 type="file"
                 onChange={props.fileSelectedHandlerUpdate(i)}
                 id="update"
-                nonsense={props.nonsense}
                 ref={fileInputUpdate => this[`fileInput${i}`] = fileInputUpdate}
               />
             </div>

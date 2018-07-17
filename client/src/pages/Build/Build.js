@@ -68,10 +68,15 @@ class Build extends Component {
               if (res.data.packageSizeId) {
                 template = templates[res.data.packageSizeId - 1];
               }
+              let newStartPrice = "";
+              if (res.data.retail !== ""){
+                newStartPrice = Helpers.getPrice(parseFloat(res.data.retail));
+              } 
               const newSettings = {
                 ...settings,
                 categories: newCategories,
-                category: newCategory
+                category: newCategory,
+                startPrice: newStartPrice,
               }
               if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
                 if (res.data.secPic !== "" && res.data.secPic !== null){
@@ -332,8 +337,10 @@ class Build extends Component {
   listItem = data => {
     data = Template.addDescription(data);
     const combined = Object.assign(data.item, data.settings, data.template, userSettings);
-    console.log(combined);
-    // API.listItem(combined)
+    // console.log(combined);
+    let ebayObject = Template.makeObject(combined);
+    console.log(ebayObject);
+    // API.listItem(ebayObject)
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
   };

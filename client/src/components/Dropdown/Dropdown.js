@@ -7,7 +7,7 @@ export const Dropdown = props => {
             <h3>{props.children}</h3>
             <select
                 value={props.value}
-                onChange={() => props.func}
+                onChange={props.func}
                 name={props.name}
             >
             {props.options.map(option => (

@@ -19,37 +19,35 @@ export const SpecificInfo = props => {
           <div>
             <Dropdown
               value={props.settings.listingType}
-              func={props.func}
+              func={props.handleInputChangeforSettings}
               name="listingType"
               options={specifics.specificsParameters.listingTypes}
             >
-            Listing Type
+              Listing Type
             </Dropdown>
           </div>
 
           <div>
             <Dropdown
             value={props.settings.duration} 
-            func={props.func}
+            func={props.handleInputChangeforSettings}
             name="duration"
             options={specifics.specificsParameters.durations}
             >
-            Duration
-          </Dropdown>
+              Duration
+            </Dropdown>
           </div>
-
 
           <div>
             <Dropdown
               value={props.settings.condition}
-              func={props.func}
+              func={props.handleInputChangeforSettings}
               name="condition"
               options={specifics.specificsParameters.conditionTypes}
             >
-            Condition
+              Condition
             </Dropdown>
           </div>
-
 
           <div>
             <h3>Condition Description</h3>
@@ -71,10 +69,9 @@ export const SpecificInfo = props => {
             </Input>
           </div>
 
-
           <div className="item-inputs db-info">
             <Input
-              value={(props.retail !== "") ? (props.getPrice(parseFloat(props.retail))) : ("0")}
+              value={props.settings.startPrice}
               func={props.handleInputChangeforSettings}
               parameter="startPrice"
               name="startPrice"
