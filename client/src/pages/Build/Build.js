@@ -45,7 +45,8 @@ class Build extends Component {
     template: {},
     isLoggedIn: true,
     username: "",
-    showModal: false
+    listingConfirmed: false,
+    listingConfirmation: ""
     
   };
 
@@ -345,12 +346,18 @@ class Build extends Component {
     let ebayObject = Template.makeObject(combined);
     console.log(ebayObject);
     API.listItem(ebayObject)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        this.setState({
+          listingConfirmed: true,
+          listingConfirmation: res
+        })
+      })
       .catch(err => console.log(err));
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({listingConfirmed: false});
   };
 
   render() {
@@ -367,6 +374,7 @@ class Build extends Component {
     const itemInfoButtons =[
       {
         to: "/search/",
+        type: "Start Over",
         name: "Start Over",
       }
     
@@ -456,17 +464,16 @@ class Build extends Component {
           </div>
         </form>
         {
-          (this.state.showModal) ? 
+          (this.state.listingConfirmed) ? 
             (
               <Modal 
                 closeModal={this.closeModal}
                 redirect={true}
                 buttons={itemInfoButtons}
                 item={this.state.item}
-
               >
                 <ModalListingConfirmed
-                  response={this.state.item}
+                  response={this.state.listingConfirmation}
                 />
               </Modal>
             ) : ("")

@@ -1,0 +1,8 @@
+.modal-listing-confirmed-wrapper {
+    padding: 1rem;
+}
+
+.modal-listing-confirmed-wrapper h3 {
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+}
