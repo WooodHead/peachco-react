@@ -200,7 +200,7 @@ class Build extends Component {
     const fd = new FormData();
     fd.append("image", e.target.files[0], e.target.files[0].name);
     fd.append("directory", this.state.item.secPic);
-    fd.append("number", (parseInt(i, 10)+1));
+    fd.append("number", (parseInt(i, 10) + 1));
     API.uploadPic(fd).then(res => {
       console.log(res);
       if(res.data === "success"){
@@ -339,14 +339,10 @@ class Build extends Component {
   };
 
   listItem = data => {
-    console.log(data);
     let listingData = JSON.parse(JSON.stringify(data));
     listingData = Template.addDescription(listingData);
-    console.log(listingData);
     const combined = Object.assign(listingData.item, listingData.settings, listingData.template, userSettings);
-    console.log(combined);
     let ebayObject = Template.makeObject(combined);
-    console.log(ebayObject);
     API.listItem(ebayObject)
       .then(res => {
         console.log(res);
