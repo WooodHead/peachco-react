@@ -339,9 +339,12 @@ class Build extends Component {
   };
 
   listItem = data => {
+    console.log(data);
     let listingData = JSON.parse(JSON.stringify(data));
     listingData = Template.addDescription(listingData);
+    console.log(listingData);
     const combined = Object.assign(listingData.item, listingData.settings, listingData.template, userSettings);
+    console.log(combined);
     let ebayObject = Template.makeObject(combined);
     console.log(ebayObject);
     API.listItem(ebayObject)
@@ -413,6 +416,7 @@ class Build extends Component {
                 packageSizeId={this.state.item.packageSizeId}
                 handleInputChangeforItem={this.handleInputChangeforItem}
                 templates={this.state.templates}
+                template={this.state.template}
               >
                 Shipping Templates
               </ShippingTemplates>

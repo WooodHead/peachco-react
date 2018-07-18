@@ -3,7 +3,19 @@ import React from "react";
 export const ShippingTemplates = props => {
     return (
 
-        <div className="section-wrapper">
+        <div className="section-wrapper"
+            style={   
+                    !props.template.shippingCost
+                 ? 
+                 
+                    {"background-color": "red", color: "white"}
+                  : 
+                 
+                    {"background-color": "white", color: "black"}
+                 
+            }
+
+            >
             <h3>{props.children}</h3>
             <select
             value={

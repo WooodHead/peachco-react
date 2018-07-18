@@ -75,6 +75,7 @@ export default {
     },
 
     makeObject : (data) => {
+        console.log(data);
         let pictureArray = [];
 
         if(data.pic !== ""){
