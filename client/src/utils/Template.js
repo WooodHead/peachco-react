@@ -2,31 +2,62 @@ import Template from "./Template";
 
 export default {
     makeTemplate : (data) =>  {
-        console.log(data);
-        
+
         const item = Object.entries(data.item)
-        const features = item.filter(p => p.toString().startsWith("f"));
-        const materials = item.filter(p => p.toString().startsWith("m_"));
-        const sizes = item.filter(p => p.toString().startsWith("s_"));
-        const setIncludes = item.filter(p => p.toString().startsWith("si_"));
+        const featuresArr = item.filter(p => p.toString().startsWith("f"));
+        const materialsArr = item.filter(p => p.toString().startsWith("m_"));
+        const sizesArr = item.filter(p => p.toString().startsWith("s_"));
+        const setIncludesArr = item.filter(p => p.toString().startsWith("si_"));
         
         let conditions = "";
+        let features = "<ul>";
+        let materials = "<ul>";
+        let sizes = "<ul>";
+        let setIncludes = "<ul>";
 
-        // features = featuresArr.map(p => )
+        featuresArr.forEach(f => {
+            if(f[1] !== "" && f[1] !== null){
+                features += `<li>${f[1]}</li>`;
+            }
+        })
+        features+="</ul>";
 
-        // console.log(features);
+        materialsArr.forEach(m => {
+            if(m[1] !== "" && m[1] !== null){
+                materials += `<li>${m[1]}</li>`;
+            }
+        })
+        materials+="</ul>";
+
+        sizesArr.forEach(s => {
+            if(s[1] !== "" && s[1] !== null){
+                sizes += `<li>${s[1]}</li>`;
+            }
+        })
+        sizes+="</ul>";
+
+        setIncludesArr.forEach(si => {
+            if(si[1] !== "" && si[1] !== null){
+                setIncludes += `<li>${si[1]}</li>`;
+            }
+        })
+        setIncludes+="</ul>";
 
         let template = `
         <h3>${data.item.brand} - ${data.item.collection}</h3>
         <p>${data.item.type}</p>
-        <p>${data.item.color}</p>
-        <p>${data.item.retail}</p>
-        <p>${features}</p>
-        <p>${materials}</p>
-        <p>${sizes}</p>
+        <p>Color: ${data.item.color}</p>
+        <p>Retail: $${data.item.retail}</p>
+        <p>Features</p>
+        ${features}
+        <p>Materials: </p>
+        ${materials}
+        <p>Sizes: </p>
+        ${sizes}
         <p>${conditions}</p>
-        <p>${setIncludes}</p>
-        <p>${data.item.shippingCost}</p>
+        <p>Set Includes: </p>
+        ${setIncludes}
+        <p>Shipping Cost is: $${data.template.shippingCost}</p>
         <p>${data.item.secPic}</p>
         `;
         return template;

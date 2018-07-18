@@ -39,38 +39,38 @@ module.exports = {
     },
 
     addItem: function(req, res){
-        console.log(req.body);
+        // console.log(req.body);
 
-        // ebay.xmlRequest({
-        //     serviceName: 'Trading',
-        //     opType: 'AddItem',
+        ebay.xmlRequest({
+            serviceName: 'Trading',
+            opType: 'AddItem',
 
-        //     // app/environment
-        //     devId: dev_id,
-        //     certId: cert_id,
-        //     appId: app_id,
-        //     sandbox: false,
+            // app/environment
+            devId: dev_id,
+            certId: cert_id,
+            appId: app_id,
+            sandbox: false,
 
-        //     // per user
-        //     authToken: user_token,
+            // per user
+            authToken: user_token,
 
-        //     params: req.body,
+            params: req.body,
 
-        //     reqOptions: {
-        //         headers: {
-        //           'X-Extra': 'um'
-        //         }
-        //     }
+            reqOptions: {
+                headers: {
+                  'X-Extra': 'um'
+                }
+            }
             
-        // }, function (error, results) {
-        //     if (error) {
-        //         console.log("error sent");
-        //         res.json(results);
-        //     } else {
-        //         console.log("result sent");
-        //         res.send(results);
-        //     }
-        // });
+        }, function (error, results) {
+            if (error) {
+                console.log("error sent");
+                res.json(results);
+            } else {
+                console.log("result sent");
+                res.send(results);
+            }
+        });
 
     },
 
