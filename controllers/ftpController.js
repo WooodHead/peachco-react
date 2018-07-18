@@ -19,7 +19,6 @@ module.exports = {
         console.log(req.body);
 
         Ftp.ls(`/public_html/ebay/images/${req.body.directory}`, (err, contents) => {
-            console.log(contents);
             if (contents.length === 0){
                 Ftp.raw("mkd", `/public_html/ebay/images/${req.body.directory}` ,(err, data) => {
                     if (err) {

@@ -31,10 +31,8 @@ module.exports = {
             }
         }, function (error, results) {
             if (error) {
-                //   console.log(error);
                 res.json(error);
             } else {
-                //   console.log(results.SuggestedCategorys);
                 res.json(results);
             }
         });

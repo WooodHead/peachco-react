@@ -37,7 +37,6 @@ export default {
 
     makeObject : (data) => {
         let pictureArray = [];
-        console.log(data.numPics);
 
         if(data.pic !== ""){
             pictureArray.push(`http://www.thepeachco.com/ebay/images/sticky/${data.pic}/1.jpg`);
@@ -47,8 +46,7 @@ export default {
                 pictureArray.push(`http://www.thepeachco.com/ebay/images/${data.secPic}/${i}.jpg`);
             }
         }
-        console.log(pictureArray);
-
+        
         let EbayObject = {
             'Item': {
                 ConditionDescription: data.conditionDescription,
