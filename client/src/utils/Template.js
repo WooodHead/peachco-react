@@ -2,11 +2,19 @@ import Template from "./Template";
 
 export default {
     makeTemplate : (data) =>  {
-        let features = "";
-        let materials = "";
-        let sizes = "";
+        console.log(data);
+        
+        const item = Object.entries(data.item)
+        const features = item.filter(p => p.toString().startsWith("f"));
+        const materials = item.filter(p => p.toString().startsWith("m_"));
+        const sizes = item.filter(p => p.toString().startsWith("s_"));
+        const setIncludes = item.filter(p => p.toString().startsWith("si_"));
+        
         let conditions = "";
-        let setIncludes = "";
+
+        // features = featuresArr.map(p => )
+
+        // console.log(features);
 
         let template = `
         <h3>${data.item.brand} - ${data.item.collection}</h3>
@@ -46,7 +54,7 @@ export default {
                 pictureArray.push(`http://www.thepeachco.com/ebay/images/${data.secPic}/${i}.jpg`);
             }
         }
-        
+
         let EbayObject = {
             'Item': {
                 ConditionDescription: data.conditionDescription,

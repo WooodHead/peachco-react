@@ -342,7 +342,6 @@ class Build extends Component {
     let listingData = JSON.parse(JSON.stringify(data));
     listingData = Template.addDescription(listingData);
     const combined = Object.assign(listingData.item, listingData.settings, listingData.template, userSettings);
-    console.log(combined);
     let ebayObject = Template.makeObject(combined);
     console.log(ebayObject);
     API.listItem(ebayObject)
