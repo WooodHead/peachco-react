@@ -1,11 +1,16 @@
 .header {
     position: -webkit-sticky;
-position: sticky;
-top: 0;
+    position: sticky;
+    top: 0;
     margin: 0;
     padding: .5rem;
     font-family: 'Catamaran', sans-serif;
     background-color: maroon;
     color: white;
     border-bottom: peachpuff 1px solid;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
 }
