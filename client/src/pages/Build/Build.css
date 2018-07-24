@@ -1,3 +1,9 @@
+.floating-logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .build-container {
     padding: 1rem;
 }

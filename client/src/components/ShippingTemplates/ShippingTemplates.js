@@ -8,10 +8,10 @@ export const ShippingTemplates = props => {
                     !props.template.shippingCost
                  ? 
                  
-                    {"background-color": "red", color: "white"}
+                    {backgroundColor: "red", color: "white"}
                   : 
                  
-                    {"background-color": "white", color: "black"}
+                    {backgroundColor: "white", color: "black"}
                  
             }
 

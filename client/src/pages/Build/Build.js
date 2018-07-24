@@ -46,7 +46,8 @@ class Build extends Component {
     isLoggedIn: true,
     username: "",
     listingConfirmed: false,
-    listingConfirmation: ""
+    listingConfirmation: "",
+    additionalPictures: []
     
   };
 
@@ -76,11 +77,20 @@ class Build extends Component {
               if (res.data.retail !== ""){
                 newStartPrice = Helpers.getPrice(parseFloat(res.data.retail));
               } 
+              let apa = [];
+              console.log(res.data.numPics);
+              if (res.data.numPics > 0){
+                for(let i = 0; i < res.data.numPics; i++){
+                  const p = `https://www.thepeachco.com/ebay/images/${res.data.secPic}/${i+1}.jpg`
+                  apa.push(p);
+                }
+              }
+              console.log(apa);       
               const newSettings = {
                 ...settings,
                 categories: newCategories,
                 category: newCategory,
-                startPrice: newStartPrice,
+                startPrice: newStartPrice
               }
               if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
                 if (res.data.secPic !== "" && res.data.secPic !== null){
@@ -93,7 +103,8 @@ class Build extends Component {
                 item: res.data,
                 settings: newSettings,
                 templates: templates,
-                template: template
+                template: template,
+                additionalPictures: apa
               });
             });
           });
@@ -203,6 +214,8 @@ class Build extends Component {
     fd.append("number", (parseInt(i, 10) + 1));
     API.uploadPic(fd).then(res => {
       console.log(res);
+      // let np = `https://www.thepeachco.com/ebay/images/${this.state.item.secPic}/number.jpg`;
+
       if(res.data === "success"){
         console.log("yay");
       }
@@ -221,6 +234,16 @@ class Build extends Component {
         this.setState({isLoggedIn: false})
       })
   };
+
+  logout = () => {
+    LoginAPI
+      .logout()
+      .then(() => {
+        this.setState({
+          isLoggedIn: false
+        })
+      })
+  }
 
   changeNumPics = num => {
     const { item } = this.state;
@@ -378,10 +401,14 @@ class Build extends Component {
     
     ];
 
-    console.log(this.state);
-
     return (
       <div className="build-container">
+        <div className="floating-logout">
+          <Button
+            name="Log Out"
+            func={this.logout}
+          />
+        </div>
         <form>
           <div className="inputs-wrapper">
             <ItemInfo

@@ -7,7 +7,7 @@ export const AdditionalPhotos = props => {
   let imageArr = [];
   for (let i = 0; i < props.numPics; i++) {
     imageArr.push(
-      `http://www.thepeachco.com/ebay/images/${props.secPic}/${i + 1}.jpg`
+      `https://www.thepeachco.com/ebay/images/${props.secPic}/${i + 1}.jpg`
     );
   }
 

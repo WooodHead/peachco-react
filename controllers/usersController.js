@@ -14,6 +14,11 @@ module.exports = {
 
     login: function(req, res){
          res.json(true);
+    },
+
+    logout: function(req, res){
+        req.logout();
+        res.json(false);
     }
 
 

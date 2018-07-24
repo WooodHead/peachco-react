@@ -12,7 +12,7 @@ export const StockPhoto = props => {
                 <img 
                     src={
                         (pic) ? 
-                        `http://www.thepeachco.com/ebay/images/sticky/${pic}/1.jpg` :
+                        `https://www.thepeachco.com/ebay/images/sticky/${pic}/1.jpg` :
                         noImage
                     }
                     height="100" 

@@ -15,4 +15,10 @@ router
         }
     }) 
 
+router 
+    .route("/logout/")
+    .get(function(req, res){
+        usersController.logout(req, res);
+    })
+
 module.exports = router;

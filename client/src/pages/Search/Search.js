@@ -79,6 +79,16 @@ class Search extends Component {
       })
   };
 
+  logout = () => {
+    LoginAPI
+      .logout()
+      .then(() => {
+        this.setState({
+          isLoggedIn: false
+        })
+      })
+  }
+
   render() {
 
     if (!this.state.isLoggedIn) {
@@ -102,6 +112,12 @@ class Search extends Component {
     return (
       <section>
         <div className="search-form-container">
+          <div className="floating-logout">
+            <Button
+              name="Log Out"
+              func={this.logout}
+            />
+          </div>
           <form>
             <div className="search-form-wrapper">
               <div className="search-input-wrapper">
