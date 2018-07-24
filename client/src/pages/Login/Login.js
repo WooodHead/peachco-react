@@ -17,7 +17,8 @@ class Login extends Component {
         showModal: false,
         username: "",
         password: "",
-        isLoggedIn: false
+        isLoggedIn: false,
+        errorMessage: ""
     }
 
     handleInputChange = event => {
@@ -43,9 +44,19 @@ class Login extends Component {
         loginUtils
           .login({username: this.state.username, password: this.state.password})
           .then(res => {
-            this.setState({isLoggedIn: res.data})
+            this.setState({
+                isLoggedIn: res.data, 
+                username: "", 
+                password: ""
+            })
           })
-          .catch(err => console.log(err.response));
+          .catch(err => {
+              this.setState({
+                  errorMessage: err.response.data, 
+                  username: "", 
+                  password: ""
+              })
+          })
       }
 
     render() {
@@ -85,6 +96,7 @@ class Login extends Component {
                             username={this.state.username}
                             password={this.state.password}
                             func={this.handleInputChange}
+                            errorMessage={this.state.errorMessage}
                           />
                         </Modal>
                       ) : ("")

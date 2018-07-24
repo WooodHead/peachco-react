@@ -24,6 +24,11 @@ export const ModalLogin = props => {
                         >
                         Password
                         </Input>
+                        <div className="error-message">
+                            <h5>
+                                {(props.errorMessage !== "")?(`${props.errorMessage}: bad username/password.`):("")}
+                            </h5>
+                        </div>
                     </div>
                     <div className="modal-login-aside">
                         <img src={logo} height="150" alt="logo"/>

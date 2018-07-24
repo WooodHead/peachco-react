@@ -47,7 +47,7 @@ class Build extends Component {
     username: "",
     listingConfirmed: false,
     listingConfirmation: "",
-    additionalPictures: []
+    imageLocation: "https://www.thepeachco.com/ebay/images/"
     
   };
 
@@ -78,14 +78,12 @@ class Build extends Component {
                 newStartPrice = Helpers.getPrice(parseFloat(res.data.retail));
               } 
               let apa = [];
-              console.log(res.data.numPics);
               if (res.data.numPics > 0){
                 for(let i = 0; i < res.data.numPics; i++){
                   const p = `https://www.thepeachco.com/ebay/images/${res.data.secPic}/${i+1}.jpg`
                   apa.push(p);
                 }
-              }
-              console.log(apa);       
+              }       
               const newSettings = {
                 ...settings,
                 categories: newCategories,
@@ -217,7 +215,9 @@ class Build extends Component {
       // let np = `https://www.thepeachco.com/ebay/images/${this.state.item.secPic}/number.jpg`;
 
       if(res.data === "success"){
-        console.log("yay");
+        this.setState({
+          imageLocation: "https://www.thepeachco.com/ebay/images/"
+        })
       }
     })
 
@@ -425,6 +425,7 @@ class Build extends Component {
                 (
                   <AdditionalPhotos
                   pic={this.state.item.pic}
+                  imageLocation={this.state.imageLocation}
                   secPic={this.state.item.secPic}
                   numPics={this.state.item.numPics}
                   fileSelectedHandler={this.fileSelectedHandler}
