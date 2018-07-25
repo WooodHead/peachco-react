@@ -26,7 +26,7 @@ export const ModalLogin = props => {
                         </Input>
                         <div className="error-message">
                             <h5>
-                                {(props.errorMessage !== "")?(`${props.errorMessage}: bad username/password.`):("")}
+                                {(props.errorMessage !== "")?(props.errorMessage):("")}
                             </h5>
                         </div>
                     </div>

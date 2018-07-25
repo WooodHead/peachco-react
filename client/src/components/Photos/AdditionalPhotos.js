@@ -18,7 +18,7 @@ export const AdditionalPhotos = props => {
         {imageArr.map((image, i) => {
           return (
             <div 
-              className="photo-wrapper" 
+              className="photo-wrapper style_prevu_kit" 
               key={i}
               onClick={() => this[`fileInput${i}`].click()}
             >

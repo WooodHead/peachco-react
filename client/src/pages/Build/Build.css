@@ -1,7 +1,13 @@
 .floating-logout {
     position: fixed;
-    top: 0;
-    right: 0;
+    z-index: 4;
+    top: 2px;
+    right: 1rem;
+}
+
+.floating-logout Button {
+    background-color: white;
+    color: black;
 }
 
 .build-container {
