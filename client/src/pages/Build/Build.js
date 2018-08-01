@@ -26,16 +26,19 @@ class Build extends Component {
   state = {
     item: {},
     settings: {
+      boMin: "",
+      boAccept: "",
+      categories: "",
+      category: "",
       conditionDescription: "",
       condition: "1000",
       customId: "",
       duration: "Days_7",
+      itemDescription: "",
       listingType: "Chinese",
       quantity: 1,
-      itemDescription: "",
-      startPrice: "",
-      categories: "",
-      category: ""
+      startPrice: ""
+
     },
     isUpdated: false,
     listId: this.props.location.state.id,
@@ -73,9 +76,11 @@ class Build extends Component {
               if (res.data.packageSizeId) {
                 template = templates[res.data.packageSizeId - 1];
               }
-              let newStartPrice = "";
+              let newStartPrice = "", newBoMin = "", newBoAccept = "";
               if (res.data.retail !== ""){
-                newStartPrice = Helpers.getPrice(parseFloat(res.data.retail));
+                newStartPrice = Helpers.getPrice(parseFloat(res.data.retail), "start");
+                newBoMin = Helpers.getPrice(parseFloat(res.data.retail), "boMin");
+                newBoAccept = Helpers.getPrice(parseFloat(res.data.retail), "boAccept");
               } 
               let apa = [];
               if (res.data.numPics > 0){
@@ -88,7 +93,9 @@ class Build extends Component {
                 ...settings,
                 categories: newCategories,
                 category: newCategory,
-                startPrice: newStartPrice
+                startPrice: newStartPrice,
+                boMin: newBoMin,
+                boAccept: newBoAccept
               }
               if (res.data.numPics === 0 || res.data.numPics === null || res.data.numPics === ""){
                 if (res.data.secPic !== "" && res.data.secPic !== null){
@@ -220,7 +227,19 @@ class Build extends Component {
         })
       }
     })
+  }
 
+  fileSelectedHandlerStock = (e) =>{
+    const fd = new FormData();
+    fd.append("image", e.target.files[0], e.target.files[0].name);
+    fd.append("directory", `sticky/${this.state.item.pic}/`);
+    fd.append("number", 1);
+    API.uploadPic(fd).then(res => {
+      console.log(res);
+      if(res.data === "success"){
+        this.addPic();
+      }
+    })
   }
 
   loginCheck = () => {
@@ -420,6 +439,7 @@ class Build extends Component {
               <StockPhoto
                 stockPic={this.state.item.pic}
                 handleInputChangeforItem={this.handleInputChangeforItem}
+                fileSelectedHandlerStock={this.fileSelectedHandlerStock}
               />
               {(this.state.item.secPic !== "" && this.state.item.secPic !== null) ? 
                 (
@@ -430,7 +450,6 @@ class Build extends Component {
                   numPics={this.state.item.numPics}
                   fileSelectedHandler={this.fileSelectedHandler}
                   fileSelectedHandlerUpdate={this.fileSelectedHandlerUpdate}
-                  nonsense={this.state.nonsense}
                   />
                 ) 
                 : 
@@ -474,6 +493,7 @@ class Build extends Component {
                     func={this.listItem}
                     parameter={this.state}
                     name="List Item"
+                    isDisabled={true}
                   />
                 </div>
               </div>

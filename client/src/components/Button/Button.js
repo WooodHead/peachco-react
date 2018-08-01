@@ -8,6 +8,9 @@ function handleClick(e, props) {
 
 export const Button = props => (
     <div>
-        <button className="button" onClick={(e) => handleClick(e, props)}>{props.name}</button>
+        <button 
+            className="button" 
+            onClick={(e) => handleClick(e, props)}>{props.name}
+        </button>
     </div>
 )

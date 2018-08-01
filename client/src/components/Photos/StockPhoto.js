@@ -8,8 +8,10 @@ export const StockPhoto = props => {
     return (
         <div className="section-wrapper">
             <h3>Stock Photo</h3>
-            <div>
-                <img 
+            <div
+                onClick={() => this.fileInput.click()}
+            >
+                <img className="style_prevu_kit"
                     src={
                         (pic) ? 
                         `https://www.thepeachco.com/ebay/images/sticky/${pic}/1.jpg` :
@@ -17,6 +19,12 @@ export const StockPhoto = props => {
                     }
                     height="100" 
                     alt="stock"
+                />
+                <input
+                style={{display: "none"}}
+                type="file"
+                onChange={props.fileSelectedHandlerStock}
+                ref={fileInput => this.fileInput = fileInput}
                 />
             </div>
             <div>

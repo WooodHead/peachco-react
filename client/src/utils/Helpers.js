@@ -1,8 +1,28 @@
 export default {
 
-    getPrice : (retail) => {
-        let startPrice =  (retail * .25);
-        return parseFloat(startPrice).toFixed(2);
+    getPrice : (retail, type) => {
+
+      let i = (retail * .03);
+      i = (Math.round(i) * 10) - 2;
+
+      if (type === "start"){
+        return parseFloat(i).toFixed(2);
+      }
+      else if (type === "boMin"){
+        if (i > 50 && i < 100){
+          return parseFloat((i - 10).toFixed(2));
+        } else {
+          return parseFloat((i * .88)).toFixed(2);
+        }
+      } else if (type === "boAccept"){
+        if (i > 50 && i < 100){
+          return parseFloat((i-3).toFixed(2));
+        } else {
+          return parseFloat((i * .95).toFixed(2));
+        }
+        
+      }
+
      },
 
      labelize : (label) => {

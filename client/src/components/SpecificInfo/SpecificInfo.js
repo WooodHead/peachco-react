@@ -81,6 +81,28 @@ export const SpecificInfo = props => {
           </div>
 
           <div className="item-inputs db-info">
+          <Input
+            value={props.settings.boMin}
+            func={props.handleInputChangeforSettings}
+            parameter="boMin"
+            name="boMin"
+          >
+            AutoDecline
+          </Input>
+        </div>
+
+        <div className="item-inputs db-info">
+        <Input
+          value={props.settings.boAccept}
+          func={props.handleInputChangeforSettings}
+          parameter="boAccept"
+          name="boAccept"
+        >
+          AutoAccept
+        </Input>
+      </div>
+
+          <div className="item-inputs db-info">
             <Input
               value={props.settings.customId}
               func={props.handleInputChangeforSettings}

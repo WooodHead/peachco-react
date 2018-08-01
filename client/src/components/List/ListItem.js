@@ -14,10 +14,10 @@ export const ListItem = props => (
             </div>
             <div className="item-result-img-wrapper">
                 <div>
-                    <img src={`http://www.thepeachco.com/ebay/images/sticky/${props.pic}/1.jpg`} alt={props.pic} height="120"/>
+                    <img className="style_prevu_kit" src={`http://www.thepeachco.com/ebay/images/sticky/${props.pic}/1.jpg`} alt={props.pic} height="120"/>
                 </div>
                 <div>
-                    <img src={`http://www.thepeachco.com/ebay/images/${props.secpic}/1.jpg`} alt={props.secpic} height="120"/>
+                    <img className="style_prevu_kit" src={`http://www.thepeachco.com/ebay/images/${props.secpic}/1.jpg`} alt={props.secpic} height="120"/>
                 </div>
             </div>
         </div>
