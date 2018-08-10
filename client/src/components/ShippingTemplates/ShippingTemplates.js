@@ -1,6 +1,9 @@
 import React from "react";
 
 export const ShippingTemplates = props => {
+    console.log(props);
+    // console.log(props.packageSizeId);
+    // console.log(props.template);
     return (
 
         <div className="section-wrapper"

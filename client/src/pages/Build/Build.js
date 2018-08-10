@@ -177,13 +177,13 @@ class Build extends Component {
       ...item,
       [event.target.name]: event.target.value
     };
-    let template = {};
+    let newTemplate = this.state.template;
     if(event.target.name === "packageSizeId"){
-      template = this.state.templates[event.target.value - 1];
+        newTemplate = this.state.templates[event.target.value - 1];
     }
     this.setState({
       item: newItem,
-      template: template
+      template: newTemplate
     });
   };
 
@@ -401,6 +401,8 @@ class Build extends Component {
   };
 
   render() {
+
+    console.log(this.state.template);
 
     if (!this.state.isLoggedIn) {
       return <Redirect to="/"/>
