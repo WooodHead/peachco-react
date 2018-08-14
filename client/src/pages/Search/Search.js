@@ -23,6 +23,7 @@ class Search extends Component {
     showModal: false,
     username: "",
     isLoggedIn: true,
+    noResults: false
   };
 
   componentDidMount() {
@@ -31,7 +32,22 @@ class Search extends Component {
 
   loadItems = () => {
     API.getItemsByQuery(this.state.query)
-      .then(res => this.setState({ items: res.data }))
+      .then(res => {
+        console.log(res);
+        if (res.data.length === 0){
+          console.log("there are no results for something");
+          this.setState(
+            {
+              noResults: true
+            });
+        } else {
+          this.setState(
+            { 
+              items: res.data,
+              noResults: false
+            });
+        }
+      })
       .catch(err => console.log(err));
   };
 
@@ -109,6 +125,8 @@ class Search extends Component {
     
     ];
 
+    console.log(this.state);
+
     return (
       <section>
         <div className="search-form-container">
@@ -152,23 +170,31 @@ class Search extends Component {
             </div>
           </form>
         </div>
-        <div className="search-results-container">
-            <List>
-              {this.state.items.map(item => (
-                <ListItem
-                  key={item.id}
-                  id={item.id}
-                  brand={item.brand}
-                  collection={item.collection}
-                  type={item.type}
-                  color={item.color}
-                  pic={item.pic}
-                  secpic={item.secPic}
-                  onClick={() => this.loadItem(item.id)}
-                />
-              ))}
-            </List>
-        </div>
+        {
+          (this.state.noResults)
+          ?
+          (<div className="no-result-message">There are no results for "{this.state.query}".</div>)
+          :
+          (
+            <div className="search-results-container">
+              <List>
+                {this.state.items.map(item => (
+                  <ListItem
+                    key={item.id}
+                    id={item.id}
+                    brand={item.brand}
+                    collection={item.collection}
+                    type={item.type}
+                    color={item.color}
+                    pic={item.pic}
+                    secpic={item.secPic}
+                    onClick={() => this.loadItem(item.id)}
+                  />
+                ))}
+              </List>
+            </div>
+          )
+        }
         {
           (this.state.showModal) ? 
             (

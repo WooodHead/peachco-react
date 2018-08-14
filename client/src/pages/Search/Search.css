@@ -31,6 +31,12 @@
 
 }
 
+.no-result-message {
+    padding-left: 1.5rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
 @media (min-width: 600px){
     .search-form-wrapper {
         grid-template-columns: minmax(auto, 1fr) minmax(max-content, max-content) minmax(max-content, max-content);
